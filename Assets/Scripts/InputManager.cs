@@ -18,7 +18,7 @@ namespace SternGerlach
             controlScheme = new PlayerControl();
             rotationController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.RMB);
             zoomController.Initialize(controlScheme.Game.Zoom);
-            panController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.LMB);
+            panController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.MouseY, controlScheme.Game.LMB);
         }
     }
 }

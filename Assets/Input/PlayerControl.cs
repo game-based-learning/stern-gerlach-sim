@@ -39,6 +39,15 @@ namespace SternGerlach.Input
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""MouseY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""85aa8da6-8dd2-4783-ac1a-c8fe65cce294"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Zoom"",
                     ""type"": ""PassThrough"",
                     ""id"": ""c963f306-5fa3-47bb-a08d-3c0422877443"",
@@ -110,6 +119,17 @@ namespace SternGerlach.Input
                     ""action"": ""LMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""151f7db5-a43e-4f10-8f11-5b1f672511fc"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -119,6 +139,7 @@ namespace SternGerlach.Input
             // Game
             m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
             m_Game_MouseX = m_Game.FindAction("MouseX", throwIfNotFound: true);
+            m_Game_MouseY = m_Game.FindAction("MouseY", throwIfNotFound: true);
             m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
             m_Game_RMB = m_Game.FindAction("RMB", throwIfNotFound: true);
             m_Game_LMB = m_Game.FindAction("LMB", throwIfNotFound: true);
@@ -182,6 +203,7 @@ namespace SternGerlach.Input
         private readonly InputActionMap m_Game;
         private IGameActions m_GameActionsCallbackInterface;
         private readonly InputAction m_Game_MouseX;
+        private readonly InputAction m_Game_MouseY;
         private readonly InputAction m_Game_Zoom;
         private readonly InputAction m_Game_RMB;
         private readonly InputAction m_Game_LMB;
@@ -190,6 +212,7 @@ namespace SternGerlach.Input
             private @PlayerControl m_Wrapper;
             public GameActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
             public InputAction @MouseX => m_Wrapper.m_Game_MouseX;
+            public InputAction @MouseY => m_Wrapper.m_Game_MouseY;
             public InputAction @Zoom => m_Wrapper.m_Game_Zoom;
             public InputAction @RMB => m_Wrapper.m_Game_RMB;
             public InputAction @LMB => m_Wrapper.m_Game_LMB;
@@ -205,6 +228,9 @@ namespace SternGerlach.Input
                     @MouseX.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
                     @MouseX.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
                     @MouseX.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
+                    @MouseY.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseY;
+                    @MouseY.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseY;
+                    @MouseY.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseY;
                     @Zoom.started -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
                     @Zoom.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
                     @Zoom.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
@@ -221,6 +247,9 @@ namespace SternGerlach.Input
                     @MouseX.started += instance.OnMouseX;
                     @MouseX.performed += instance.OnMouseX;
                     @MouseX.canceled += instance.OnMouseX;
+                    @MouseY.started += instance.OnMouseY;
+                    @MouseY.performed += instance.OnMouseY;
+                    @MouseY.canceled += instance.OnMouseY;
                     @Zoom.started += instance.OnZoom;
                     @Zoom.performed += instance.OnZoom;
                     @Zoom.canceled += instance.OnZoom;
@@ -237,6 +266,7 @@ namespace SternGerlach.Input
         public interface IGameActions
         {
             void OnMouseX(InputAction.CallbackContext context);
+            void OnMouseY(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
             void OnRMB(InputAction.CallbackContext context);
             void OnLMB(InputAction.CallbackContext context);
