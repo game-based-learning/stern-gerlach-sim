@@ -10,6 +10,7 @@ namespace SternGerlach
         private PlayerControl controlScheme;
         [SerializeField] private Rotation rotationController;
         [SerializeField] private Zoom zoomController;
+        [SerializeField] private Pan panController;
         // Start is called before the first frame update
 
         private void Awake()
@@ -17,6 +18,7 @@ namespace SternGerlach
             controlScheme = new PlayerControl();
             rotationController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.RMB);
             zoomController.Initialize(controlScheme.Game.Zoom);
+            panController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.LMB);
         }
     }
 }

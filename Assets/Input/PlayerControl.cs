@@ -55,6 +55,15 @@ namespace SternGerlach.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LMB"",
+                    ""type"": ""Value"",
+                    ""id"": ""ae0b5916-2c11-4a95-b5e4-db9db538138b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ namespace SternGerlach.Input
                     ""action"": ""RMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c3fbb1b-48cf-4109-af72-37f28d8e40d1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LMB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ namespace SternGerlach.Input
             m_Game_MouseX = m_Game.FindAction("MouseX", throwIfNotFound: true);
             m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
             m_Game_RMB = m_Game.FindAction("RMB", throwIfNotFound: true);
+            m_Game_LMB = m_Game.FindAction("LMB", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -163,6 +184,7 @@ namespace SternGerlach.Input
         private readonly InputAction m_Game_MouseX;
         private readonly InputAction m_Game_Zoom;
         private readonly InputAction m_Game_RMB;
+        private readonly InputAction m_Game_LMB;
         public struct GameActions
         {
             private @PlayerControl m_Wrapper;
@@ -170,6 +192,7 @@ namespace SternGerlach.Input
             public InputAction @MouseX => m_Wrapper.m_Game_MouseX;
             public InputAction @Zoom => m_Wrapper.m_Game_Zoom;
             public InputAction @RMB => m_Wrapper.m_Game_RMB;
+            public InputAction @LMB => m_Wrapper.m_Game_LMB;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -188,6 +211,9 @@ namespace SternGerlach.Input
                     @RMB.started -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
                     @RMB.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
                     @RMB.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
+                    @LMB.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
+                    @LMB.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
+                    @LMB.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
                 }
                 m_Wrapper.m_GameActionsCallbackInterface = instance;
                 if (instance != null)
@@ -201,6 +227,9 @@ namespace SternGerlach.Input
                     @RMB.started += instance.OnRMB;
                     @RMB.performed += instance.OnRMB;
                     @RMB.canceled += instance.OnRMB;
+                    @LMB.started += instance.OnLMB;
+                    @LMB.performed += instance.OnLMB;
+                    @LMB.canceled += instance.OnLMB;
                 }
             }
         }
@@ -210,6 +239,7 @@ namespace SternGerlach.Input
             void OnMouseX(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
             void OnRMB(InputAction.CallbackContext context);
+            void OnLMB(InputAction.CallbackContext context);
         }
     }
 }
