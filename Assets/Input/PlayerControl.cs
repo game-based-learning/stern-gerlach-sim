@@ -30,36 +30,34 @@ namespace SternGerlach.Input
             ""id"": ""1d938242-6288-40ef-a883-13af4b308bb8"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""ba366f85-3056-43db-b7d2-4e5e9416e6e0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Mouse"",
+                    ""name"": ""MouseX"",
                     ""type"": ""PassThrough"",
                     ""id"": ""1fe92e08-82db-41ee-95e5-e37e6020151e"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c963f306-5fa3-47bb-a08d-3c0422877443"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RMB"",
+                    ""type"": ""Value"",
+                    ""id"": ""d3ee026c-4462-4e25-a676-1a3257150e65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5a35e1ba-784c-47e0-9ca1-2ac213664f47"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""838e7bd2-dc36-4ebb-9c48-5bcbb3e754b2"",
@@ -67,7 +65,29 @@ namespace SternGerlach.Input
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Mouse"",
+                    ""action"": ""MouseX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45085728-57cb-4238-b406-b73c84bf72df"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a5a0ad2-09ba-4a19-b3b5-decd23d49f95"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -78,8 +98,9 @@ namespace SternGerlach.Input
 }");
             // Game
             m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
-            m_Game_Newaction = m_Game.FindAction("New action", throwIfNotFound: true);
-            m_Game_Mouse = m_Game.FindAction("Mouse", throwIfNotFound: true);
+            m_Game_MouseX = m_Game.FindAction("MouseX", throwIfNotFound: true);
+            m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
+            m_Game_RMB = m_Game.FindAction("RMB", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -139,14 +160,16 @@ namespace SternGerlach.Input
         // Game
         private readonly InputActionMap m_Game;
         private IGameActions m_GameActionsCallbackInterface;
-        private readonly InputAction m_Game_Newaction;
-        private readonly InputAction m_Game_Mouse;
+        private readonly InputAction m_Game_MouseX;
+        private readonly InputAction m_Game_Zoom;
+        private readonly InputAction m_Game_RMB;
         public struct GameActions
         {
             private @PlayerControl m_Wrapper;
             public GameActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Newaction => m_Wrapper.m_Game_Newaction;
-            public InputAction @Mouse => m_Wrapper.m_Game_Mouse;
+            public InputAction @MouseX => m_Wrapper.m_Game_MouseX;
+            public InputAction @Zoom => m_Wrapper.m_Game_Zoom;
+            public InputAction @RMB => m_Wrapper.m_Game_RMB;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -156,30 +179,37 @@ namespace SternGerlach.Input
             {
                 if (m_Wrapper.m_GameActionsCallbackInterface != null)
                 {
-                    @Newaction.started -= m_Wrapper.m_GameActionsCallbackInterface.OnNewaction;
-                    @Newaction.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnNewaction;
-                    @Newaction.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnNewaction;
-                    @Mouse.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMouse;
-                    @Mouse.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMouse;
-                    @Mouse.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMouse;
+                    @MouseX.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
+                    @MouseX.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
+                    @MouseX.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMouseX;
+                    @Zoom.started -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
+                    @Zoom.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
+                    @Zoom.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnZoom;
+                    @RMB.started -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
+                    @RMB.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
+                    @RMB.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnRMB;
                 }
                 m_Wrapper.m_GameActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @Newaction.started += instance.OnNewaction;
-                    @Newaction.performed += instance.OnNewaction;
-                    @Newaction.canceled += instance.OnNewaction;
-                    @Mouse.started += instance.OnMouse;
-                    @Mouse.performed += instance.OnMouse;
-                    @Mouse.canceled += instance.OnMouse;
+                    @MouseX.started += instance.OnMouseX;
+                    @MouseX.performed += instance.OnMouseX;
+                    @MouseX.canceled += instance.OnMouseX;
+                    @Zoom.started += instance.OnZoom;
+                    @Zoom.performed += instance.OnZoom;
+                    @Zoom.canceled += instance.OnZoom;
+                    @RMB.started += instance.OnRMB;
+                    @RMB.performed += instance.OnRMB;
+                    @RMB.canceled += instance.OnRMB;
                 }
             }
         }
         public GameActions @Game => new GameActions(this);
         public interface IGameActions
         {
-            void OnNewaction(InputAction.CallbackContext context);
-            void OnMouse(InputAction.CallbackContext context);
+            void OnMouseX(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
+            void OnRMB(InputAction.CallbackContext context);
         }
     }
 }

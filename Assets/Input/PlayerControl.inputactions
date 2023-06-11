@@ -6,36 +6,34 @@
             "id": "1d938242-6288-40ef-a883-13af4b308bb8",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "ba366f85-3056-43db-b7d2-4e5e9416e6e0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Mouse",
+                    "name": "MouseX",
                     "type": "PassThrough",
                     "id": "1fe92e08-82db-41ee-95e5-e37e6020151e",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "PassThrough",
+                    "id": "c963f306-5fa3-47bb-a08d-3c0422877443",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RMB",
+                    "type": "Value",
+                    "id": "d3ee026c-4462-4e25-a676-1a3257150e65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "5a35e1ba-784c-47e0-9ca1-2ac213664f47",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "838e7bd2-dc36-4ebb-9c48-5bcbb3e754b2",
@@ -43,7 +41,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouse",
+                    "action": "MouseX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45085728-57cb-4238-b406-b73c84bf72df",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a5a0ad2-09ba-4a19-b3b5-decd23d49f95",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

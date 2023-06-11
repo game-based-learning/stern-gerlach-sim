@@ -8,13 +8,15 @@ namespace SternGerlach
     public class InputManager : MonoBehaviour
     {
         private PlayerControl controlScheme;
-        [SerializeField] private CameraRotation mouseController;
+        [SerializeField] private Rotation rotationController;
+        [SerializeField] private Zoom zoomController;
         // Start is called before the first frame update
 
         private void Awake()
         {
             controlScheme = new PlayerControl();
-            mouseController.Initialize(controlScheme.Game.Mouse);
+            rotationController.Initialize(controlScheme.Game.MouseX, controlScheme.Game.RMB);
+            zoomController.Initialize(controlScheme.Game.Zoom);
         }
     }
 }
