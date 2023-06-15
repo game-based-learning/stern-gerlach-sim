@@ -27,7 +27,7 @@ namespace SternGerlach
         void Update()
         {
             scrl = scroll.ReadValue<float>() * Time.deltaTime * speed;
-            Debug.Log(scrl);
+            //Debug.Log(scrl);
             cam.Translate(Vector3.forward * scrl);
         }
     }

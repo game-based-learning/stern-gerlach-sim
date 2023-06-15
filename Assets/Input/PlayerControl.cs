@@ -132,6 +132,34 @@ namespace SternGerlach.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""2ac87f3b-8256-48d6-a42b-28a343ce5824"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""0993a3f3-10cc-4adc-a706-ee4ffe4af767"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""eef20a08-8a2c-40e7-b8ed-3a61eefcc5bb"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -143,6 +171,9 @@ namespace SternGerlach.Input
             m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
             m_Game_RMB = m_Game.FindAction("RMB", throwIfNotFound: true);
             m_Game_LMB = m_Game.FindAction("LMB", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_MousePosition = m_UI.FindAction("MousePosition", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -263,6 +294,39 @@ namespace SternGerlach.Input
             }
         }
         public GameActions @Game => new GameActions(this);
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private IUIActions m_UIActionsCallbackInterface;
+        private readonly InputAction m_UI_MousePosition;
+        public struct UIActions
+        {
+            private @PlayerControl m_Wrapper;
+            public UIActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
+            public InputAction @MousePosition => m_Wrapper.m_UI_MousePosition;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void SetCallbacks(IUIActions instance)
+            {
+                if (m_Wrapper.m_UIActionsCallbackInterface != null)
+                {
+                    @MousePosition.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
+                    @MousePosition.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
+                    @MousePosition.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
+                }
+                m_Wrapper.m_UIActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @MousePosition.started += instance.OnMousePosition;
+                    @MousePosition.performed += instance.OnMousePosition;
+                    @MousePosition.canceled += instance.OnMousePosition;
+                }
+            }
+        }
+        public UIActions @UI => new UIActions(this);
         public interface IGameActions
         {
             void OnMouseX(InputAction.CallbackContext context);
@@ -270,6 +334,10 @@ namespace SternGerlach.Input
             void OnZoom(InputAction.CallbackContext context);
             void OnRMB(InputAction.CallbackContext context);
             void OnLMB(InputAction.CallbackContext context);
+        }
+        public interface IUIActions
+        {
+            void OnMousePosition(InputAction.CallbackContext context);
         }
     }
 }
