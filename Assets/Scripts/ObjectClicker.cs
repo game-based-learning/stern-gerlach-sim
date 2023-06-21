@@ -12,7 +12,7 @@ namespace SternGerlach
         [SerializeField] private Transform clickedObject;
         private Ray ray;
         private RaycastHit hit;
-        //[SerializeField] private Camera cam;
+        [SerializeField] private PointManager pm;
 
         public void Initialize(InputAction c, InputAction p)
         {
@@ -44,6 +44,7 @@ namespace SternGerlach
                 if (lmb_val == 1)
                 {
                     Debug.Log(hit.collider.name);
+                    pm.Focus(hit.collider.transform);
                 }
             }
         }
