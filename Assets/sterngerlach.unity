@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   macroscopicMagnetPrefab: {fileID: 8212612158024416005, guid: 5803960faf317564689324d079e996b3, type: 3}
-  silverAtomPrefab: {fileID: 7489285081339113790, guid: 87665b6725f808c4fafa3d7fa79867a6, type: 3}
+  silverAtomPrefab: {fileID: 7489285081339113790, guid: b14934b460b456340a64b2ebce5b348e, type: 3}
   firstNode: {fileID: 1802083625}
 --- !u!4 &822118963
 Transform:
