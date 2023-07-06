@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using SternGerlach;
 using UnityEngine;
 
-public abstract class Agent : MonoBehaviour
+public class Agent : MonoBehaviour
 {
     private Node currentNode, nextNode;
     private System.Random random;
     enum AgentState { WithinNode, BetweenNodes }
-    enum SpinState {  }
+    public enum AgentType { MacroscopicMagnet, SilverAtom }
     private AgentState agentState;
-    public Agent(Node initialNode) {
+    private AgentType agentType;
+    private int angle;
+    private GameObject arrow, questionMark;
+    public void Initialize(Node firstNode, AgentType type)  {
         this.agentState = AgentState.WithinNode;
-        this.currentNode = initialNode;
-        this.random = new System.Random();
-    }
-    public Agent() {
-        this.agentState = AgentState.WithinNode;
-        this.random = new System.Random();
-    }
-    public void setInitNode(Node node) {
-        this.currentNode = node;
+        this.agentType = type;
+        this.currentNode = firstNode;
+        this.angle = -1;
+        if (type == AgentType.SilverAtom) {
+            this.arrow = this.transform.Find("Arrow").gameObject;
+            this.questionMark = this.transform.Find("QuestionMark").gameObject;
+            this.arrow.SetActive(false);
+            this.questionMark.SetActive(true);
+        }
     }
     void Start()
     {
@@ -30,44 +34,79 @@ public abstract class Agent : MonoBehaviour
         if (agentState.Equals(AgentState.WithinNode))
         {
             if (!transform.position.Equals(currentNode.GetEndLocation)) {
-                transform.position = Vector3.MoveTowards(transform.position, currentNode.GetEndLocation, 3f * Time.deltaTime);
+                StepToward(currentNode.GetEndLocation);
                 return;
             }
             if (currentNode.children != null)
             {
-                nextNode = currentNode.children[random.Next(0,2)];
-                agentState = AgentState.BetweenNodes;
+                ExitMagnet();
                 return;
             }
             else {
                 Destroy(this.gameObject);
                 if (currentNode is ImagePlate) {
-                    ((ImagePlate)currentNode).ShowIndicator();
+                    HitImagePlate();
                 }
             }
         }
         else if (agentState.Equals(AgentState.BetweenNodes)) {
             if (!transform.position.Equals(nextNode.GetStartLocation))
             {
-                transform.position = Vector3.MoveTowards(transform.position, nextNode.GetStartLocation, 3f * Time.deltaTime);
+                StepToward(nextNode.GetStartLocation);
                 return;
             }
             else {
-                currentNode = nextNode;
-                agentState = AgentState.WithinNode;
+                EnterMagnet();
             }
         }
-        /**Debug.Log("fgji");
-        if (agentState.Equals(AgentState.WithinNode)) {
-            Debug.Log(transform.position);
-            Debug.Log(currentNode.GetEndLocation);
-            if (!transform.position.Equals(currentNode.GetEndLocation)) {
-                transform.position = Vector3.Lerp(currentNode.GetStartLocation, currentNode.GetEndLocation, 10f * Time.deltaTime);
-            }
-        }**/
-        //if(!transform.position.Equals(currentNode.get))
     }
-    /**public abstract chooseNextNode() { 
-    
-    }**/
+    void StepToward(Vector3 location) {
+        transform.position = Vector3.MoveTowards(transform.position, location, 3f * Time.deltaTime);
+    }
+    void EnterMagnet()
+    {
+        if (agentType == AgentType.SilverAtom) {
+            this.angle = currentNode.GetRotation(this.gameObject);
+            this.arrow.SetActive(false);
+            this.questionMark.SetActive(true);
+        }
+        currentNode = nextNode;
+        agentState = AgentState.WithinNode;
+    }
+    void ExitMagnet() {
+        Collapse();
+        agentState = AgentState.BetweenNodes;
+    }
+    void HitImagePlate()
+    {
+        ((ImagePlate)currentNode).ShowIndicator();
+    }
+    void Collapse() {
+        if (agentType == AgentType.SilverAtom) {
+            int magnetRotation = currentNode.GetRotation(this.gameObject);
+            // collapse to random node
+            if (angle != magnetRotation)
+            {
+                nextNode = currentNode.children[random.Next(0, 2)];
+                this.angle = nextNode.GetRotation(this.gameObject);
+            }
+            // collapse to node parallel with our angle
+            else {
+                this.angle = magnetRotation;
+                if (angle > 0) {
+                    nextNode = currentNode.children[1];
+                }
+                else {
+                    nextNode = currentNode.children[0];
+                }
+            }
+            this.arrow.transform.rotation = Quaternion.Euler(NewArrowAngle(nextNode), 90, 0);
+            this.arrow.SetActive(true);
+            this.questionMark.SetActive(false);
+        }
+
+    }
+    int NewArrowAngle(Node node) {
+        return -Mathf.FloorToInt(Vector2.Angle(transform.position, node.GetStartLocation));
+    }
 }

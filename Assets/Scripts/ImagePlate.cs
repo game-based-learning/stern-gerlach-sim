@@ -14,6 +14,10 @@ public class ImagePlate : Node
     {
         
     }
+   
+    public override int GetRotation(GameObject gameObject) {
+        return Mathf.FloorToInt(Vector2.Angle(gameObject.transform.position, transform.position));
+    }
 
     // Update is called once per frame
     void Update()
