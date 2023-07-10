@@ -100,13 +100,13 @@ public class Agent : MonoBehaviour
                     nextNode = currentNode.children[0];
                 }
             }
-            this.arrow.transform.rotation = Quaternion.Euler(NewArrowAngle(nextNode), 90, 0);
-            this.arrow.SetActive(true);
-            this.questionMark.SetActive(false);
+            //this.arrow.transform.rotation = Quaternion.Euler(NewArrowAngle(nextNode), 90, 0);
+            if (!(currentNode is Furnace)) {
+                this.arrow.transform.LookAt(nextNode.GetStartLocation);
+                this.arrow.transform.Rotate(-180,0,0);
+                this.arrow.SetActive(true);
+                this.questionMark.SetActive(false);
+            }
         }
-
-    }
-    int NewArrowAngle(Node node) {
-        return -Mathf.FloorToInt(Vector2.Angle(transform.position, node.GetStartLocation));
     }
 }
