@@ -9,6 +9,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction createSilverAtom;
     private InputAction createMacroscopicMagnet;
     [SerializeField] MagnetFactory factory;
+    [SerializeField] MagnetFactory factory2;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class PlayerControls : MonoBehaviour
             factory.createSilverAtom();
         }
         else if (createMacroscopicMagnet.WasPerformedThisFrame()) {
-            factory.createMacroscopicMagnet();
+            factory2.createMacroscopicMagnet();
         }
     }
 }

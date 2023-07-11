@@ -20,14 +20,14 @@ public class MagnetFactory : MonoBehaviour
     }
     public Agent createMacroscopicMagnet() {
         GameObject magnet = GameObject.Instantiate(macroscopicMagnetPrefab, firstNode.GetStartLocation, Quaternion.identity);
-        Agent agent = magnet.AddComponent<MacroscopicMagnet>();
-        agent.setInitNode(firstNode);
+        Agent agent = magnet.AddComponent<Agent>();
+        agent.Initialize(firstNode,Agent.AgentType.MacroscopicMagnet);
         return agent;
     }
     public Agent createSilverAtom() {
         GameObject atom = GameObject.Instantiate(silverAtomPrefab, firstNode.GetStartLocation, Quaternion.identity);
-        Agent agent = atom.AddComponent<SilverAtom>();
-        agent.setInitNode(firstNode);
+        Agent agent = atom.AddComponent<Agent>();
+        agent.Initialize(firstNode, Agent.AgentType.SilverAtom);
         return agent;
     }
 }
