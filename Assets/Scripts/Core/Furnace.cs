@@ -19,18 +19,11 @@ namespace SternGerlach
         {
             return -1;
         }
-
         // Start is called before the first frame update
         void Start()
         {
             this.entranceLoc = entrance.transform.position;
             this.exitLoc = exit.transform.position;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }

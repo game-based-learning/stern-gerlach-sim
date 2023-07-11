@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Magnet : Node
+public class SGMagnet : Node
 {
     [SerializeField] List<Node> nodes;
     [SerializeField] GameObject entrance,exit;
@@ -14,7 +14,7 @@ public class Magnet : Node
     public override int GetRotation(GameObject gameObject) {
         return Mathf.FloorToInt(transform.eulerAngles.x);
     } 
-    public Magnet() {
+    public SGMagnet() {
 
     }
     void Start()

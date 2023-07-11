@@ -8,5 +8,7 @@ namespace SternGerlach
     {
         public static List<int> POSSIBLE_MACROSCOPIC_ANGLES = new List<int>() { 0, 30, 60, 90, 120, 150, 180 };
         public static float PARTICLE_STEP_SPEED = 3f;
+        public static string QUESTION_MARK_NAME = "QuestionMark";
+        public static string ARROW_NAME = "Arrow";
     }
 }

@@ -20,8 +20,8 @@ public class Agent : MonoBehaviour
         this.angle = -1;
         this.random = new System.Random();
         if (type == AgentType.SilverAtom) {
-            this.arrow = this.transform.Find("Arrow").gameObject;
-            this.questionMark = this.transform.Find("QuestionMark").gameObject;
+            this.arrow = this.transform.Find(Globals.ARROW_NAME).gameObject;
+            this.questionMark = this.transform.Find(Globals.QUESTION_MARK_NAME).gameObject;
             this.arrow.SetActive(false);
             this.questionMark.SetActive(true);
         }
@@ -107,17 +107,14 @@ public class Agent : MonoBehaviour
             // make necessary visual changes
             if (!(currentNode is Furnace)) {
                 this.arrow.transform.LookAt(nextNode.GetStartLocation);
+                // adjust for model inaccuracy (arrow is facing wrong direction)
                 this.arrow.transform.Rotate(-180,0,0);
                 this.arrow.SetActive(true);
                 this.questionMark.SetActive(false);
             }
         }
-        else if(agentType == AgentType.MacroscopicMagnet && currentNode is Magnet) {
-            Debug.Log("transform rotation" + transform.localRotation.eulerAngles.z);
+        else if(agentType == AgentType.MacroscopicMagnet && currentNode is SGMagnet) {
             int destination = MacroscopicCollapseHelper(transform.localRotation.eulerAngles.z);
-            Debug.Log("destination" + destination);
-            Debug.Log("Current node is magnet: " + currentNode is Magnet);
-            Debug.Log("Current node children count:" + currentNode.children.Count);
             nextNode = currentNode.children[destination];
         }
         else {
@@ -129,27 +126,6 @@ public class Agent : MonoBehaviour
             if(((i*30 - 15) <= angle)  && ((15 + i*30) >= angle)) {
                 return i;
             }
-        }
-        if(angle >= 0 && angle < 15f) {
-            return 0;
-        }
-        if(angle >= 15f && angle < 45f) {
-            return 1;
-        } 
-        if(angle >= 45f && angle < 75f) {
-            return 2;
-        }
-        if(angle >= 75f && angle < 105f) {
-            return 3;
-        }
-        if(angle >= 105f && angle < 135f) {
-            return 4;
-        }
-        if(angle >= 135f && angle < 165f) {
-            return 5;
-        }
-        if(angle >= 165f) {
-            return 6;
         }
         return -1;
     }
