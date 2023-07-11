@@ -39,6 +39,9 @@ public class Agent : MonoBehaviour
             }
             if (currentNode.children != null)
             {
+                if (currentNode is Furnace) {
+                    nextNode = currentNode.children[0];
+                }
                 ExitMagnet();
                 return;
             }
@@ -50,6 +53,9 @@ public class Agent : MonoBehaviour
             }
         }
         else if (agentState.Equals(AgentState.BetweenNodes)) {
+            Debug.Log(nextNode);
+            Debug.Log(nextNode.GetStartLocation);
+            Debug.Log(transform.position);
             if (!transform.position.Equals(nextNode.GetStartLocation))
             {
                 StepToward(nextNode.GetStartLocation);
