@@ -73,6 +73,33 @@ namespace SternGerlach.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LShift"",
+                    ""type"": ""Value"",
+                    ""id"": ""0e569e33-8700-413e-9c49-9b9a0c999191"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Macro"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2351f55-215c-4626-915c-1d946349644c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Silver"",
+                    ""type"": ""Button"",
+                    ""id"": ""0876f4fe-79e9-423f-835f-d29883ad9808"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +157,39 @@ namespace SternGerlach.Input
                     ""action"": ""MouseY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""987a1810-59ef-4e43-b7fd-b54ca8148384"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d8957e3-b3ad-473d-a8eb-7423ee4fc18f"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Macro"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e22ea8f0-14b0-4f6b-87bc-5195b5a0c49d"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Silver"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -171,6 +231,9 @@ namespace SternGerlach.Input
             m_Game_Zoom = m_Game.FindAction("Zoom", throwIfNotFound: true);
             m_Game_RMB = m_Game.FindAction("RMB", throwIfNotFound: true);
             m_Game_LMB = m_Game.FindAction("LMB", throwIfNotFound: true);
+            m_Game_LShift = m_Game.FindAction("LShift", throwIfNotFound: true);
+            m_Game_Macro = m_Game.FindAction("Macro", throwIfNotFound: true);
+            m_Game_Silver = m_Game.FindAction("Silver", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_MousePosition = m_UI.FindAction("MousePosition", throwIfNotFound: true);
@@ -238,6 +301,9 @@ namespace SternGerlach.Input
         private readonly InputAction m_Game_Zoom;
         private readonly InputAction m_Game_RMB;
         private readonly InputAction m_Game_LMB;
+        private readonly InputAction m_Game_LShift;
+        private readonly InputAction m_Game_Macro;
+        private readonly InputAction m_Game_Silver;
         public struct GameActions
         {
             private @PlayerControl m_Wrapper;
@@ -247,6 +313,9 @@ namespace SternGerlach.Input
             public InputAction @Zoom => m_Wrapper.m_Game_Zoom;
             public InputAction @RMB => m_Wrapper.m_Game_RMB;
             public InputAction @LMB => m_Wrapper.m_Game_LMB;
+            public InputAction @LShift => m_Wrapper.m_Game_LShift;
+            public InputAction @Macro => m_Wrapper.m_Game_Macro;
+            public InputAction @Silver => m_Wrapper.m_Game_Silver;
             public InputActionMap Get() { return m_Wrapper.m_Game; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -271,6 +340,15 @@ namespace SternGerlach.Input
                     @LMB.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
                     @LMB.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
                     @LMB.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLMB;
+                    @LShift.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLShift;
+                    @LShift.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLShift;
+                    @LShift.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLShift;
+                    @Macro.started -= m_Wrapper.m_GameActionsCallbackInterface.OnMacro;
+                    @Macro.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnMacro;
+                    @Macro.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnMacro;
+                    @Silver.started -= m_Wrapper.m_GameActionsCallbackInterface.OnSilver;
+                    @Silver.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnSilver;
+                    @Silver.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnSilver;
                 }
                 m_Wrapper.m_GameActionsCallbackInterface = instance;
                 if (instance != null)
@@ -290,6 +368,15 @@ namespace SternGerlach.Input
                     @LMB.started += instance.OnLMB;
                     @LMB.performed += instance.OnLMB;
                     @LMB.canceled += instance.OnLMB;
+                    @LShift.started += instance.OnLShift;
+                    @LShift.performed += instance.OnLShift;
+                    @LShift.canceled += instance.OnLShift;
+                    @Macro.started += instance.OnMacro;
+                    @Macro.performed += instance.OnMacro;
+                    @Macro.canceled += instance.OnMacro;
+                    @Silver.started += instance.OnSilver;
+                    @Silver.performed += instance.OnSilver;
+                    @Silver.canceled += instance.OnSilver;
                 }
             }
         }
@@ -334,6 +421,9 @@ namespace SternGerlach.Input
             void OnZoom(InputAction.CallbackContext context);
             void OnRMB(InputAction.CallbackContext context);
             void OnLMB(InputAction.CallbackContext context);
+            void OnLShift(InputAction.CallbackContext context);
+            void OnMacro(InputAction.CallbackContext context);
+            void OnSilver(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

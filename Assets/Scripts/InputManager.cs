@@ -26,10 +26,12 @@ namespace SternGerlach
             panController.Initialize(
                 controlScheme.Game.MouseX, 
                 controlScheme.Game.MouseY, 
-                controlScheme.Game.LMB);
+                controlScheme.Game.LMB,
+                controlScheme.Game.LShift);
             clickController.Initialize(
                 controlScheme.Game.LMB,
-                controlScheme.UI.MousePosition);
+                controlScheme.UI.MousePosition,
+                controlScheme.Game.LShift);
         }
     }
 }

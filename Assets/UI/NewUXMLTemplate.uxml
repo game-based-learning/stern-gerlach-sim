@@ -1,11 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" style="width: 100%; height: 100%;">
-        <ui:VisualElement style="width: 20%; height: 100%; left: 80%; right: auto;">
-            <ui:VisualElement name="FocusTop">
-                <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" />
+        <ui:VisualElement style="width: 20%; height: 100%; left: 80%; right: auto; background-color: rgba(0, 0, 0, 0.38);">
+            <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">
+                <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
             </ui:VisualElement>
-            <ui:VisualElement name="FocusMid" />
-            <ui:VisualElement name="FocusBottom" />
+            <ui:VisualElement name="Image" style="width: 100%; height: 40%;" />
+            <ui:VisualElement name="Stats" style="width: 100%; height: 100%;">
+                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; align-items: center; justify-content: space-between;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

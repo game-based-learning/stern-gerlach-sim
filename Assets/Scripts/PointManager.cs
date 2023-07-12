@@ -17,7 +17,7 @@ namespace SternGerlach
             if(points.Contains(t))
             {
                 rotating= true;
-                focusObject= t.GetChild(0);
+                focusObject= t.Find("viewpoint");
             }
         }
 
