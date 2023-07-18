@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class SGMagnet : Node
 {
-    [SerializeField] List<Node> nodes;
+    [SerializeField] Dictionary<int,Node> nodes;
     [SerializeField] GameObject entrance,exit;
     private Vector3 entranceLoc, exitLoc;
-    public override List<Node> children { get => nodes; set => nodes = value; }
+    public override Dictionary<int,Node> children { get => nodes; set => nodes = value; }
     public override Vector3 GetStartLocation { get => entranceLoc; set => entranceLoc = value; }
     public override Vector3 GetEndLocation { get => exitLoc; set => exitLoc = value; }
     public override int GetRotation(GameObject gameObject) {
@@ -17,11 +17,12 @@ public class SGMagnet : Node
     public SGMagnet() {
 
     }
-    void Start()
-    {
+    void Start() {
         this.entranceLoc = entrance.transform.position;
         this.exitLoc = exit.transform.position;
-    }
+        if (nodes == null) {
+            nodes = new Dictionary<int, Node>();
+        }
 
-    // Update is called once per frame
+    }
 }

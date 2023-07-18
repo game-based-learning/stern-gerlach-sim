@@ -11,7 +11,7 @@ namespace SternGerlach
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
         private Vector3 entranceLoc, exitLoc;
-        public override List<Node> children { get => new() { firstMagnet }; set => firstMagnet = value[0]; }
+        public override Dictionary<int, Node> children { get => new() { { 0, firstMagnet } }; set => firstMagnet = value[0]; }
         public override Vector3 GetStartLocation { get => entranceLoc; set => entranceLoc = value; }
         public override Vector3 GetEndLocation { get => exitLoc; set => exitLoc = value; }
 

@@ -44,6 +44,60 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Value"",
+                    ""id"": ""d3262d29-a5b9-458b-b0ba-f44626db8f92"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseLeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""6849c63e-494b-4eab-8f35-3fbc05636bc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceImagePlate"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b85c415-2869-4466-8cc4-79d930996772"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceSGMagnet"",
+                    ""type"": ""Button"",
+                    ""id"": ""4428f268-315d-48bc-ae89-08a990781512"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c17ec9f-3f16-41b9-aefd-8e217de95b4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""135631db-c442-42f7-afa8-53c303b6d550"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +122,72 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Silver"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7348cee4-2ca8-4497-8ace-f232bdf9998a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dcc7b1e-1f34-4b24-9908-31bb37042cd4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd0b1935-078a-4131-a9bd-54cfa896c24c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceImagePlate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8565ff9-a3c3-4bd3-9eb9-57bb4dff86b1"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceSGMagnet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28234ba4-197a-4ada-82d8-b50ddeb36fa1"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9563a5c-93ac-44b6-8bbf-ccc3d96522f7"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +198,12 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
         m_Control_Macro = m_Control.FindAction("Macro", throwIfNotFound: true);
         m_Control_Silver = m_Control.FindAction("Silver", throwIfNotFound: true);
+        m_Control_MousePos = m_Control.FindAction("MousePos", throwIfNotFound: true);
+        m_Control_MouseLeftClick = m_Control.FindAction("MouseLeftClick", throwIfNotFound: true);
+        m_Control_PlaceImagePlate = m_Control.FindAction("PlaceImagePlate", throwIfNotFound: true);
+        m_Control_PlaceSGMagnet = m_Control.FindAction("PlaceSGMagnet", throwIfNotFound: true);
+        m_Control_RotateLeft = m_Control.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Control_RotateRight = m_Control.FindAction("RotateRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +265,24 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
     private IControlActions m_ControlActionsCallbackInterface;
     private readonly InputAction m_Control_Macro;
     private readonly InputAction m_Control_Silver;
+    private readonly InputAction m_Control_MousePos;
+    private readonly InputAction m_Control_MouseLeftClick;
+    private readonly InputAction m_Control_PlaceImagePlate;
+    private readonly InputAction m_Control_PlaceSGMagnet;
+    private readonly InputAction m_Control_RotateLeft;
+    private readonly InputAction m_Control_RotateRight;
     public struct ControlActions
     {
         private @InputControl m_Wrapper;
         public ControlActions(@InputControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Macro => m_Wrapper.m_Control_Macro;
         public InputAction @Silver => m_Wrapper.m_Control_Silver;
+        public InputAction @MousePos => m_Wrapper.m_Control_MousePos;
+        public InputAction @MouseLeftClick => m_Wrapper.m_Control_MouseLeftClick;
+        public InputAction @PlaceImagePlate => m_Wrapper.m_Control_PlaceImagePlate;
+        public InputAction @PlaceSGMagnet => m_Wrapper.m_Control_PlaceSGMagnet;
+        public InputAction @RotateLeft => m_Wrapper.m_Control_RotateLeft;
+        public InputAction @RotateRight => m_Wrapper.m_Control_RotateRight;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +298,24 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                 @Silver.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
                 @Silver.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
                 @Silver.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
+                @MousePos.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMousePos;
+                @MousePos.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMousePos;
+                @MousePos.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMousePos;
+                @MouseLeftClick.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @MouseLeftClick.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @MouseLeftClick.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @PlaceImagePlate.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceImagePlate.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceImagePlate.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceSGMagnet.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @PlaceSGMagnet.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @PlaceSGMagnet.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @RotateLeft.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateRight.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
+                @RotateRight.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
+                @RotateRight.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +326,24 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                 @Silver.started += instance.OnSilver;
                 @Silver.performed += instance.OnSilver;
                 @Silver.canceled += instance.OnSilver;
+                @MousePos.started += instance.OnMousePos;
+                @MousePos.performed += instance.OnMousePos;
+                @MousePos.canceled += instance.OnMousePos;
+                @MouseLeftClick.started += instance.OnMouseLeftClick;
+                @MouseLeftClick.performed += instance.OnMouseLeftClick;
+                @MouseLeftClick.canceled += instance.OnMouseLeftClick;
+                @PlaceImagePlate.started += instance.OnPlaceImagePlate;
+                @PlaceImagePlate.performed += instance.OnPlaceImagePlate;
+                @PlaceImagePlate.canceled += instance.OnPlaceImagePlate;
+                @PlaceSGMagnet.started += instance.OnPlaceSGMagnet;
+                @PlaceSGMagnet.performed += instance.OnPlaceSGMagnet;
+                @PlaceSGMagnet.canceled += instance.OnPlaceSGMagnet;
+                @RotateLeft.started += instance.OnRotateLeft;
+                @RotateLeft.performed += instance.OnRotateLeft;
+                @RotateLeft.canceled += instance.OnRotateLeft;
+                @RotateRight.started += instance.OnRotateRight;
+                @RotateRight.performed += instance.OnRotateRight;
+                @RotateRight.canceled += instance.OnRotateRight;
             }
         }
     }
@@ -178,5 +352,11 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
     {
         void OnMacro(InputAction.CallbackContext context);
         void OnSilver(InputAction.CallbackContext context);
+        void OnMousePos(InputAction.CallbackContext context);
+        void OnMouseLeftClick(InputAction.CallbackContext context);
+        void OnPlaceImagePlate(InputAction.CallbackContext context);
+        void OnPlaceSGMagnet(InputAction.CallbackContext context);
+        void OnRotateLeft(InputAction.CallbackContext context);
+        void OnRotateRight(InputAction.CallbackContext context);
     }
 }
