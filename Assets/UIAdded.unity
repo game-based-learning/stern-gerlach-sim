@@ -499,7 +499,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6616750480162749730, guid: add22a7dd924eb34ab26df5c58717376, type: 3}
   m_PrefabInstance: {fileID: 627967469}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 795145591}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4412632f2775d24c8ddcd4a8097c42f, type: 3}
@@ -1121,6 +1121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Silver Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 1064806864984803667, guid: add22a7dd924eb34ab26df5c58717376, type: 3}
+      propertyPath: m_TagString
+      value: focusable
+      objectReference: {fileID: 0}
     - target: {fileID: 1714077968118266027, guid: add22a7dd924eb34ab26df5c58717376, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1248,6 +1252,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e71ec40d3da3247becc49ce63a19e2, type: 3}
+--- !u!1 &795145591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1064806864984803667, guid: add22a7dd924eb34ab26df5c58717376, type: 3}
+  m_PrefabInstance: {fileID: 627967469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &795145592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795145591}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &822118961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickedObject: {fileID: 0}
   pm: {fileID: 1148150296}
+  UIManager: {fileID: 1991216314}
 --- !u!114 &1148150294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2219,6 +2242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991216312}
   - component: {fileID: 1991216313}
+  - component: {fileID: 1991216314}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2257,6 +2281,21 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 3cede94fbd2462845b33608a4ae26116, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1991216314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991216311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d652f0b752a4c64cb8bd92c14d809a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusables:
+  - {fileID: 259218201}
+  ui: {fileID: 1991216313}
 --- !u!1 &1999243313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1064806864984803667, guid: 63e71ec40d3da3247becc49ce63a19e2, type: 3}

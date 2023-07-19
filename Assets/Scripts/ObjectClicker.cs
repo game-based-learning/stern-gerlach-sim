@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +17,7 @@ namespace SternGerlach
         private Ray ray;
         private RaycastHit hit;
         [SerializeField] private PointManager pm;
+        [SerializeField] private UIUpdater UIManager;
 
         public void Initialize(InputAction c, InputAction p, InputAction ls)
         {
@@ -26,10 +29,27 @@ namespace SternGerlach
             lShift = ls;
         }
         
-        // Start is called before the first frame update
-        void Start()
+        private void FocusCollider(Ray ray, float lmb_val, float ls_val)
         {
-        
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (lmb_val == 1 && ls_val == 0)
+                {
+                    Debug.Log(hit.collider.name);
+                    pm.Focus(hit.collider.transform);
+                }
+            }
+        }
+
+        private void FocusUI(Ray ray, float lmb_val, float ls_val)
+        {
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (lmb_val == 1 && ls_val == 0)
+                {
+                    UIManager.Modify(hit.transform);
+                }
+            }
         }
 
         // Update is called once per frame
@@ -44,14 +64,8 @@ namespace SternGerlach
             //Debug.Log("mouse pos: " + position);
             ray = Camera.main.ScreenPointToRay(position);
 
-            if (Physics.Raycast(ray, out hit) )
-            {
-                if (lmb_val == 1 && ls_val == 0)
-                {
-                    Debug.Log(hit.collider.name);
-                    pm.Focus(hit.collider.transform);
-                }
-            }
+            FocusCollider(ray, lmb_val, ls_val);
+            FocusUI(ray, lmb_val, ls_val);
         }
     }
 }
