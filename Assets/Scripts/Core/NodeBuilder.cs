@@ -40,14 +40,32 @@ namespace SternGerlach
                     break;
             }
             newNode.transform.parent = parent;
-            SGMagnet node = parent.gameObject.GetComponent<SGMagnet>();
-            Debug.Log(index);
-            Debug.Log(node);
+            Node node = parent.gameObject.GetComponent<SGMagnet>();
+            // Accounts for special case (first node not placed yet)
+            bool firstnode = false;
+            if(node == null) {
+                node = parent.gameObject.GetComponent<Furnace>();
+                firstnode = true;
+            }
             node.children[index] = newNode;
-            newNode.transform.rotation = parent.rotation;
-            float angle = Vector3.SignedAngle(parent.gameObject.transform.position, newNode.transform.position, parent.gameObject.transform.up);
-            newNode.transform.Rotate(new Vector3(0, 0, -angle),Space.Self);
-
+            if(!firstnode) {
+                newNode.transform.rotation = parent.rotation;
+                // we know the parent is an SG magnet so find magnet child
+                Transform sgChildTransform = parent.transform.Find("Magnet").gameObject.transform;
+                // make calculation with top node
+                Debug.Log(sgChildTransform.position);
+                Debug.Log(node != null);
+                Debug.Log(node.GetType());
+                Debug.Log(node.children[0].transform.position);
+                Debug.Log(parent.gameObject.transform.up);
+                float angle = Vector3.SignedAngle(sgChildTransform.position, node.children[0].transform.position, parent.gameObject.transform.up);
+                if(index == 1) {
+                    newNode.transform.Rotate(new Vector3(0, 0, angle),Space.Self);
+                }
+                else {
+                    newNode.transform.Rotate(new Vector3(0, 0, -angle),Space.Self);
+                }
+            }
             Destroy(selectedNode.gameObject);
         }
         bool NodeSelected() {
