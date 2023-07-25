@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,9 +23,23 @@ namespace SternGerlach
 
         }
 
+        private void LargeImagePlateMod()
+        {
+             root.Q<Label>("1").text = "Total Particles Hit: \n";
+            root.Q<Label>("2").text = "Distribution of particles: \n";
+            root.Q<Label>("3").text = "Last Particle hit ";
+        }
         public void Modify(Transform t)
         {
             root.Q<Label>("FocusName").text = t.name;
+            switch (t.name)
+            {
+                case "LargeImagePlate":
+                    LargeImagePlateMod();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

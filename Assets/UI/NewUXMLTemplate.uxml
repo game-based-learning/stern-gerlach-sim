@@ -6,9 +6,9 @@
             </ui:VisualElement>
             <ui:VisualElement name="Image" style="width: 100%; height: 40%;" />
             <ui:VisualElement name="Stats" style="width: 100%; height: 100%;">
-                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; align-items: center; justify-content: space-between;" />
-                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
-                <ui:Label text="Label" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="1" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; align-items: center; justify-content: space-between;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="2" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="3" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; justify-content: space-between; align-items: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
