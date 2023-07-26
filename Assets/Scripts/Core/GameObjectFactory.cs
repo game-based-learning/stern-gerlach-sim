@@ -16,17 +16,39 @@ public class GameObjectFactory : MonoBehaviour
     {
         
     }
-    public Agent CreateMacroscopicMagnet() {
-        GameObject magnet = GameObject.Instantiate(macroscopicMagnetPrefab, firstNode.GetStartLocation, Quaternion.identity);
-        Agent agent = magnet.AddComponent<Agent>();
-        agent.Initialize(firstNode,Agent.AgentType.MacroscopicMagnet);
-        return agent;
+    private bool CanFireParticle() {
+        return CanFireParticle(firstNode.children[0]);
     }
-    public Agent CreateSilverAtom() {
-        GameObject atom = GameObject.Instantiate(silverAtomPrefab, firstNode.GetStartLocation, Quaternion.identity);
-        Agent agent = atom.AddComponent<Agent>();
-        agent.Initialize(firstNode, Agent.AgentType.SilverAtom);
-        return agent;
+    private bool CanFireParticle(Node node) {
+        if(node is ImagePlate) {
+            return true;
+        }
+        if(node is SGMagnet) {
+            return CanFireParticle(node.children[0]) && CanFireParticle(node.children[1]);
+        }
+        else {
+            return false;
+        }
+    }
+    public void CreateMacroscopicMagnet() {
+        if(CanFireParticle()) {
+            GameObject magnet = GameObject.Instantiate(macroscopicMagnetPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            Agent agent = magnet.AddComponent<Agent>();
+            agent.Initialize(firstNode,Agent.AgentType.MacroscopicMagnet);
+        }
+        else {
+            Debug.Log("Incomplete setup.");
+        }
+    }
+    public void CreateSilverAtom() {
+        if(CanFireParticle()) {
+            GameObject atom = GameObject.Instantiate(silverAtomPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            Agent agent = atom.AddComponent<Agent>();
+            agent.Initialize(firstNode, Agent.AgentType.SilverAtom);
+        }
+        else {
+            Debug.Log("Incomplete setup.");
+        }
     }
 
     internal ImagePlate CreateImagePlate(Vector3 loc)
