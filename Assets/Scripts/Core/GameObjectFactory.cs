@@ -5,16 +5,9 @@ public class GameObjectFactory : MonoBehaviour
     [SerializeField] GameObject macroscopicMagnetPrefab, silverAtomPrefab;
     [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab;
     [SerializeField] Node firstNode;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public bool CanUpdateSetup() {
+        return this.transform.childCount == 0;
     }
     private bool CanFireParticle() {
         return CanFireParticle(firstNode.children[0]);
@@ -33,6 +26,7 @@ public class GameObjectFactory : MonoBehaviour
     public void CreateMacroscopicMagnet() {
         if(CanFireParticle()) {
             GameObject magnet = GameObject.Instantiate(macroscopicMagnetPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            //magnet.transform.parent = this.transform;
             Agent agent = magnet.AddComponent<Agent>();
             agent.Initialize(firstNode,Agent.AgentType.MacroscopicMagnet);
         }
@@ -43,6 +37,7 @@ public class GameObjectFactory : MonoBehaviour
     public void CreateSilverAtom() {
         if(CanFireParticle()) {
             GameObject atom = GameObject.Instantiate(silverAtomPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            atom.transform.parent = this.transform;
             Agent agent = atom.AddComponent<Agent>();
             agent.Initialize(firstNode, Agent.AgentType.SilverAtom);
         }

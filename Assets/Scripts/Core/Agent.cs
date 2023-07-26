@@ -38,6 +38,7 @@ public class Agent : MonoBehaviour
                 StepToward(currentNode.GetEndLocation);
                 return;
             }
+            Debug.Log(2);
             if (currentNode.children != null)
             {
                 if (currentNode is Furnace) {

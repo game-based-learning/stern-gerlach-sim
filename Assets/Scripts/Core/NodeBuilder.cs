@@ -72,6 +72,10 @@ namespace SternGerlach
             return selectedNode != null;
         }
         bool CanPlace() {
+            if(!factory.CanUpdateSetup()) { 
+                Debug.Log("Cannot update setup while particles are actively traversing."); 
+                return false; 
+            }
             return NodeSelected() && selectedNode.gameObject.name != "FirstMagnet";
         }
         internal void SelectNode(Ray ray)
