@@ -20,8 +20,14 @@ public class SGMagnet : Node
     void Start() {
         if (nodes == null) {
             nodes = new Dictionary<int, Node>();
-            nodes[0] = transform.Find("EmptyNodeTop").gameObject.GetComponent<Node>();
-            nodes[1] = transform.Find("EmptyNodeBottom").gameObject.GetComponent<Node>();
+            if (transform.Find("EmptyNodeTop") == null)
+            {
+                nodes[0] = transform.Find("EmptyNode").gameObject.GetComponent<Node>();
+            }
+            else {
+                nodes[0] = transform.Find("EmptyNodeTop").gameObject.GetComponent<Node>();
+                nodes[1] = transform.Find("EmptyNodeBottom").gameObject.GetComponent<Node>();
+            }
         }
 
     }

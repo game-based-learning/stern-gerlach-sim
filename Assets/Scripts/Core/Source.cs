@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace SternGerlach
 {
-    public class Furnace : Node
+    public class Source : Node
     {
-        [SerializeField] GameObject furnace;
         [SerializeField] Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
+        [SerializeField] public SourceType type;
+        public enum SourceType { MacroscopicMagnet, SilverAtom }
         private Dictionary<int,Node> nodes = new Dictionary<int, Node>();
         private Vector3 entranceLoc, exitLoc;
         public override Dictionary<int, Node> children { get => nodes; set => nodes[0] = value[0]; }

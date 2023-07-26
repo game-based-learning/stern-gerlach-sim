@@ -1,16 +1,20 @@
+using SternGerlach;
 using UnityEngine;
+using static SternGerlach.Source;
 
 public class GameObjectFactory : MonoBehaviour
 {
-    [SerializeField] GameObject macroscopicMagnetPrefab, silverAtomPrefab;
+    [SerializeField] GameObject particlePrefab;
     [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab;
-    [SerializeField] Node firstNode;
-
+    [SerializeField] Source source;
+    public bool SilverAtomMode() {
+        return source.type == SourceType.SilverAtom;
+    }
     public bool CanUpdateSetup() {
         return this.transform.childCount == 0;
     }
     private bool CanFireParticle() {
-        return CanFireParticle(firstNode.children[0]);
+        return CanFireParticle(source.children[0]);
     }
     private bool CanFireParticle(Node node) {
         if(node is ImagePlate) {
@@ -23,23 +27,35 @@ public class GameObjectFactory : MonoBehaviour
             return false;
         }
     }
-    public void CreateMacroscopicMagnet() {
+    public void CreateParticle() {
+        if (source.type == SourceType.MacroscopicMagnet) {
+            CreateMacroscopicMagnet();
+        }
+        if (source.type == SourceType.SilverAtom)
+        {
+            CreateSilverAtom();
+        }
+        else {
+            Debug.Log("Invalid Source Type.");
+        }
+    }
+    private void CreateMacroscopicMagnet() {
         if(CanFireParticle()) {
-            GameObject magnet = GameObject.Instantiate(macroscopicMagnetPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            GameObject magnet = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             //magnet.transform.parent = this.transform;
             Agent agent = magnet.AddComponent<Agent>();
-            agent.Initialize(firstNode,Agent.AgentType.MacroscopicMagnet);
+            agent.Initialize(source,Agent.AgentType.MacroscopicMagnet);
         }
         else {
             Debug.Log("Incomplete setup.");
         }
     }
-    public void CreateSilverAtom() {
+    private void CreateSilverAtom() {
         if(CanFireParticle()) {
-            GameObject atom = GameObject.Instantiate(silverAtomPrefab, firstNode.GetStartLocation, Quaternion.identity);
+            GameObject atom = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             atom.transform.parent = this.transform;
             Agent agent = atom.AddComponent<Agent>();
-            agent.Initialize(firstNode, Agent.AgentType.SilverAtom);
+            agent.Initialize(source, Agent.AgentType.SilverAtom);
         }
         else {
             Debug.Log("Incomplete setup.");

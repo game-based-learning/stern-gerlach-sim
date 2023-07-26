@@ -41,7 +41,7 @@ public class Agent : MonoBehaviour
             Debug.Log(2);
             if (currentNode.children != null)
             {
-                if (currentNode is Furnace) {
+                if (currentNode is Source) {
                     nextNode = currentNode.children[0];
                 }
                 ExitMagnet();
@@ -107,7 +107,7 @@ public class Agent : MonoBehaviour
                 }
             }
             // make necessary visual changes
-            if (!(currentNode is Furnace)) {
+            if (!(currentNode is Source)) {
                 this.arrow.transform.LookAt(nextNode.GetStartLocation);
                 // adjust for model inaccuracy (arrow is facing wrong direction)
                 this.arrow.transform.Rotate(-180,0,0);

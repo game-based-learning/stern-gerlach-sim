@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 180916637055200821}
   - component: {fileID: 4618404149510817886}
   m_Layer: 0
-  m_Name: Mag2
+  m_Name: SGMag-Two-Nodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

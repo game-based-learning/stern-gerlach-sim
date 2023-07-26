@@ -35,7 +35,9 @@ namespace SternGerlach
                 case "EmptyNodeBottom":
                     index = 1;
                     break;
+                // intentional fallthrough
                 case "EmptyNodeTop":
+                case "EmptyNode":
                     index = 0;
                     break;
             }
@@ -44,7 +46,7 @@ namespace SternGerlach
             // Accounts for special case (first node not placed yet)
             bool firstnode = false;
             if(node == null) {
-                node = parent.gameObject.GetComponent<Furnace>();
+                node = parent.gameObject.GetComponent<Source>();
                 firstnode = true;
             }
             node.children[index] = newNode;
@@ -90,15 +92,18 @@ namespace SternGerlach
         }
         internal void RotateLeft()
         {
-            if (!NodeSelected() || !(selectedNode is SGMagnet)) { return; }
+            if (!ShouldRotate()) { return; }
             Debug.Log("Rotate Left");
             selectedNode.transform.Rotate(new Vector3(-15,0,0),Space.Self);
         }
         internal void RotateRight()
         {
-            if (!NodeSelected() || !(selectedNode is SGMagnet)) { return; }
+            if (!ShouldRotate()) { return; }
             Debug.Log("Rotate Right");
             selectedNode.transform.Rotate(new Vector3(15, 0, 0), Space.Self);
+        }
+        private bool ShouldRotate() {
+            return factory.SilverAtomMode() && NodeSelected() && selectedNode is SGMagnet;
         }
 
         // Start is called before the first frame update

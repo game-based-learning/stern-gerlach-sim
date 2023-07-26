@@ -9,10 +9,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] InputControl controls;
     private InputAction mouseClick;
     private InputAction placeImagePlate, placeSGMagnet;
-    private InputAction createSilverAtom, createMacroscopicMagnet;
+    private InputAction createParticle;
     private InputAction rotateLeft, rotateRight;
     [SerializeField] GameObjectFactory factory;
-    [SerializeField] GameObjectFactory factory2;
     [SerializeField] NodeBuilder builder;
     [SerializeField] Camera mainCamera;
     // Start is called before the first frame update
@@ -20,8 +19,7 @@ public class PlayerControls : MonoBehaviour
     {
         controls = new InputControl();
         controls.Enable();
-        createSilverAtom = controls.Control.Silver;
-        createMacroscopicMagnet = controls.Control.Macro;
+        createParticle = controls.Control.Silver;
         placeSGMagnet = controls.Control.PlaceSGMagnet;
         placeImagePlate = controls.Control.PlaceImagePlate;
         mouseClick = controls.Control.MouseLeftClick;
@@ -32,13 +30,9 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (createSilverAtom.WasPressedThisFrame())
+        if (createParticle.WasPressedThisFrame())
         {
-            factory.CreateSilverAtom();
-        }
-        if (createMacroscopicMagnet.WasPerformedThisFrame())
-        {
-            factory2.CreateMacroscopicMagnet();
+            factory.CreateParticle();
         }
         if (placeSGMagnet.WasPressedThisFrame()) {
             builder.PlaceSGMagnet();
