@@ -29,7 +29,7 @@ public class Agent : MonoBehaviour
             this.questionMark.SetActive(true);
         }
         else if(type == AgentType.MacroscopicMagnet) {
-            this.transform.Rotate(0,0,Globals.POSSIBLE_MACROSCOPIC_ANGLES[random.Next(Globals.POSSIBLE_MACROSCOPIC_ANGLES.Count)],Space.Self);
+            this.transform.Rotate(0,90,Globals.POSSIBLE_MACROSCOPIC_ANGLES[random.Next(Globals.POSSIBLE_MACROSCOPIC_ANGLES.Count)],Space.Self);
         }
 
     }
