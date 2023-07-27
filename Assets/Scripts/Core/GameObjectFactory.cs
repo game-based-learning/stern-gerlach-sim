@@ -7,7 +7,7 @@ using static SternGerlach.Source;
 public class GameObjectFactory : MonoBehaviour
 {
     [SerializeField] GameObject particlePrefab;
-    [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab;
+    [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab, emptyNodePrefab;
     [SerializeField] Source source;
     public bool SilverAtomMode() {
         return source.type == SourceType.SilverAtom;
@@ -76,5 +76,10 @@ public class GameObjectFactory : MonoBehaviour
     {
         GameObject imagePlate = GameObject.Instantiate(sgMagnetPrefab, loc, Quaternion.identity);
         return imagePlate.GetComponent<SGMagnet>();
+    }
+    internal EmptyNode CreateEmptyNode(Vector3 loc)
+    {
+        GameObject emptyNode = GameObject.Instantiate(emptyNodePrefab, loc, Quaternion.identity);
+        return emptyNode.GetComponent<EmptyNode>();
     }
 }

@@ -69,9 +69,10 @@ namespace SternGerlach
             Node sgMagnet = parent.gameObject.GetComponent<SGMagnet>();
             int count = 0;
             foreach (Node node in nodes) {
-                node.transform.parent = parent;
                 sgMagnet.children[count++] = node;
             }
+
+            nodes[0].transform.parent.transform.parent = sgMagnet.transform;
             Destroy(selectedNode.gameObject);
         }
         bool NodeSelected() {
@@ -97,22 +98,32 @@ namespace SternGerlach
         internal void DeleteNode()
         {
             if (!factory.CanUpdateSetup()) { Debug.Log("Cannot update setup while particles are actively traversing."); return; }
-            if (selectedNode != null) { Debug.Log("No node was selected."); return; }
+            if (selectedNode == null) { Debug.Log("No node was selected."); return; }
             if (selectedNode is Source) { Debug.Log("Cannot delete source."); return; }
             if (selectedNode is EmptyNode) { Debug.Log("Cannot delete a node that is already empty."); return; }
             Node parent = selectedNode.transform.parent.GetComponent<Node>();
+            // Special case for large image plate
+            int index = 0;
             if (!factory.SilverAtomMode() && selectedNode is ImagePlate) {
-                    parent.children = new Dictionary<int, Node>();
+                parent = selectedNode.transform.parent.transform.parent.GetComponent<SGMagnet>();
+                parent.children = new Dictionary<int, Node>();
+                EmptyNode node = factory.CreateEmptyNode(selectedNode.transform.parent.transform.position);
+                node.transform.parent = parent.transform;
+                parent.children[index] = node;
+                Destroy(selectedNode.transform.parent.gameObject);
             }
             else {
                 for (int i = 0; i < parent.children.Count; i++) {
                     if (parent.children[i] == selectedNode) {
-                        parent.children[i] = null;
+                        index = i;
                         break;
                     }
                 }
+                EmptyNode node = factory.CreateEmptyNode(selectedNode.transform.position);
+                node.transform.parent = parent.transform;
+                parent.children[index] = node;
+                Destroy(selectedNode.gameObject);
             }
-            Destroy(selectedNode.gameObject);
         }
         internal void RotateLeft()
         {
@@ -127,7 +138,7 @@ namespace SternGerlach
             selectedNode.transform.Rotate(new Vector3(15, 0, 0), Space.Self);
         }
         private bool ShouldRotate() {
-            return factory.SilverAtomMode() && NodeSelected() && selectedNode is SGMagnet;
+            return factory.SilverAtomMode() && NodeSelected() && factory.CanUpdateSetup() && selectedNode is SGMagnet;
         }
     }
 }

@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class SGMagnet : Node
 {
-    [SerializeField] Dictionary<int,Node> nodes;
+    [SerializeField] List<Node> nodes;
     [SerializeField] GameObject entrance,exit;
     private Vector3 entranceLoc, exitLoc;
-    public override Dictionary<int,Node> children { get => nodes; set => nodes = value; }
+    private Dictionary<int,Node> childs = new Dictionary<int,Node>();
+    public override Dictionary<int,Node> children { get => childs; set => childs = value; }
     public override Vector3 GetStartLocation { get => entrance.transform.position; set => entranceLoc = value; }
     public override Vector3 GetEndLocation { get => exit.transform.position; set => exitLoc = value; }
     public override int GetRotation(GameObject gameObject) {
@@ -19,17 +20,25 @@ public class SGMagnet : Node
 
     }
     void Start() {
-        if (nodes == null) {
-            nodes = new Dictionary<int, Node>();
-            if (transform.Find(Globals.TOP_EMPTY_NODE_NAME) == null)
+        if (childs == null)
+        {
+            childs = new Dictionary<int,Node>();
+            //nodes = new Dictionary<int, Node>();
+            //if (transform.Find(Globals.TOP_EMPTY_NODE_NAME) == null)
+            //{
+            //    nodes[0] = transform.Find(Globals.EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
+            //}
+            //else {
+            //    nodes[0] = transform.Find(Globals.TOP_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
+            //    nodes[1] = transform.Find(Globals.BOTTOM_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
+            //}
+        }
+        else {
+            int count = 0;
+            foreach (Node node in nodes)
             {
-                nodes[0] = transform.Find(Globals.EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
-            }
-            else {
-                nodes[0] = transform.Find(Globals.TOP_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
-                nodes[1] = transform.Find(Globals.BOTTOM_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
+                childs[count++] = node;
             }
         }
-
     }
 }
