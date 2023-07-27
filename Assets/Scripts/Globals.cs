@@ -12,5 +12,8 @@ namespace SternGerlach
         public static string ARROW_NAME = "Arrow";
         public static string MAGNET_NAME = "Magnet";
         public static float ANGLE_BETWEEN_NODES = 22.5f;
+        public static string TOP_EMPTY_NODE_NAME = "EmptyNodeTop";
+        public static string BOTTOM_EMPTY_NODE_NAME = "EmptyNodeBottom";
+        public static string EMPTY_NODE_NAME = "EmptyNode";
     }
 }

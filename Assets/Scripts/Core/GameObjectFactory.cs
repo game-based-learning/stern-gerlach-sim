@@ -44,7 +44,6 @@ public class GameObjectFactory : MonoBehaviour
     private void CreateMacroscopicMagnet() {
         if(CanFireParticle()) {
             GameObject magnet = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
-            //magnet.transform.parent = this.transform;
             Agent agent = magnet.AddComponent<Agent>();
             agent.Initialize(source,Agent.AgentType.MacroscopicMagnet);
         }

@@ -1,3 +1,4 @@
+using SternGerlach;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,13 +21,13 @@ public class SGMagnet : Node
     void Start() {
         if (nodes == null) {
             nodes = new Dictionary<int, Node>();
-            if (transform.Find("EmptyNodeTop") == null)
+            if (transform.Find(Globals.TOP_EMPTY_NODE_NAME) == null)
             {
-                nodes[0] = transform.Find("EmptyNode").gameObject.GetComponent<Node>();
+                nodes[0] = transform.Find(Globals.EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
             }
             else {
-                nodes[0] = transform.Find("EmptyNodeTop").gameObject.GetComponent<Node>();
-                nodes[1] = transform.Find("EmptyNodeBottom").gameObject.GetComponent<Node>();
+                nodes[0] = transform.Find(Globals.TOP_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
+                nodes[1] = transform.Find(Globals.BOTTOM_EMPTY_NODE_NAME).gameObject.GetComponent<Node>();
             }
         }
 
