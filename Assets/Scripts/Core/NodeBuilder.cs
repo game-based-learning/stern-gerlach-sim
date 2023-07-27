@@ -10,6 +10,8 @@ namespace SternGerlach
         internal void PlaceImagePlate()
         {
             if (!CanPlace()) { return; }
+            if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is Source) { return; }
+
             Debug.Log("Place Image Plate");
             Vector3 loc = selectedNode.transform.position;
             if (factory.SilverAtomMode())
@@ -91,6 +93,26 @@ namespace SternGerlach
                     Debug.Log("Selected: " + hit.transform.gameObject.name);
                 }
             }
+        }
+        internal void DeleteNode()
+        {
+            if (!factory.CanUpdateSetup()) { Debug.Log("Cannot update setup while particles are actively traversing."); return; }
+            if (selectedNode != null) { Debug.Log("No node was selected."); return; }
+            if (selectedNode is Source) { Debug.Log("Cannot delete source."); return; }
+            if (selectedNode is EmptyNode) { Debug.Log("Cannot delete a node that is already empty."); return; }
+            Node parent = selectedNode.transform.parent.GetComponent<Node>();
+            if (!factory.SilverAtomMode() && selectedNode is ImagePlate) {
+                    parent.children = new Dictionary<int, Node>();
+            }
+            else {
+                for (int i = 0; i < parent.children.Count; i++) {
+                    if (parent.children[i] == selectedNode) {
+                        parent.children[i] = null;
+                        break;
+                    }
+                }
+            }
+            Destroy(selectedNode.gameObject);
         }
         internal void RotateLeft()
         {

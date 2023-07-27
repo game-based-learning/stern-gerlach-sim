@@ -106,7 +106,6 @@ public class Agent : MonoBehaviour
             // collapse to node parallel with our angle
             else {
                 this.angle = magnetRotation;
-                Debug.Log(angle);
                 if (lastCollapse == CollapseType.UpState) {
                     choice = 1;
                 }

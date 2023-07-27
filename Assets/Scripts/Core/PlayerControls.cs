@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction placeImagePlate, placeSGMagnet;
     private InputAction createParticle;
     private InputAction rotateLeft, rotateRight;
+    private InputAction deleteNode;
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
     [SerializeField] Camera mainCamera;
@@ -25,6 +26,7 @@ public class PlayerControls : MonoBehaviour
         mouseClick = controls.Control.MouseLeftClick;
         rotateLeft = controls.Control.RotateLeft;
         rotateRight = controls.Control.RotateRight;
+        deleteNode = controls.Control.DeleteNode;
     }
 
     // Update is called once per frame
@@ -43,11 +45,14 @@ public class PlayerControls : MonoBehaviour
         if (mouseClick.WasPressedThisFrame()) {
             builder.SelectNode(mainCamera.ScreenPointToRay(Input.mousePosition));
         }
-        if (rotateLeft.WasPerformedThisFrame()) {
+        if (rotateLeft.WasPressedThisFrame()) {
             builder.RotateLeft();
         }
-        if (rotateRight.WasPerformedThisFrame()) {
+        if (rotateRight.WasPressedThisFrame()) {
             builder.RotateRight();
+        }
+        if (deleteNode.WasPressedThisFrame()) {
+            builder.DeleteNode();
         }
     }
 }
