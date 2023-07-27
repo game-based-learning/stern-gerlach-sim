@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SternGerlach
@@ -28,7 +25,9 @@ namespace SternGerlach
         }
         void PlaceNode(Node newNode) {
             Transform parent = selectedNode.transform.parent;
-            Debug.Log(parent);
+
+
+            /*
             int index = 0;
             switch (selectedNode.gameObject.name)
             {
@@ -40,9 +39,14 @@ namespace SternGerlach
                 case "EmptyNode":
                     index = 0;
                     break;
-            }
+            } **/
+
             newNode.transform.parent = parent;
             Node node = parent.gameObject.GetComponent<SGMagnet>();
+
+            int index = 0;
+            if (node != null && selectedNode == node.children[1]) { index = 1; }
+
             // Accounts for special case (first node not placed yet)
             bool firstnode = false;
             if(node == null) {
@@ -52,8 +56,6 @@ namespace SternGerlach
             node.children[index] = newNode;
             if(!firstnode) {
                 newNode.transform.rotation = parent.rotation;
-                // we know the parent is an SG magnet so find magnet child
-                Transform sgChildTransform = parent.transform.Find(Globals.MAGNET_NAME).gameObject.transform;
                 // perform appropriate rotation
                 int direction = 1;
                 if(index != 1) {
@@ -97,18 +99,6 @@ namespace SternGerlach
         }
         private bool ShouldRotate() {
             return factory.SilverAtomMode() && NodeSelected() && selectedNode is SGMagnet;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }
