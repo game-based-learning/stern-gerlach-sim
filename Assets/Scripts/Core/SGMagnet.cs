@@ -12,6 +12,7 @@ public class SGMagnet : Node
     public override Vector3 GetStartLocation { get => entrance.transform.position; set => entranceLoc = value; }
     public override Vector3 GetEndLocation { get => exit.transform.position; set => exitLoc = value; }
     public override int GetRotation(GameObject gameObject) {
+        Debug.Log("SGMag Rot:" + Mathf.FloorToInt(transform.eulerAngles.x));
         return Mathf.FloorToInt(transform.eulerAngles.x);
     } 
     public SGMagnet() {
