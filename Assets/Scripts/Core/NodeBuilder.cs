@@ -26,6 +26,8 @@ namespace SternGerlach
         internal void PlaceSGMagnet()
         {
             if (!CanPlace()) { return; }
+            // only allow one sg magnet for macroscopic mode
+            if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is SGMagnet) { return; }
             Debug.Log("Place SG Magnet");
             Vector3 loc = selectedNode.transform.position;
             SGMagnet plate = factory.CreateSGMagnet(loc);
