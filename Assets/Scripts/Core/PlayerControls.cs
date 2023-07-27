@@ -2,32 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using SternGerlach;
 
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] InputControl controls;
-    private InputAction createSilverAtom;
-    private InputAction createMacroscopicMagnet;
-    [SerializeField] MagnetFactory factory;
-    [SerializeField] MagnetFactory factory2;
+    private InputAction mouseClick;
+    private InputAction placeImagePlate, placeSGMagnet;
+    private InputAction createParticle;
+    private InputAction rotateLeft, rotateRight;
+    private InputAction deleteNode;
+    [SerializeField] GameObjectFactory factory;
+    [SerializeField] NodeBuilder builder;
+    [SerializeField] Camera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
         controls = new InputControl();
         controls.Enable();
-        createSilverAtom = controls.Control.Silver;
-        createMacroscopicMagnet = controls.Control.Macro;
+        createParticle = controls.Control.Silver;
+        placeSGMagnet = controls.Control.PlaceSGMagnet;
+        placeImagePlate = controls.Control.PlaceImagePlate;
+        mouseClick = controls.Control.MouseLeftClick;
+        rotateLeft = controls.Control.RotateLeft;
+        rotateRight = controls.Control.RotateRight;
+        deleteNode = controls.Control.DeleteNode;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (createSilverAtom.WasPressedThisFrame())
+        if (createParticle.WasPressedThisFrame())
         {
-            factory.createSilverAtom();
+            factory.CreateParticle();
         }
-        else if (createMacroscopicMagnet.WasPerformedThisFrame()) {
-            factory2.createMacroscopicMagnet();
+        if (placeSGMagnet.WasPressedThisFrame()) {
+            builder.PlaceSGMagnet();
+        }
+        if (placeImagePlate.WasPressedThisFrame()) {
+            builder.PlaceImagePlate();
+        }
+        if (mouseClick.WasPressedThisFrame()) {
+            builder.SelectNode(mainCamera.ScreenPointToRay(Input.mousePosition));
+        }
+        if (rotateLeft.WasPressedThisFrame()) {
+            builder.RotateLeft();
+        }
+        if (rotateRight.WasPressedThisFrame()) {
+            builder.RotateRight();
+        }
+        if (deleteNode.WasPressedThisFrame()) {
+            builder.DeleteNode();
         }
     }
 }

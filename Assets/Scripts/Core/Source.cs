@@ -4,14 +4,16 @@ using UnityEngine;
 
 namespace SternGerlach
 {
-    public class Furnace : Node
+    public class Source : Node
     {
-        [SerializeField] GameObject furnace;
         [SerializeField] Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
+        [SerializeField] public SourceType type;
+        public enum SourceType { MacroscopicMagnet, SilverAtom }
+        private Dictionary<int,Node> nodes = new Dictionary<int, Node>();
         private Vector3 entranceLoc, exitLoc;
-        public override List<Node> children { get => new() { firstMagnet }; set => firstMagnet = value[0]; }
+        public override Dictionary<int, Node> children { get => nodes; set => nodes[0] = value[0]; }
         public override Vector3 GetStartLocation { get => entranceLoc; set => entranceLoc = value; }
         public override Vector3 GetEndLocation { get => exitLoc; set => exitLoc = value; }
 
@@ -24,6 +26,9 @@ namespace SternGerlach
         {
             this.entranceLoc = entrance.transform.position;
             this.exitLoc = exit.transform.position;
+            if(firstMagnet != null) {
+                nodes[0] = firstMagnet;
+            }
         }
     }
 }

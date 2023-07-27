@@ -28,15 +28,6 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
             ""id"": ""201c4812-2342-4c01-b85d-b6e98dccc3c8"",
             ""actions"": [
                 {
-                    ""name"": ""Macro"",
-                    ""type"": ""Button"",
-                    ""id"": ""c75fbe1a-6fdf-4084-b29d-f163d7aaf97a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Silver"",
                     ""type"": ""Button"",
                     ""id"": ""ce70affc-6ee7-4c3b-bd02-48b1d501080d"",
@@ -44,20 +35,63 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseLeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""6849c63e-494b-4eab-8f35-3fbc05636bc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceImagePlate"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b85c415-2869-4466-8cc4-79d930996772"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceSGMagnet"",
+                    ""type"": ""Button"",
+                    ""id"": ""4428f268-315d-48bc-ae89-08a990781512"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c17ec9f-3f16-41b9-aefd-8e217de95b4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""135631db-c442-42f7-afa8-53c303b6d550"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeleteNode"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fe45b07-48dd-4d7a-8893-a65fe7391c09"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""2419b6d0-5aa9-44d9-8b3c-19fdc1eb4522"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Macro"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""a304478f-15ed-43eb-b52d-9d37fe73ca8b"",
@@ -68,6 +102,72 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""action"": ""Silver"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6dcc7b1e-1f34-4b24-9908-31bb37042cd4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd0b1935-078a-4131-a9bd-54cfa896c24c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceImagePlate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8565ff9-a3c3-4bd3-9eb9-57bb4dff86b1"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceSGMagnet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28234ba4-197a-4ada-82d8-b50ddeb36fa1"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9563a5c-93ac-44b6-8bbf-ccc3d96522f7"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fd980db-3487-4129-87ef-86ef467df08e"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeleteNode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -76,8 +176,13 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
 }");
         // Control
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
-        m_Control_Macro = m_Control.FindAction("Macro", throwIfNotFound: true);
         m_Control_Silver = m_Control.FindAction("Silver", throwIfNotFound: true);
+        m_Control_MouseLeftClick = m_Control.FindAction("MouseLeftClick", throwIfNotFound: true);
+        m_Control_PlaceImagePlate = m_Control.FindAction("PlaceImagePlate", throwIfNotFound: true);
+        m_Control_PlaceSGMagnet = m_Control.FindAction("PlaceSGMagnet", throwIfNotFound: true);
+        m_Control_RotateLeft = m_Control.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Control_RotateRight = m_Control.FindAction("RotateRight", throwIfNotFound: true);
+        m_Control_DeleteNode = m_Control.FindAction("DeleteNode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -137,14 +242,24 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
     // Control
     private readonly InputActionMap m_Control;
     private IControlActions m_ControlActionsCallbackInterface;
-    private readonly InputAction m_Control_Macro;
     private readonly InputAction m_Control_Silver;
+    private readonly InputAction m_Control_MouseLeftClick;
+    private readonly InputAction m_Control_PlaceImagePlate;
+    private readonly InputAction m_Control_PlaceSGMagnet;
+    private readonly InputAction m_Control_RotateLeft;
+    private readonly InputAction m_Control_RotateRight;
+    private readonly InputAction m_Control_DeleteNode;
     public struct ControlActions
     {
         private @InputControl m_Wrapper;
         public ControlActions(@InputControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Macro => m_Wrapper.m_Control_Macro;
         public InputAction @Silver => m_Wrapper.m_Control_Silver;
+        public InputAction @MouseLeftClick => m_Wrapper.m_Control_MouseLeftClick;
+        public InputAction @PlaceImagePlate => m_Wrapper.m_Control_PlaceImagePlate;
+        public InputAction @PlaceSGMagnet => m_Wrapper.m_Control_PlaceSGMagnet;
+        public InputAction @RotateLeft => m_Wrapper.m_Control_RotateLeft;
+        public InputAction @RotateRight => m_Wrapper.m_Control_RotateRight;
+        public InputAction @DeleteNode => m_Wrapper.m_Control_DeleteNode;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -154,29 +269,64 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_ControlActionsCallbackInterface != null)
             {
-                @Macro.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMacro;
-                @Macro.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMacro;
-                @Macro.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMacro;
                 @Silver.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
                 @Silver.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
                 @Silver.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnSilver;
+                @MouseLeftClick.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @MouseLeftClick.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @MouseLeftClick.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMouseLeftClick;
+                @PlaceImagePlate.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceImagePlate.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceImagePlate.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceImagePlate;
+                @PlaceSGMagnet.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @PlaceSGMagnet.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @PlaceSGMagnet.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnPlaceSGMagnet;
+                @RotateLeft.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateLeft;
+                @RotateRight.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
+                @RotateRight.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
+                @RotateRight.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnRotateRight;
+                @DeleteNode.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
+                @DeleteNode.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
+                @DeleteNode.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Macro.started += instance.OnMacro;
-                @Macro.performed += instance.OnMacro;
-                @Macro.canceled += instance.OnMacro;
                 @Silver.started += instance.OnSilver;
                 @Silver.performed += instance.OnSilver;
                 @Silver.canceled += instance.OnSilver;
+                @MouseLeftClick.started += instance.OnMouseLeftClick;
+                @MouseLeftClick.performed += instance.OnMouseLeftClick;
+                @MouseLeftClick.canceled += instance.OnMouseLeftClick;
+                @PlaceImagePlate.started += instance.OnPlaceImagePlate;
+                @PlaceImagePlate.performed += instance.OnPlaceImagePlate;
+                @PlaceImagePlate.canceled += instance.OnPlaceImagePlate;
+                @PlaceSGMagnet.started += instance.OnPlaceSGMagnet;
+                @PlaceSGMagnet.performed += instance.OnPlaceSGMagnet;
+                @PlaceSGMagnet.canceled += instance.OnPlaceSGMagnet;
+                @RotateLeft.started += instance.OnRotateLeft;
+                @RotateLeft.performed += instance.OnRotateLeft;
+                @RotateLeft.canceled += instance.OnRotateLeft;
+                @RotateRight.started += instance.OnRotateRight;
+                @RotateRight.performed += instance.OnRotateRight;
+                @RotateRight.canceled += instance.OnRotateRight;
+                @DeleteNode.started += instance.OnDeleteNode;
+                @DeleteNode.performed += instance.OnDeleteNode;
+                @DeleteNode.canceled += instance.OnDeleteNode;
             }
         }
     }
     public ControlActions @Control => new ControlActions(this);
     public interface IControlActions
     {
-        void OnMacro(InputAction.CallbackContext context);
         void OnSilver(InputAction.CallbackContext context);
+        void OnMouseLeftClick(InputAction.CallbackContext context);
+        void OnPlaceImagePlate(InputAction.CallbackContext context);
+        void OnPlaceSGMagnet(InputAction.CallbackContext context);
+        void OnRotateLeft(InputAction.CallbackContext context);
+        void OnRotateRight(InputAction.CallbackContext context);
+        void OnDeleteNode(InputAction.CallbackContext context);
     }
 }

@@ -8,9 +8,12 @@ public class Agent : MonoBehaviour
     private Node currentNode, nextNode;
     private System.Random random;
     enum AgentState { WithinNode, BetweenNodes }
+    enum CollapseType { UpState, DownState }
     public enum AgentType { MacroscopicMagnet, SilverAtom }
+    private bool enteredFirstMagnet = false;
     private AgentState agentState;
     private AgentType agentType;
+    private CollapseType lastCollapse;
     private int angle;
     private GameObject arrow, questionMark;
     public void Initialize(Node firstNode, AgentType type)  {
@@ -40,7 +43,7 @@ public class Agent : MonoBehaviour
             }
             if (currentNode.children != null)
             {
-                if (currentNode is Furnace) {
+                if (currentNode is Source) {
                     nextNode = currentNode.children[0];
                 }
                 ExitMagnet();
@@ -86,26 +89,35 @@ public class Agent : MonoBehaviour
         ((ImagePlate)currentNode).ShowIndicator();
     }
     void Collapse() {
+        if (!enteredFirstMagnet) {
+            nextNode = currentNode.children[0];
+            enteredFirstMagnet = !enteredFirstMagnet;
+            return;
+        }
         if (agentType == AgentType.SilverAtom) {
             int magnetRotation = currentNode.GetRotation(this.gameObject);
             // collapse to random node
-            if (angle != magnetRotation)
-            {
-                nextNode = currentNode.children[random.Next(0, 2)];
+            int choice = 0;
+            if (angle != magnetRotation) {
+                choice = random.Next(0, 2);
+                nextNode = currentNode.children[choice];
                 this.angle = nextNode.GetRotation(this.gameObject);
             }
             // collapse to node parallel with our angle
             else {
                 this.angle = magnetRotation;
-                if (angle > 0) {
-                    nextNode = currentNode.children[1];
+                if (lastCollapse == CollapseType.UpState) {
+                    choice = 1;
                 }
-                else {
-                    nextNode = currentNode.children[0];
-                }
+                nextNode = currentNode.children[choice];
+            }
+            if (choice == 0) {
+                lastCollapse = CollapseType.DownState;
+            } else {
+                lastCollapse = CollapseType.UpState;
             }
             // make necessary visual changes
-            if (!(currentNode is Furnace)) {
+            if (!(currentNode is Source)) {
                 this.arrow.transform.LookAt(nextNode.GetStartLocation);
                 // adjust for model inaccuracy (arrow is facing wrong direction)
                 this.arrow.transform.Rotate(-180,0,0);
