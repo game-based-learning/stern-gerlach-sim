@@ -53,15 +53,13 @@ namespace SternGerlach
             if(!firstnode) {
                 newNode.transform.rotation = parent.rotation;
                 // we know the parent is an SG magnet so find magnet child
-                Transform sgChildTransform = parent.transform.Find("Magnet").gameObject.transform;
-                // make calculation with top node
-                //float angle = Vector3.SignedAngle(sgChildTransform.position, node.children[0].transform.position, parent.gameObject.transform.up);
-                if(index == 1) {
-                    newNode.transform.Rotate(new Vector3(0, 0, 22.5f),Space.Self);
+                Transform sgChildTransform = parent.transform.Find(Globals.MAGNET_NAME).gameObject.transform;
+                // perform appropriate rotation
+                int direction = 1;
+                if(index != 1) {
+                    direction *= -1;
                 }
-                else {
-                    newNode.transform.Rotate(new Vector3(0, 0, -22.5f),Space.Self);
-                }
+                newNode.transform.Rotate(new Vector3(0, 0, direction * Globals.ANGLE_BETWEEN_NODES),Space.Self);
             }
             Destroy(selectedNode.gameObject);
         }

@@ -10,5 +10,7 @@ namespace SternGerlach
         public static float PARTICLE_STEP_SPEED = 3f;
         public static string QUESTION_MARK_NAME = "QuestionMark";
         public static string ARROW_NAME = "Arrow";
+        public static string MAGNET_NAME = "Magnet";
+        public static float ANGLE_BETWEEN_NODES = 22.5f;
     }
 }
