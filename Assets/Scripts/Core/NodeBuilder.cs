@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SternGerlach
@@ -11,8 +12,15 @@ namespace SternGerlach
             if (!CanPlace()) { return; }
             Debug.Log("Place Image Plate");
             Vector3 loc = selectedNode.transform.position;
-            ImagePlate plate = factory.CreateImagePlate(loc);
-            PlaceNode(plate);
+            if (factory.SilverAtomMode())
+            {
+                ImagePlate plate = factory.CreateImagePlate(loc);
+                PlaceNode(plate);
+            }
+            else {
+                List<ImagePlate> largePlate = factory.CreateLargeImagePlate(loc);
+                PlaceLargePlateNodes(largePlate);
+            }
         }
 
         internal void PlaceSGMagnet()
@@ -26,24 +34,10 @@ namespace SternGerlach
         void PlaceNode(Node newNode) {
             Transform parent = selectedNode.transform.parent;
 
-
-            /*
-            int index = 0;
-            switch (selectedNode.gameObject.name)
-            {
-                case "EmptyNodeBottom":
-                    index = 1;
-                    break;
-                // intentional fallthrough
-                case "EmptyNodeTop":
-                case "EmptyNode":
-                    index = 0;
-                    break;
-            } **/
-
             newNode.transform.parent = parent;
             Node node = parent.gameObject.GetComponent<SGMagnet>();
 
+            // choose child
             int index = 0;
             if (node != null && selectedNode == node.children[1]) { index = 1; }
 
@@ -62,6 +56,17 @@ namespace SternGerlach
                     direction *= -1;
                 }
                 newNode.transform.Rotate(new Vector3(0, 0, direction * Globals.ANGLE_BETWEEN_NODES),Space.Self);
+            }
+            Destroy(selectedNode.gameObject);
+        }
+        void PlaceLargePlateNodes(List<ImagePlate> nodes)
+        {
+            Transform parent = selectedNode.transform.parent;
+            Node sgMagnet = parent.gameObject.GetComponent<SGMagnet>();
+            int count = 0;
+            foreach (Node node in nodes) {
+                node.transform.parent = parent;
+                sgMagnet.children[count++] = node;
             }
             Destroy(selectedNode.gameObject);
         }

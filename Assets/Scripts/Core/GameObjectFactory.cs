@@ -1,4 +1,6 @@
 using SternGerlach;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static SternGerlach.Source;
 
@@ -31,7 +33,7 @@ public class GameObjectFactory : MonoBehaviour
         if (source.type == SourceType.MacroscopicMagnet) {
             CreateMacroscopicMagnet();
         }
-        if (source.type == SourceType.SilverAtom)
+        else if (source.type == SourceType.SilverAtom)
         {
             CreateSilverAtom();
         }
@@ -61,7 +63,11 @@ public class GameObjectFactory : MonoBehaviour
             Debug.Log("Incomplete setup.");
         }
     }
+    internal List<ImagePlate> CreateLargeImagePlate(Vector3 loc) {
+        GameObject largeImagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);
+        return largeImagePlate.GetComponentsInChildren<ImagePlate>().ToList();
 
+    }
     internal ImagePlate CreateImagePlate(Vector3 loc)
     {
         GameObject imagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);
