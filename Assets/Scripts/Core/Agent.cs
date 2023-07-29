@@ -86,7 +86,10 @@ public class Agent : MonoBehaviour
     }
     void HitImagePlate()
     {
+        var imgplate = ((ImagePlate)currentNode); //added code
         ((ImagePlate)currentNode).ShowIndicator();
+        imgplate.collapseCount++; //added code
+        imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
     }
     void Collapse() {
         if (!enteredFirstMagnet) {
