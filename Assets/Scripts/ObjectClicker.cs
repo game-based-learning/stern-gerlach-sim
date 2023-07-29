@@ -16,6 +16,7 @@ namespace SternGerlach
         [SerializeField] private Transform clickedObject;
         private Ray ray;
         private RaycastHit hit;
+        private Vector3 position = new Vector3();
         [SerializeField] private PointManager pm;
         [SerializeField] private UIUpdater UIManager;
 
@@ -37,6 +38,10 @@ namespace SternGerlach
                 {
                     Debug.Log(hit.collider.name);
                     pm.Focus(hit.collider.transform);
+                    if (hit.collider.gameObject.CompareTag("Node"))
+                    {
+                        UIManager.PopupDialog(position);
+                    }
                 }
             }
         }
@@ -56,7 +61,9 @@ namespace SternGerlach
         void Update()
         {
             Vector2 tmp = mPos.ReadValue<Vector2>();
-            Vector3 position = new Vector3(tmp.x, tmp.y, 0);
+            position.x = tmp.x;
+            position.y = tmp.y;
+            position.z = 0;
 
             float lmb_val = click.ReadValue<float>();
             float ls_val = lShift.ReadValue<float>();
