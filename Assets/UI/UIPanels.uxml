@@ -2,8 +2,8 @@
     <ui:VisualElement name="screen" style="width: 100%; height: 100%; flex-direction: row;">
         <ui:VisualElement style="width: 80%; height: 100%;">
             <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
-                <ui:Button text="SG Magnet" display-tooltip-when-elided="true" style="height: 50%;" />
-                <ui:Button text="Image Plate" display-tooltip-when-elided="true" style="height: 50%;" />
+                <ui:Button text="SG Magnet" display-tooltip-when-elided="true" name="sgmagnet-button" style="height: 50%;" />
+                <ui:Button text="Image Plate" display-tooltip-when-elided="true" name="imageplate-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>

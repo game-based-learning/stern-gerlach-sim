@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +10,7 @@ namespace SternGerlach
         private InputAction mPos;
         private InputAction lShift;
         [SerializeField] private Transform clickedObject;
+        //private Node selectedNode;
         private Ray ray;
         private RaycastHit hit;
         private Vector3 position = new Vector3();
@@ -36,11 +33,19 @@ namespace SternGerlach
             {
                 if (lmb_val == 1 && ls_val == 0)
                 {
-                    Debug.Log(hit.collider.name);
+                    //Debug.Log(hit.collider.name);
                     pm.Focus(hit.collider.transform);
                     if (hit.collider.gameObject.CompareTag("Node"))
                     {
                         UIManager.PopupDialog(position);
+                        UIManager.state = UIUpdater.States.UI_OPEN;
+                    }
+                    if (hit.transform.TryGetComponent<Node>(out UIManager.builder.selectedNode))
+                    {
+                        Debug.Log("Selected: " + hit.transform.gameObject.name);
+                    } else
+                    {
+                        UIManager.builder.selectedNode = null;
                     }
                 }
             }
@@ -71,7 +76,10 @@ namespace SternGerlach
             //Debug.Log("mouse pos: " + position);
             ray = Camera.main.ScreenPointToRay(position);
 
-            FocusCollider(ray, lmb_val, ls_val);
+            Debug.Log(UIManager.state);
+            if(UIManager.state == UIUpdater.States.UI_CLOSED) {
+                FocusCollider(ray, lmb_val, ls_val);
+            }
             FocusUI(ray, lmb_val, ls_val);
         }
     }

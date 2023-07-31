@@ -10,17 +10,49 @@ namespace SternGerlach
     {
         [SerializeField] public Transform[] focusables;
         [SerializeField] UIDocument ui;
+        [SerializeField] public NodeBuilder builder;
         private VisualElement root;
         private VisualElement bc;
         private Button closebutton;
+        private Button sgbutton;
+        private Button ipbutton;
+        public States state = States.UI_CLOSED;
+
+        public enum States
+        {
+            UI_CLOSED,
+            UI_OPEN,
+        }
         // Start is called before the first frame update
         void Start()
         {
             root = ui.rootVisualElement;
             bc = root.Q<VisualElement>("DialogPopup");
             closebutton = root.Q<Button>("close-button");
+            sgbutton = root.Q<Button>("sgmagnet-button");
+            ipbutton = root.Q<Button>("imageplate-button");
 
             closebutton.clicked += CloseButtonPressed;
+            sgbutton.clicked += SGMagnetButtonPressed;
+            ipbutton.clicked += ImagePlateButtonPressed;
+        }
+        private void CloseButtonPressed()
+        {
+            bc.visible = false;
+            state = States.UI_CLOSED;
+        }
+        private void SGMagnetButtonPressed()
+        {
+            builder.PlaceSGMagnet();
+            bc.visible = false;
+            state = States.UI_CLOSED;
+        }
+
+        private void ImagePlateButtonPressed()
+        {
+            builder.PlaceImagePlate();
+            bc.visible = false;
+            state = States.UI_CLOSED;
         }
 
         private void LargeImagePlateMod()
@@ -37,10 +69,6 @@ namespace SternGerlach
             bc.style.top = Screen.height - position.y;
         }
 
-        private void CloseButtonPressed()
-        {
-            bc.visible = false;
-        }
         public void Modify(Transform t)
         {
             root.Q<Label>("FocusName").text = t.name;

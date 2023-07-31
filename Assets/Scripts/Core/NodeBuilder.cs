@@ -5,7 +5,7 @@ namespace SternGerlach
 {
     public class NodeBuilder : MonoBehaviour
     {
-        private Node selectedNode;
+        public Node selectedNode;
         [SerializeField] GameObjectFactory factory;
         internal void PlaceImagePlate()
         {
@@ -23,6 +23,8 @@ namespace SternGerlach
                 List<ImagePlate> largePlate = factory.CreateLargeImagePlate(loc);
                 PlaceLargePlateNodes(largePlate);
             }
+
+            selectedNode = null; //added code
         }
 
         internal void PlaceSGMagnet()
@@ -34,6 +36,7 @@ namespace SternGerlach
             Vector3 loc = selectedNode.transform.position;
             SGMagnet plate = factory.CreateSGMagnet(loc);
             PlaceNode(plate);
+            selectedNode = null; //added code
         }
         void PlaceNode(Node newNode) {
             Transform parent = selectedNode.transform.parent;
