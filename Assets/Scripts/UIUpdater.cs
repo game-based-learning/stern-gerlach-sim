@@ -76,7 +76,8 @@ namespace SternGerlach
             builder.PlaceSGMagnet();
             bc.visible = false;
             RotationPopup();
-            state = States.UI_CLOSED;
+            //state = States.UI_CLOSED;
+            Modify();
         }
 
         private void ImagePlateButtonPressed()
@@ -108,17 +109,17 @@ namespace SternGerlach
             rc.style.top = popupPosition.y;
         }
 
-        public void Modify(Transform t)
+        public void Modify()
         {
-            root.Q<Label>("FocusName").text = t.name;
-            switch (t.name)
+            root.Q<Label>("FocusName").text = builder.selectedNode.name;
+            /*switch (t.name)
             {
                 case "LargeImagePlate":
                     LargeImagePlateMod();
                     break;
                 default:
                     break;
-            }
+            }*/
         }
     }
 }

@@ -57,7 +57,7 @@ namespace SternGerlach
             {
                 if (lmb_val == 1 && ls_val == 0)
                 {
-                    UIManager.Modify(hit.transform);
+                    UIManager.Modify();
                 }
             }
         }

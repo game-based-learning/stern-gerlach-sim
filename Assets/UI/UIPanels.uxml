@@ -6,7 +6,7 @@
                 <ui:Button text="Image Plate" display-tooltip-when-elided="true" name="imageplate-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close-button" style="height: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="RotationContainer" style="width: 105px; height: 74px; visibility: visible; position: relative;">
+            <ui:VisualElement name="RotationContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
                 <ui:Button text="Rotate Left" display-tooltip-when-elided="true" name="rotate-left" style="height: 50%;" />
                 <ui:Button text="Rotate Right" display-tooltip-when-elided="true" name="rotate-right" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="rclose-button" style="height: 50%;" />
