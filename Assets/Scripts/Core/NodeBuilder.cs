@@ -24,7 +24,7 @@ namespace SternGerlach
                 PlaceLargePlateNodes(largePlate);
             }
 
-            selectedNode = null; //added code
+            //selectedNode = null; //added code
         }
 
         internal void PlaceSGMagnet()
@@ -36,7 +36,7 @@ namespace SternGerlach
             Vector3 loc = selectedNode.transform.position;
             SGMagnet plate = factory.CreateSGMagnet(loc);
             PlaceNode(plate);
-            selectedNode = null; //added code
+            //selectedNode = null; //added code
         }
         void PlaceNode(Node newNode) {
             Transform parent = selectedNode.transform.parent;
@@ -65,6 +65,7 @@ namespace SternGerlach
                 newNode.transform.Rotate(new Vector3(0, 0, direction * Globals.ANGLE_BETWEEN_NODES),Space.Self);
             }
             Destroy(selectedNode.gameObject);
+            selectedNode = newNode;
         }
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
         {
