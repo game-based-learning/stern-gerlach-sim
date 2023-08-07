@@ -11,6 +11,10 @@
                 <ui:Button text="Rotate Right" display-tooltip-when-elided="true" name="rotate-right" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="rclose-button" style="height: 50%;" />
             </ui:VisualElement>
+            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+                <ui:Button text="Delete" display-tooltip-when-elided="true" name="delete-button" style="height: 50%;" />
+                <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
             <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">

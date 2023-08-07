@@ -14,7 +14,10 @@ namespace SternGerlach
         private VisualElement root;
         private VisualElement bc;
         private VisualElement rc;
+        private VisualElement dc;
 
+        private Button deletebutton;
+        private Button dclosebutton;
         private Button closebutton;
         private Button sgbutton;
         private Button ipbutton;
@@ -35,9 +38,16 @@ namespace SternGerlach
             root = ui.rootVisualElement;
             bc = root.Q<VisualElement>("DialogPopup");
             rc = root.Q<VisualElement>("RotationContainer");
+            dc = root.Q<VisualElement>("DeleteContainer");
             closebutton = root.Q<Button>("close-button");
             sgbutton = root.Q<Button>("sgmagnet-button");
             ipbutton = root.Q<Button>("imageplate-button");
+
+            deletebutton = root.Q<Button>("delete-button");
+            dclosebutton = root.Q<Button>("dclose-button");
+
+            deletebutton.clicked += DeleteButtonPressed;
+            dclosebutton.clicked += CloseButtonPressed;
 
             closebutton.clicked += CloseButtonPressed;
             sgbutton.clicked += SGMagnetButtonPressed;
@@ -51,6 +61,13 @@ namespace SternGerlach
             rleftbutton.clicked += RotateLeftButtonPressed;
             rrightbutton.clicked += RotateRightButtonPressed;
             rclosebutton.clicked += CloseButtonPressed;
+        }
+
+        private void DeleteButtonPressed()
+        {
+            builder.DeleteNode();
+            dc.visible = false;
+            state = States.UI_CLOSED;
         }
 
         private void RotateLeftButtonPressed()
@@ -69,6 +86,7 @@ namespace SternGerlach
         {
             bc.visible = false;
             rc.visible = false;
+            dc.visible = false;
             state = States.UI_CLOSED;
         }
         private void SGMagnetButtonPressed()
@@ -107,6 +125,13 @@ namespace SternGerlach
             rc.visible = true;
             rc.style.left = popupPosition.x;
             rc.style.top = popupPosition.y;
+        }
+
+        public void DeletePopup()
+        {
+            dc.visible = true;
+            dc.style.left = popupPosition.x;
+            dc.style.top = popupPosition.y;
         }
 
         public void Modify()

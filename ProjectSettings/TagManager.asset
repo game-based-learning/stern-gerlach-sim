@@ -6,6 +6,7 @@ TagManager:
   tags:
   - focusable
   - Node
+  - Object
   layers:
   - Default
   - TransparentFX

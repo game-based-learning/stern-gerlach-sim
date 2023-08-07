@@ -35,9 +35,14 @@ namespace SternGerlach
                 {
                     //Debug.Log(hit.collider.name);
                     pm.Focus(hit.collider.transform);
-                    if (hit.collider.gameObject.CompareTag("Node"))
+                    var ntag = hit.collider.gameObject.tag;
+                    if (ntag == "Node")
                     {
                         UIManager.PopupDialog(position);
+                        UIManager.state = UIUpdater.States.UI_OPEN;
+                    } else if (ntag == "Object")
+                    {
+                        UIManager.DeletePopup();
                         UIManager.state = UIUpdater.States.UI_OPEN;
                     }
                     if (hit.transform.TryGetComponent<Node>(out UIManager.builder.selectedNode))
