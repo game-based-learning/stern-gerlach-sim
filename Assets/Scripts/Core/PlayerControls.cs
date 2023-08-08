@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction createParticle;
     private InputAction rotateLeft, rotateRight;
     private InputAction deleteNode;
+    private float cooldown = 0f;
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
     [SerializeField] Camera mainCamera;
@@ -32,9 +33,15 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (createParticle.WasPressedThisFrame())
+        if (cooldown > 0f) {
+            cooldown -= Time.deltaTime;
+        }
+        if (createParticle.IsPressed())
         {
-            factory.CreateParticle();
+            if (cooldown <= 0f) {
+                factory.CreateParticle();
+                cooldown = Globals.PARTICLE_COOLDOWN;
+            }
         }
         if (placeSGMagnet.WasPressedThisFrame()) {
             builder.PlaceSGMagnet();

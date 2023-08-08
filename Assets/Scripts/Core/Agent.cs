@@ -73,7 +73,9 @@ public class Agent : MonoBehaviour
     void EnterMagnet()
     {
         if (agentType == AgentType.SilverAtom) {
+            // set angle of agent to previous node's rotation
             this.angle = currentNode.GetRotation(this.gameObject);
+            // switch from "-->" to "?"
             this.arrow.SetActive(false);
             this.questionMark.SetActive(true);
         }
@@ -87,9 +89,10 @@ public class Agent : MonoBehaviour
     void HitImagePlate()
     {
         var imgplate = ((ImagePlate)currentNode); //added code
-        ((ImagePlate)currentNode).ShowIndicator();
-        imgplate.collapseCount++; //added code
-        imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
+        imgplate.ShowIndicator();
+        // Commented out because this is broken on the fix branch
+        //imgplate.collapseCount++; //added code
+        //imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
     }
     void Collapse() {
         if (!enteredFirstMagnet) {
@@ -98,7 +101,9 @@ public class Agent : MonoBehaviour
             return;
         }
         if (agentType == AgentType.SilverAtom) {
+            //changed to nexnode
             int magnetRotation = currentNode.GetRotation(this.gameObject);
+            print("Last rotation: " + angle + " This rotation: " + magnetRotation);
             // collapse to random node
             int choice = 0;
             if (angle != magnetRotation) {
@@ -135,6 +140,10 @@ public class Agent : MonoBehaviour
         else {
             Debug.Log("Unexpected agent type.");
         }
+    }
+    // Check if we have a special case we need to deal with
+    private bool IsSpecialCaseUpsideDown() {
+        return false;
     }
     private int MacroscopicCollapseHelper(float angle) {
         for(int i = 0; i < 7; i++) {
