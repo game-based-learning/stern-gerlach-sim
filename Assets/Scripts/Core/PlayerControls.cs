@@ -49,9 +49,9 @@ public class PlayerControls : MonoBehaviour
         if (placeImagePlate.WasPressedThisFrame()) {
             builder.PlaceImagePlate();
         }
-        if (mouseClick.WasPressedThisFrame()) {
-            builder.SelectNode(mainCamera.ScreenPointToRay(Input.mousePosition));
-        }
+        //if (mouseClick.WasPressedThisFrame()) {
+        //    builder.SelectNode(mainCamera.ScreenPointToRay(Input.mousePosition));
+        //}
         if (rotateLeft.WasPressedThisFrame()) {
             builder.RotateLeft();
         }

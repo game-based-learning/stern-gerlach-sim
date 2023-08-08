@@ -12,6 +12,7 @@ namespace SternGerlach
         [SerializeField] private Zoom zoomController;
         [SerializeField] private Pan panController;
         [SerializeField] private ObjectClicker clickController;
+        [SerializeField] private SceneChanger sceneManager;
         // Start is called before the first frame update
 
         private void Awake()
@@ -32,6 +33,8 @@ namespace SternGerlach
                 controlScheme.Game.LMB,
                 controlScheme.UI.MousePosition,
                 controlScheme.Game.LShift);
+            sceneManager.Initialize(
+                controlScheme.UI.Space);
         }
     }
 }

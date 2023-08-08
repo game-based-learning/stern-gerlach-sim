@@ -205,6 +205,15 @@ namespace SternGerlach.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cbc1b46-9267-4d8e-915c-eb74825a241d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +225,17 @@ namespace SternGerlach.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d7edd5a-15f0-4737-a865-0b4ca122b39f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -237,6 +257,7 @@ namespace SternGerlach.Input
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_MousePosition = m_UI.FindAction("MousePosition", throwIfNotFound: true);
+            m_UI_Space = m_UI.FindAction("Space", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -386,11 +407,13 @@ namespace SternGerlach.Input
         private readonly InputActionMap m_UI;
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_MousePosition;
+        private readonly InputAction m_UI_Space;
         public struct UIActions
         {
             private @PlayerControl m_Wrapper;
             public UIActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
             public InputAction @MousePosition => m_Wrapper.m_UI_MousePosition;
+            public InputAction @Space => m_Wrapper.m_UI_Space;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -403,6 +426,9 @@ namespace SternGerlach.Input
                     @MousePosition.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
                     @MousePosition.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
                     @MousePosition.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMousePosition;
+                    @Space.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
+                    @Space.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
+                    @Space.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -410,6 +436,9 @@ namespace SternGerlach.Input
                     @MousePosition.started += instance.OnMousePosition;
                     @MousePosition.performed += instance.OnMousePosition;
                     @MousePosition.canceled += instance.OnMousePosition;
+                    @Space.started += instance.OnSpace;
+                    @Space.performed += instance.OnSpace;
+                    @Space.canceled += instance.OnSpace;
                 }
             }
         }
@@ -428,6 +457,7 @@ namespace SternGerlach.Input
         public interface IUIActions
         {
             void OnMousePosition(InputAction.CallbackContext context);
+            void OnSpace(InputAction.CallbackContext context);
         }
     }
 }

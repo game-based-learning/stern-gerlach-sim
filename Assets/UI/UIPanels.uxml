@@ -2,9 +2,18 @@
     <ui:VisualElement name="screen" style="width: 100%; height: 100%; flex-direction: row;">
         <ui:VisualElement style="width: 80%; height: 100%;">
             <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
-                <ui:Button text="SG Magnet" display-tooltip-when-elided="true" style="height: 50%;" />
-                <ui:Button text="Image Plate" display-tooltip-when-elided="true" style="height: 50%;" />
+                <ui:Button text="SG Magnet" display-tooltip-when-elided="true" name="sgmagnet-button" style="height: 50%;" />
+                <ui:Button text="Image Plate" display-tooltip-when-elided="true" name="imageplate-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close-button" style="height: 50%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="RotationContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+                <ui:Button text="Rotate Left" display-tooltip-when-elided="true" name="rotate-left" style="height: 50%;" />
+                <ui:Button text="Rotate Right" display-tooltip-when-elided="true" name="rotate-right" style="height: 50%;" />
+                <ui:Button text="Close" display-tooltip-when-elided="true" name="rclose-button" style="height: 50%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+                <ui:Button text="Delete" display-tooltip-when-elided="true" name="delete-button" style="height: 50%;" />
+                <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
