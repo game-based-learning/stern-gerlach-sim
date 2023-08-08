@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace SternGerlach
@@ -11,6 +9,10 @@ namespace SternGerlach
         [SerializeField] public Transform[] focusables;
         [SerializeField] UIDocument ui;
         [SerializeField] public NodeBuilder builder;
+        [SerializeField] SceneChanger scenechanger;
+
+        private bool isMain = false;
+
         private VisualElement root;
         private VisualElement bc;
         private VisualElement rc;
@@ -24,6 +26,11 @@ namespace SternGerlach
         private Button rleftbutton;
         private Button rrightbutton;
         private Button rclosebutton;
+
+        private Button guidedbutton;
+        private Button freeplaybutton;
+        private Button helpbutton;
+
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
 
@@ -35,32 +42,55 @@ namespace SternGerlach
         // Start is called before the first frame update
         void Start()
         {
+            Debug.Log(SceneManager.GetActiveScene().name);
+            if(SceneManager.GetActiveScene().name == "AlphaBuild")
+            {
+                isMain = true;
+            }
             root = ui.rootVisualElement;
-            bc = root.Q<VisualElement>("DialogPopup");
-            rc = root.Q<VisualElement>("RotationContainer");
-            dc = root.Q<VisualElement>("DeleteContainer");
-            closebutton = root.Q<Button>("close-button");
-            sgbutton = root.Q<Button>("sgmagnet-button");
-            ipbutton = root.Q<Button>("imageplate-button");
 
-            deletebutton = root.Q<Button>("delete-button");
-            dclosebutton = root.Q<Button>("dclose-button");
+            Debug.Log(isMain);
+            if (!isMain)
+            {
+                bc = root.Q<VisualElement>("DialogPopup");
+                rc = root.Q<VisualElement>("RotationContainer");
+                dc = root.Q<VisualElement>("DeleteContainer");
 
-            deletebutton.clicked += DeleteButtonPressed;
-            dclosebutton.clicked += CloseButtonPressed;
+                closebutton = root.Q<Button>("close-button");
+                sgbutton = root.Q<Button>("sgmagnet-button");
+                ipbutton = root.Q<Button>("imageplate-button");
 
-            closebutton.clicked += CloseButtonPressed;
-            sgbutton.clicked += SGMagnetButtonPressed;
-            ipbutton.clicked += ImagePlateButtonPressed;
+                deletebutton = root.Q<Button>("delete-button");
+                dclosebutton = root.Q<Button>("dclose-button");
+
+                deletebutton.clicked += DeleteButtonPressed;
+                dclosebutton.clicked += CloseButtonPressed;
+
+                closebutton.clicked += CloseButtonPressed;
+                sgbutton.clicked += SGMagnetButtonPressed;
+                ipbutton.clicked += ImagePlateButtonPressed;
 
 
-            rleftbutton = root.Q<Button>("rotate-left");
-            rrightbutton = root.Q<Button>("rotate-right");
-            rclosebutton = root.Q<Button>("rclose-button");
+                rleftbutton = root.Q<Button>("rotate-left");
+                rrightbutton = root.Q<Button>("rotate-right");
+                rclosebutton = root.Q<Button>("rclose-button");
 
-            rleftbutton.clicked += RotateLeftButtonPressed;
-            rrightbutton.clicked += RotateRightButtonPressed;
-            rclosebutton.clicked += CloseButtonPressed;
+                rleftbutton.clicked += RotateLeftButtonPressed;
+                rrightbutton.clicked += RotateRightButtonPressed;
+                rclosebutton.clicked += CloseButtonPressed;
+            } else
+            {
+                guidedbutton = root.Q<Button>("guided-mode");
+                freeplaybutton = root.Q<Button>("freeplay-mode");
+                helpbutton = root.Q<Button>("help");
+
+                guidedbutton.clicked += GuidedModeButtonPressed;
+            }
+        }
+
+        private void GuidedModeButtonPressed()
+        {
+            scenechanger.changeScene("MacroscopicNodeBuilder");
         }
 
         private void DeleteButtonPressed()
