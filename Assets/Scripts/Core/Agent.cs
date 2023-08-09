@@ -91,8 +91,8 @@ public class Agent : MonoBehaviour
         var imgplate = ((ImagePlate)currentNode); //added code
         imgplate.ShowIndicator();
         // Commented out because this is broken on the fix branch
-        //imgplate.collapseCount++; //added code
-        //imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
+        imgplate.collapseCount++; //added code
+        imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
     }
     void Collapse() {
         if (!enteredFirstMagnet) {
