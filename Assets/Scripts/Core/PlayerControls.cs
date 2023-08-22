@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction createParticle;
     private InputAction rotateLeft, rotateRight;
     private InputAction deleteNode;
+    private InputAction freeze;
     private float cooldown = 0f;
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
@@ -28,6 +29,7 @@ public class PlayerControls : MonoBehaviour
         rotateLeft = controls.Control.RotateLeft;
         rotateRight = controls.Control.RotateRight;
         deleteNode = controls.Control.DeleteNode;
+        freeze = controls.Control.Freeze;
     }
 
     // Update is called once per frame
@@ -60,6 +62,9 @@ public class PlayerControls : MonoBehaviour
         }
         if (deleteNode.WasPressedThisFrame()) {
             builder.DeleteNode();
+        }
+        if (freeze.WasPressedThisFrame()) {
+            GameManager.Instance.ToggleFreeze();
         }
     }
 }

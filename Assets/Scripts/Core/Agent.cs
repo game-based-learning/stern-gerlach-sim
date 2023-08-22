@@ -35,6 +35,10 @@ public class Agent : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
+            // no updates if we are frozen
+            return;
+        }
         if (agentState.Equals(AgentState.WithinNode))
         {
             if (!transform.position.Equals(currentNode.GetEndLocation)) {
