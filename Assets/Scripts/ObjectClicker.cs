@@ -68,7 +68,7 @@ namespace SternGerlach
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             Vector2 tmp = mPos.ReadValue<Vector2>();
             position.x = tmp.x;

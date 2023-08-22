@@ -31,6 +31,9 @@ namespace SternGerlach
         private Button freeplaybutton;
         private Button helpbutton;
 
+        //private VisualElement clickoffcontainer;
+        private Button clickoffbutton;
+
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
 
@@ -56,10 +59,24 @@ namespace SternGerlach
                 rc = root.Q<VisualElement>("RotationContainer");
                 dc = root.Q<VisualElement>("DeleteContainer");
 
+                /*clickoffcontainer = root.Q<VisualElement>("ClickOff");
+
+                clickoffcontainer.AddManipulator(new Clickable(evt => {
+                    if(state == States.UI_OPEN)
+                    {
+                        CloseButtonPressed();
+                    }
+                }));*/
+
+
+                clickoffbutton = root.Q<Button>("ClickOff");
+                clickoffbutton.clicked += CloseButtonPressed;
+                clickoffbutton.visible = false;
+
                 closebutton = root.Q<Button>("close-button");
                 sgbutton = root.Q<Button>("sgmagnet-button");
                 ipbutton = root.Q<Button>("imageplate-button");
-
+                
                 deletebutton = root.Q<Button>("delete-button");
                 dclosebutton = root.Q<Button>("dclose-button");
 
@@ -69,7 +86,6 @@ namespace SternGerlach
                 closebutton.clicked += CloseButtonPressed;
                 sgbutton.clicked += SGMagnetButtonPressed;
                 ipbutton.clicked += ImagePlateButtonPressed;
-
 
                 rleftbutton = root.Q<Button>("rotate-left");
                 rrightbutton = root.Q<Button>("rotate-right");
@@ -88,6 +104,7 @@ namespace SternGerlach
             }
         }
 
+
         private void GuidedModeButtonPressed()
         {
             scenechanger.changeScene("MacroscopicNodeBuilder");
@@ -97,6 +114,7 @@ namespace SternGerlach
         {
             builder.DeleteNode();
             dc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
 
@@ -117,12 +135,14 @@ namespace SternGerlach
             bc.visible = false;
             rc.visible = false;
             dc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
         private void SGMagnetButtonPressed()
         {
             builder.PlaceSGMagnet();
             bc.visible = false;
+            clickoffbutton.visible = false;
             RotationPopup();
             //state = States.UI_CLOSED;
             Modify();
@@ -132,6 +152,7 @@ namespace SternGerlach
         {
             builder.PlaceImagePlate();
             bc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
 
@@ -145,6 +166,7 @@ namespace SternGerlach
         public void PopupDialog(Vector3 position)
         {
             bc.visible = true;
+            clickoffbutton.visible = true;
             bc.style.left = position.x;
             bc.style.top = Screen.height - position.y;
             popupPosition = (position.x, Screen.height - position.y);
@@ -153,6 +175,7 @@ namespace SternGerlach
         public void RotationPopup()
         {
             rc.visible = true;
+            clickoffbutton.visible = true;
             rc.style.left = popupPosition.x;
             rc.style.top = popupPosition.y;
         }
@@ -160,8 +183,10 @@ namespace SternGerlach
         public void DeletePopup()
         {
             dc.visible = true;
+            
             dc.style.left = popupPosition.x;
             dc.style.top = popupPosition.y;
+            clickoffbutton.visible = true;
         }
 
         public void Modify()
