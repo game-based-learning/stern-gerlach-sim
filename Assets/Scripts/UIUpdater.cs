@@ -12,6 +12,7 @@ namespace SternGerlach
         [SerializeField] SceneChanger scenechanger;
 
         private bool isMain = false;
+        //private bool isMacro = false;
 
         private VisualElement root;
         private VisualElement bc;
@@ -104,10 +105,17 @@ namespace SternGerlach
             }
         }
 
-
+        /*void Update()
+        {
+            if (SceneManager.GetActiveScene().name == "MacroscopicNodeBuilder")
+            {
+                isMain = true;
+            }
+        }*/
         private void GuidedModeButtonPressed()
         {
             scenechanger.changeScene("MacroscopicNodeBuilder");
+            //isMacro = true;
         }
 
         private void DeleteButtonPressed()
@@ -165,11 +173,16 @@ namespace SternGerlach
 
         public void PopupDialog(Vector3 position)
         {
+            /*if (isMacro && )
+            {
+                root.Q<Button>("imageplate-button").visible = false;
+            }*/
             bc.visible = true;
             clickoffbutton.visible = true;
             bc.style.left = position.x;
             bc.style.top = Screen.height - position.y;
             popupPosition = (position.x, Screen.height - position.y);
+            Debug.Log("at PopupDialog: " + popupPosition);
         }
 
         public void RotationPopup()
@@ -178,14 +191,15 @@ namespace SternGerlach
             clickoffbutton.visible = true;
             rc.style.left = popupPosition.x;
             rc.style.top = popupPosition.y;
+            Debug.Log("at RotationPopup: " + popupPosition);
         }
 
-        public void DeletePopup()
+        public void DeletePopup(Vector3 position)
         {
             dc.visible = true;
             
-            dc.style.left = popupPosition.x;
-            dc.style.top = popupPosition.y;
+            dc.style.left = position.x;
+            dc.style.top = Screen.height - position.y;
             clickoffbutton.visible = true;
         }
 
