@@ -67,6 +67,7 @@ public class GameObjectFactory : MonoBehaviour
         return largeImagePlate.GetComponentsInChildren<ImagePlate>().ToList();
 
     }
+    internal Source GetSource() { return source;  }
     internal ImagePlate CreateImagePlate(Vector3 loc)
     {
         GameObject imagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);

@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
+using Vector3 = UnityEngine.Vector3;
 
 namespace SternGerlach
 {
@@ -26,7 +30,34 @@ namespace SternGerlach
 
             //selectedNode = null; //added code
         }
-
+        internal Vector3 FindCenterOfRotation() {
+            Source source = factory.GetSource();
+            List<Vector3> nodeLocations = GetChildrenLocations(source);
+            // Initialize maxima to an arbitrary tiny value
+            float xMaxima = Int32.MinValue, yMaxima = Int32.MinValue, zMaxima = Int32.MinValue;
+            // Initialize minima to an arbitrary huge value
+            float xMinima = Int32.MaxValue, yMinima = Int32.MaxValue, zMinima = Int32.MaxValue;
+            foreach (Vector3 position in nodeLocations) {
+                if (position.x > xMaxima) { xMaxima = position.x; }
+                if (position.x < xMinima) { xMinima = position.x; }
+                if (position.y > yMaxima) { yMaxima = position.y; }
+                if (position.y < yMinima) { yMinima = position.y; }
+                if (position.z > zMaxima) { zMaxima = position.z; }
+                if (position.z < zMinima) { zMinima = position.z; }
+            }
+            return new Vector3((xMaxima+xMinima)/2, (yMaxima+yMinima)/2, (zMaxima+zMinima)/2);
+        }
+        private List<Vector3> GetChildrenLocations(Node node) { 
+            List<Vector3> locations = new List<Vector3>();
+            locations.Add(node.transform.position);
+            for (int i = 0; i < node.children.Count; i++) {
+                foreach (Vector3 position in GetChildrenLocations(node.children[i])) {
+                    locations.Add(position);
+                }
+                return locations;
+            }
+            return locations;
+        }
         internal void PlaceSGMagnet()
         {
             if (!CanPlace()) { return; }
