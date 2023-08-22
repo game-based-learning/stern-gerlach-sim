@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39160052, g: 0.42309564, b: 0.46167073, a: 1}
+  m_IndirectSpecularColor: {r: 0.3867188, g: 0.4238264, b: 0.46289152, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,6 +156,7 @@ MonoBehaviour:
   sgMagnetPrefab: {fileID: 1064806864984803667, guid: 8ce6ab7e6254970458ec9cd90ae3ef1c, type: 3}
   imagePlatePrefab: {fileID: 1686357668650756311, guid: 73afe4d8777100b4486afe57b6b25638, type: 3}
   emptyNodePrefab: {fileID: 4865539505302257838, guid: fbc74a34106b89743bc2dbef3cb588b8, type: 3}
+  debugBoxPrefab: {fileID: 6987266766615288548, guid: f6ce3be5ca755054392e6869c8080f1c, type: 3}
   source: {fileID: 2127386178}
 --- !u!4 &466879209
 Transform:

@@ -4987,7 +4987,7 @@ GameObject:
   - component: {fileID: 4844128743297632526}
   - component: {fileID: 2519875672228959108}
   m_Layer: 0
-  m_Name: SilverAtom
+  m_Name: Silver Atom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
