@@ -67,6 +67,7 @@ public class PlayerControls : MonoBehaviour
         if (freeze.WasPressedThisFrame()) {
             GameManager.Instance.ToggleFreeze();
         }
+        // Remove for final ver
         if (cortest.WasPressedThisFrame()) {
             factory.CreateDebugBox(builder.FindCenterOfRotation());
         }

@@ -23,6 +23,7 @@ namespace SternGerlach
             else
             {
                 _instance = this;
+                DontDestroyOnLoad(this.gameObject);
             }
         }
         public void ToggleFreeze() {
