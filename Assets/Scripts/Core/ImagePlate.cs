@@ -11,11 +11,17 @@ public class ImagePlate : Node
     [SerializeField] GameObject indicator;
     public int collapseCount = 0; //added code
     [SerializeField] public TextMeshPro textCount; //added code
+
    
     public override int GetRotation(GameObject gameObject) {
         return Mathf.FloorToInt(Vector2.Angle(gameObject.transform.position, transform.position));
     }
     public void ShowIndicator() {
         this.indicator.SetActive(true);
+    }
+    void FixedUpdate()
+    {
+        textCount.transform.LookAt(Camera.main.transform);
+        textCount.transform.Rotate(0f, 180f, 0f);
     }
 }
