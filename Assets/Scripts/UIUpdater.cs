@@ -34,6 +34,7 @@ namespace SternGerlach
 
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
+        private bool sceneHasOneSGMagnet;
 
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
@@ -120,6 +121,13 @@ namespace SternGerlach
 
         private void DeleteButtonPressed()
         {
+            Debug.Log("use this: " + builder.selectedNode.name);
+            if (builder.selectedNode.name == "SGMag-One-Node(Clone)")
+            {
+                sceneHasOneSGMagnet = false;
+                sgbutton.visible = bc.visible;
+            }
+            Debug.Log(sceneHasOneSGMagnet);
             builder.DeleteNode();
             dc.visible = false;
             clickoffbutton.visible = false;
@@ -151,9 +159,16 @@ namespace SternGerlach
             builder.PlaceSGMagnet();
             bc.visible = false;
             clickoffbutton.visible = false;
-            RotationPopup();
-            //state = States.UI_CLOSED;
             Modify();
+            if (SceneManager.GetActiveScene().name == "MacroscopicNodeBuilder")
+            {
+                sceneHasOneSGMagnet = true;
+                state = States.UI_CLOSED;
+                return;
+            }
+            CloseButtonPressed();
+            RotationPopup();
+            
         }
 
         private void ImagePlateButtonPressed()
@@ -177,7 +192,16 @@ namespace SternGerlach
             {
                 root.Q<Button>("imageplate-button").visible = false;
             }*/
+            Debug.Log("before popup check: " + sceneHasOneSGMagnet);
             bc.visible = true;
+            if (sceneHasOneSGMagnet)
+            {
+                sgbutton.visible = false;
+            }
+            else
+            {
+                sgbutton.style.visibility = StyleKeyword.Null;
+            }
             clickoffbutton.visible = true;
             bc.style.left = position.x;
             bc.style.top = Screen.height - position.y;
