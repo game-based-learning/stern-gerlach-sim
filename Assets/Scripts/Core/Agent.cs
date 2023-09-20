@@ -8,13 +8,13 @@ public class Agent : MonoBehaviour
     private Node currentNode, nextNode;
     private System.Random random;
     enum AgentState { WithinNode, BetweenNodes }
-    enum CollapseType { UpState, DownState }
+    public enum CollapseType { UpState, DownState }
     public enum AgentType { MacroscopicMagnet, SilverAtom }
     private bool enteredFirstMagnet = false;
     private AgentState agentState;
     private AgentType agentType;
-    private CollapseType lastCollapse;
-    private int angle;
+    public CollapseType lastCollapse { get; set; }
+    public int angle;
     private GameObject arrow, questionMark;
     public void Initialize(Node firstNode, AgentType type)  {
         this.agentState = AgentState.WithinNode;

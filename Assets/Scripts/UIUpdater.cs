@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -39,12 +40,20 @@ namespace SternGerlach
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
 
+        private InputAction ubutton;
+        private bool showUI = true;
+
         public enum States
         {
             UI_CLOSED,
             UI_OPEN,
         }
         // Start is called before the first frame update
+        public void Initialize(InputAction u)
+        {
+            u.Enable();
+            ubutton = u;
+        }
         void Start()
         {
             Debug.Log(SceneManager.GetActiveScene().name);
@@ -106,13 +115,21 @@ namespace SternGerlach
             }
         }
 
-        /*void Update()
+        void Update()
         {
-            if (SceneManager.GetActiveScene().name == "MacroscopicNodeBuilder")
+            if (ubutton.WasPressedThisFrame())
             {
-                isMain = true;
+                if (showUI)
+                {
+                    root.visible = false;
+                    showUI = false;
+                } else
+                {
+                    root.visible = true;
+                    showUI = true;
+                }
             }
-        }*/
+        }
         private void GuidedModeButtonPressed()
         {
             scenechanger.changeScene("MacroscopicNodeBuilder");
@@ -179,12 +196,6 @@ namespace SternGerlach
             state = States.UI_CLOSED;
         }
 
-        private void LargeImagePlateMod()
-        {
-            root.Q<Label>("1").text = "Total Particles Hit: \n";
-            root.Q<Label>("2").text = "Distribution of particles: \n";
-            root.Q<Label>("3").text = "Last Particle hit ";
-        }
 
         public void PopupDialog(Vector3 position)
         {
@@ -229,15 +240,71 @@ namespace SternGerlach
 
         public void Modify()
         {
-            root.Q<Label>("FocusName").text = builder.selectedNode.name;
-            /*switch (t.name)
+            var n = builder.selectedNode.name;
+            root.Q<Label>("FocusName").text = n;
+            root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+            root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
+
+            switch (n)
             {
+                case "ImagePlate":
+                    ImagePlateMod(builder.selectedNode);
+                    break;
+                case "SG-Magnet":
+                    SGMagnetMod(builder.selectedNode);
+                    break;
+                case "Silver Atom":
+                    SilverAtomMod(builder.selectedNode);
+                    break;
+                case "Classical Magnet":
+                    ClassicalMagnetMod(builder.selectedNode);
+                    break;
                 case "LargeImagePlate":
-                    LargeImagePlateMod();
+                    //LargeImagePlateMod(builder.selectedNode);
                     break;
                 default:
                     break;
-            }*/
+            }
         }
+
+        private void ImagePlateMod(Node sn)
+        {
+            var count = sn.GetComponent<ImagePlate>().textCount;
+            root.Q<Label>("1").text = "Total Particles Hit: " + count + "\n";
+        }
+
+        private void SGMagnetMod(Node sn)
+        {
+            /*var orientation = sn.GetComponent<SGMagnet>().orientation;
+            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";*/
+        }
+
+        private void SilverAtomMod(Node sn)
+        {
+            var spin = sn.GetComponent<Agent>().lastCollapse;
+            root.Q<Label>("1").text = "Spin: " + spin + "\n";
+        }
+
+        private void ClassicalMagnetMod(Node sn)
+        {
+            var orientation = sn.GetComponent<Agent>().angle;
+            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";
+        }
+
+        public float PredictionToggle(float pos)
+        {
+            var predictionbox = root.Q<VisualElement>("predictionpopup");
+            predictionbox.style.bottom = new StyleLength(new Length(pos, LengthUnit.Percent));
+            if (pos < 0) {
+                return 0;
+            } else
+            {
+                return -35;
+            }
+        }
+
+        /*private void LargeImagePlateMod(Node sn)
+        {
+        }*/
     }
 }

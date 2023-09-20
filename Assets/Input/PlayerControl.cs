@@ -214,6 +214,24 @@ namespace SternGerlach.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UIToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""455e7c4d-91e3-4c6d-a608-010f73f7f974"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MCQPrediction"",
+                    ""type"": ""Button"",
+                    ""id"": ""641674eb-b4aa-4ca3-ba7e-a6d04ba56e3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +256,28 @@ namespace SternGerlach.Input
                     ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7092254-7a95-4695-a700-fe43fdb59e54"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UIToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abe0cc97-5e7e-4175-9c8e-def66850b803"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MCQPrediction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -258,6 +298,8 @@ namespace SternGerlach.Input
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_MousePosition = m_UI.FindAction("MousePosition", throwIfNotFound: true);
             m_UI_Space = m_UI.FindAction("Space", throwIfNotFound: true);
+            m_UI_UIToggle = m_UI.FindAction("UIToggle", throwIfNotFound: true);
+            m_UI_MCQPrediction = m_UI.FindAction("MCQPrediction", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -408,12 +450,16 @@ namespace SternGerlach.Input
         private IUIActions m_UIActionsCallbackInterface;
         private readonly InputAction m_UI_MousePosition;
         private readonly InputAction m_UI_Space;
+        private readonly InputAction m_UI_UIToggle;
+        private readonly InputAction m_UI_MCQPrediction;
         public struct UIActions
         {
             private @PlayerControl m_Wrapper;
             public UIActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
             public InputAction @MousePosition => m_Wrapper.m_UI_MousePosition;
             public InputAction @Space => m_Wrapper.m_UI_Space;
+            public InputAction @UIToggle => m_Wrapper.m_UI_UIToggle;
+            public InputAction @MCQPrediction => m_Wrapper.m_UI_MCQPrediction;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -429,6 +475,12 @@ namespace SternGerlach.Input
                     @Space.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
                     @Space.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
                     @Space.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSpace;
+                    @UIToggle.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUIToggle;
+                    @UIToggle.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUIToggle;
+                    @UIToggle.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUIToggle;
+                    @MCQPrediction.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMCQPrediction;
+                    @MCQPrediction.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMCQPrediction;
+                    @MCQPrediction.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMCQPrediction;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -439,6 +491,12 @@ namespace SternGerlach.Input
                     @Space.started += instance.OnSpace;
                     @Space.performed += instance.OnSpace;
                     @Space.canceled += instance.OnSpace;
+                    @UIToggle.started += instance.OnUIToggle;
+                    @UIToggle.performed += instance.OnUIToggle;
+                    @UIToggle.canceled += instance.OnUIToggle;
+                    @MCQPrediction.started += instance.OnMCQPrediction;
+                    @MCQPrediction.performed += instance.OnMCQPrediction;
+                    @MCQPrediction.canceled += instance.OnMCQPrediction;
                 }
             }
         }
@@ -458,6 +516,8 @@ namespace SternGerlach.Input
         {
             void OnMousePosition(InputAction.CallbackContext context);
             void OnSpace(InputAction.CallbackContext context);
+            void OnUIToggle(InputAction.CallbackContext context);
+            void OnMCQPrediction(InputAction.CallbackContext context);
         }
     }
 }

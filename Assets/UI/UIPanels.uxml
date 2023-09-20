@@ -1,5 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" style="width: 100%; height: 100%; flex-direction: row;">
+        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: -35%; background-color: rgba(0, 0, 0, 0.51);">
+            <ui:VisualElement style="width: 20%;" />
+            <ui:VisualElement>
+                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 20px; align-items: stretch; justify-content: space-around; flex-direction: column;" />
+                <ui:TextField picking-mode="Ignore" label="What do you think will happen next?" value="I think that..." text="I think that..." max-length="-1" tabindex="0" style="font-size: 20px; color: rgb(255, 255, 255); -unity-text-align: upper-left; -unity-font-style: bold; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-direction: column;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:Button text="Button" display-tooltip-when-elided="true" name="ClickOff" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; right: 0; bottom: 0; align-items: flex-start; flex-basis: auto; opacity: 0.19; visibility: hidden;" />
         <ui:VisualElement name="popups" picking-mode="Ignore" style="width: 80%; height: 100%; visibility: visible; display: flex;">
             <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: absolute;">
@@ -17,25 +24,31 @@
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
+        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none;">
             <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">
                 <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Stats" style="width: 100%; height: 33%;">
+            <ui:VisualElement name="Stats" style="width: 100%; height: auto;">
                 <ui:Label text="STATS" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="1" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; align-items: center; justify-content: space-between; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="2" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="3" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Checklist" style="width: 100%; height: 33%;">
+            <ui:VisualElement name="Checklist" style="width: 100%; height: auto;">
                 <ui:Toggle label="Toggle" focusable="false" style="color: rgb(255, 255, 255); flex-direction: row-reverse;" />
                 <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
                 <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
             </ui:VisualElement>
-            <ui:VisualElement name="Notes" style="height: 33%;">
+            <ui:VisualElement name="PausePlay" style="width: 200px; height: 200px; background-image: url(&apos;project://database/Assets/UI/pause-button-png-24.png?fileID=2800000&amp;guid=8f16d3bdfe2491c48b2746f58bbe8ab8&amp;type=3#pause-button-png-24&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; justify-content: space-around; align-items: center; flex-direction: column; -unity-text-align: upper-center;">
+                <ui:VisualElement name="pauseplaybutton" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Notes" style="height: auto;">
                 <ui:Label text="NOTES" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; -unity-font-style: bold; font-size: 20px;" />
                 <ui:TextField picking-mode="Ignore" value="filler text" text="filler text" style="flex-direction: column; white-space: normal;" />
             </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="side-2" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
+            <ui:Label text="Click something to bring to focus!" display-tooltip-when-elided="true" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
