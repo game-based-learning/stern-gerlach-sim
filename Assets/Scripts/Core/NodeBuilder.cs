@@ -11,6 +11,7 @@ namespace SternGerlach
     {
         public Node selectedNode;
         [SerializeField] GameObjectFactory factory;
+        [SerializeField] GameObject COR;
         internal void PlaceImagePlate()
         {
             if (!CanPlace()) { return; }
@@ -100,6 +101,7 @@ namespace SternGerlach
             }
             Destroy(selectedNode.gameObject);
             selectedNode = newNode;
+            this.COR.transform.position = FindCenterOfRotation();
         }
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
         {
@@ -112,6 +114,7 @@ namespace SternGerlach
 
             nodes[0].transform.parent.transform.parent = sgMagnet.transform;
             Destroy(selectedNode.gameObject);
+            this.COR.transform.position = FindCenterOfRotation();
         }
         bool NodeSelected() {
             return selectedNode != null;
@@ -162,6 +165,7 @@ namespace SternGerlach
                 parent.children[index] = node;
                 Destroy(selectedNode.gameObject);
             }
+            this.COR.transform.position = FindCenterOfRotation();
         }
         internal void RotateLeft()
         {

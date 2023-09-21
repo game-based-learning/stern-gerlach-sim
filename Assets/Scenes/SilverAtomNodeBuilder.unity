@@ -793,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
   factory: {fileID: 890276988}
+  COR: {fileID: 240012957}
 --- !u!1 &1948414426
 GameObject:
   m_ObjectHideFlags: 0

@@ -251,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
   factory: {fileID: 466879208}
+  COR: {fileID: 1921879754}
 --- !u!4 &594517562
 Transform:
   m_ObjectHideFlags: 0
