@@ -35,6 +35,7 @@ public class Agent : MonoBehaviour
     }
     void Update()
     {
+        //Debug.Log(angle);
         if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
             // no updates if we are frozen
             return;
@@ -78,7 +79,7 @@ public class Agent : MonoBehaviour
     {
         if (agentType == AgentType.SilverAtom) {
             // set angle of agent to previous node's rotation
-            this.angle = currentNode.GetRotation(this.gameObject);
+            this.angle = currentNode.GetRotation();
             // switch from "-->" to "?"
             this.arrow.SetActive(false);
             this.questionMark.SetActive(true);
@@ -106,14 +107,14 @@ public class Agent : MonoBehaviour
         }
         if (agentType == AgentType.SilverAtom) {
             //changed to nexnode
-            int magnetRotation = currentNode.GetRotation(this.gameObject);
+            int magnetRotation = currentNode.GetRotation();
             print("Last rotation: " + angle + " This rotation: " + magnetRotation);
             // collapse to random node
             int choice = 0;
             if (angle != magnetRotation) {
                 choice = random.Next(0, 2);
                 nextNode = currentNode.children[choice];
-                this.angle = nextNode.GetRotation(this.gameObject);
+                this.angle = nextNode.GetRotation();
             }
             // collapse to node parallel with our angle
             else {

@@ -14,21 +14,7 @@ public class SGMagnet : Node
     public override Dictionary<int,Node> children { get => childs; set => childs = value; }
     public override Vector3 GetStartLocation { get => entrance.transform.position; set => entranceLoc = value; }
     public override Vector3 GetEndLocation { get => exit.transform.position; set => exitLoc = value; }
-    public override int GetRotation(GameObject gameObject) {
-        // deal with absurdly strange and specific edge case
-        print("Euler: " + transform.eulerAngles);
-        if (transform.eulerAngles.y == -180 || transform.eulerAngles.y == 180) {
-            return Mathf.FloorToInt(transform.eulerAngles.y);
-        }
-
-        else
-        {
-            return Mathf.FloorToInt(Mathf.Repeat(transform.localEulerAngles.x + 180, 360) - 180);
-        }
-    } 
-    public SGMagnet() {
-
-    }
+    public SGMagnet() { }
     void Start() {
         if (childs == null)
         {

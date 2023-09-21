@@ -18,10 +18,6 @@ namespace SternGerlach
         public override Vector3 GetStartLocation { get => entranceLoc; set => entranceLoc = value; }
         public override Vector3 GetEndLocation { get => exitLoc; set => exitLoc = value; }
 
-        public override int GetRotation(GameObject gameObj)
-        {
-            return -1;
-        }
         // Start is called before the first frame update
         void Start()
         {
@@ -32,6 +28,9 @@ namespace SternGerlach
             }
             magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
             questionSprite.SetActive(type == SourceType.SilverAtom);
+        }
+        public override int GetRotation() { 
+            return -1; 
         }
     }
 }

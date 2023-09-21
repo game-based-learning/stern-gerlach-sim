@@ -81,7 +81,7 @@ namespace SternGerlach
             //Debug.Log("mouse pos: " + position);
             ray = Camera.main.ScreenPointToRay(position);
 
-            Debug.Log(UIManager.state);
+            //Debug.Log(UIManager.state);
             if(UIManager.state == UIUpdater.States.UI_CLOSED) {
                 FocusCollider(ray, lmb_val, ls_val);
             }

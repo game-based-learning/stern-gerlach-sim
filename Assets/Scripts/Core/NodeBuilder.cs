@@ -165,12 +165,14 @@ namespace SternGerlach
             if (!ShouldRotate()) { return; }
             Debug.Log("Rotate Left");
             selectedNode.transform.Rotate(new Vector3(-15,0,0),Space.Self);
+            selectedNode.AdjustRotation(-15);
         }
         internal void RotateRight()
         {
             if (!ShouldRotate()) { return; }
             Debug.Log("Rotate Right");
             selectedNode.transform.Rotate(new Vector3(15, 0, 0), Space.Self);
+            selectedNode.AdjustRotation(15);
         }
         private bool ShouldRotate() {
             return factory.SilverAtomMode() && NodeSelected() && factory.CanUpdateSetup() && selectedNode is SGMagnet;

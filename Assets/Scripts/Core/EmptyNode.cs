@@ -10,11 +10,6 @@ namespace SternGerlach
         public override Vector3 GetStartLocation { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public override Vector3 GetEndLocation { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
-        public override int GetRotation(GameObject gameObj)
-        {
-            throw new System.NotImplementedException();
-        }
-
         // Start is called before the first frame update
         void Start()
         {
