@@ -7,6 +7,7 @@ public abstract class Node : MonoBehaviour
     public abstract Dictionary<int, Node> children { get; set; }
     public abstract Vector3 GetStartLocation { get; set; }
     public abstract Vector3 GetEndLocation { get; set; }
+    public Vector3 GetAbsoluteRotation() { return transform.eulerAngles; }
     public virtual int GetRotation() { return rotation; }
     // Precondition: newRot is in [-180, 180]
     public void SetRotation(int newRot) { this.rotation = newRot; }

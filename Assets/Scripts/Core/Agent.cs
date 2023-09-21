@@ -15,7 +15,7 @@ public class Agent : MonoBehaviour
     private AgentType agentType;
     private CollapseType lastCollapse;
     private int angle;
-    private GameObject arrow, questionMark;
+    private GameObject arrow, questionMark, upCaret, downCaret;
     public void Initialize(Node firstNode, AgentType type)  {
         this.agentState = AgentState.WithinNode;
         this.agentType = type;
@@ -27,8 +27,11 @@ public class Agent : MonoBehaviour
             this.questionMark = this.transform.Find(Globals.QUESTION_MARK_NAME).gameObject;
             this.arrow.SetActive(false);
             this.questionMark.SetActive(true);
+            this.upCaret = this.transform.Find(Globals.UP_CARET_NAME).gameObject;
+            this.downCaret = this.transform.Find(Globals.DOWN_CARET_NAME).gameObject;
+            return;
         }
-        else if(type == AgentType.MacroscopicMagnet) {
+        if(type == AgentType.MacroscopicMagnet) {
             this.transform.Rotate(0,90,Globals.POSSIBLE_MACROSCOPIC_ANGLES[random.Next(Globals.POSSIBLE_MACROSCOPIC_ANGLES.Count)],Space.Self);
         }
 
@@ -80,9 +83,11 @@ public class Agent : MonoBehaviour
         if (agentType == AgentType.SilverAtom) {
             // set angle of agent to previous node's rotation
             this.angle = currentNode.GetRotation();
+
             // switch from "-->" to "?"
             this.arrow.SetActive(false);
             this.questionMark.SetActive(true);
+            HideCaret();
         }
         currentNode = nextNode;
         agentState = AgentState.WithinNode;
@@ -95,9 +100,8 @@ public class Agent : MonoBehaviour
     {
         var imgplate = ((ImagePlate)currentNode); //added code
         imgplate.ShowIndicator();
-        // Commented out because this is broken on the fix branch
-        //imgplate.collapseCount++; //added code
-        //imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
+        imgplate.collapseCount++; //added code
+        imgplate.textCount.text = imgplate.collapseCount.ToString(); //added code
     }
     void Collapse() {
         if (!enteredFirstMagnet) {
@@ -106,7 +110,7 @@ public class Agent : MonoBehaviour
             return;
         }
         if (agentType == AgentType.SilverAtom) {
-            //changed to nexnode
+            //changed to next node
             int magnetRotation = currentNode.GetRotation();
             print("Last rotation: " + angle + " This rotation: " + magnetRotation);
             // collapse to random node
@@ -124,18 +128,19 @@ public class Agent : MonoBehaviour
                 }
                 nextNode = currentNode.children[choice];
             }
-            if (choice == 0) {
-                lastCollapse = CollapseType.DownState;
-            } else {
-                lastCollapse = CollapseType.UpState;
-            }
+
+            // Update collapse to our choice
+            lastCollapse = (choice == 0) ? CollapseType.DownState : CollapseType.UpState;
+
             // make necessary visual changes
             if (!(currentNode is Source)) {
-                this.arrow.transform.LookAt(nextNode.GetStartLocation);
-                // adjust for model inaccuracy (arrow is facing wrong direction)
-                this.arrow.transform.Rotate(-180,0,0);
+                this.transform.eulerAngles = this.currentNode.GetAbsoluteRotation();
+                // Rotate up if up or down if down!
+                this.transform.Rotate(0, 0, lastCollapse == CollapseType.UpState 
+                    ? Globals.ANGLE_BETWEEN_NODES : -Globals.ANGLE_BETWEEN_NODES, Space.Self);
                 this.arrow.SetActive(true);
                 this.questionMark.SetActive(false);
+                ShowCaret();
             }
         }
         else if(agentType == AgentType.MacroscopicMagnet && currentNode is SGMagnet) {
@@ -146,9 +151,18 @@ public class Agent : MonoBehaviour
             Debug.Log("Unexpected agent type.");
         }
     }
-    // Check if we have a special case we need to deal with
-    private bool IsSpecialCaseUpsideDown() {
-        return false;
+    void ShowCaret() {
+        if (lastCollapse == CollapseType.UpState)
+        {
+            this.upCaret.SetActive(true);
+        }
+        else { 
+            this.downCaret.SetActive(true);
+        }
+    }
+    void HideCaret() {
+        this.upCaret.SetActive(false);
+        this.downCaret.SetActive(false);
     }
     private int MacroscopicCollapseHelper(float angle) {
         for(int i = 0; i < 7; i++) {
