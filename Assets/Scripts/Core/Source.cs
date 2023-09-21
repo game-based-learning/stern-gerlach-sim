@@ -9,6 +9,7 @@ namespace SternGerlach
         [SerializeField] Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
+        [SerializeField] GameObject magnetSprite, questionSprite;
         [SerializeField] public SourceType type;
         public enum SourceType { MacroscopicMagnet, SilverAtom }
         private Dictionary<int,Node> nodes = new Dictionary<int, Node>();
@@ -17,10 +18,6 @@ namespace SternGerlach
         public override Vector3 GetStartLocation { get => entranceLoc; set => entranceLoc = value; }
         public override Vector3 GetEndLocation { get => exitLoc; set => exitLoc = value; }
 
-        public override int GetRotation(GameObject gameObj)
-        {
-            return -1;
-        }
         // Start is called before the first frame update
         void Start()
         {
@@ -29,6 +26,11 @@ namespace SternGerlach
             if(firstMagnet != null) {
                 nodes[0] = firstMagnet;
             }
+            magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
+            questionSprite.SetActive(type == SourceType.SilverAtom);
+        }
+        public override int GetRotation() { 
+            return -1; 
         }
     }
 }

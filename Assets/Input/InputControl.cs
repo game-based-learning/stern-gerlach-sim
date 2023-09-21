@@ -89,6 +89,24 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Freeze"",
+                    ""type"": ""Button"",
+                    ""id"": ""8876fbb3-91e1-4777-8749-e328db53ae3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FindCOR"",
+                    ""type"": ""Button"",
+                    ""id"": ""b40d4995-5c3d-43e0-9f53-f506bf69a9c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -168,6 +186,28 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                     ""action"": ""DeleteNode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""636805e7-b721-48e1-bc81-d120515caf92"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Freeze"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1726f94-8092-4401-bdf0-cb76c9157cb9"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FindCOR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -183,6 +223,8 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
         m_Control_RotateLeft = m_Control.FindAction("RotateLeft", throwIfNotFound: true);
         m_Control_RotateRight = m_Control.FindAction("RotateRight", throwIfNotFound: true);
         m_Control_DeleteNode = m_Control.FindAction("DeleteNode", throwIfNotFound: true);
+        m_Control_Freeze = m_Control.FindAction("Freeze", throwIfNotFound: true);
+        m_Control_FindCOR = m_Control.FindAction("FindCOR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +291,8 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
     private readonly InputAction m_Control_RotateLeft;
     private readonly InputAction m_Control_RotateRight;
     private readonly InputAction m_Control_DeleteNode;
+    private readonly InputAction m_Control_Freeze;
+    private readonly InputAction m_Control_FindCOR;
     public struct ControlActions
     {
         private @InputControl m_Wrapper;
@@ -260,6 +304,8 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
         public InputAction @RotateLeft => m_Wrapper.m_Control_RotateLeft;
         public InputAction @RotateRight => m_Wrapper.m_Control_RotateRight;
         public InputAction @DeleteNode => m_Wrapper.m_Control_DeleteNode;
+        public InputAction @Freeze => m_Wrapper.m_Control_Freeze;
+        public InputAction @FindCOR => m_Wrapper.m_Control_FindCOR;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -290,6 +336,12 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                 @DeleteNode.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
                 @DeleteNode.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
                 @DeleteNode.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnDeleteNode;
+                @Freeze.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnFreeze;
+                @Freeze.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnFreeze;
+                @Freeze.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnFreeze;
+                @FindCOR.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnFindCOR;
+                @FindCOR.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnFindCOR;
+                @FindCOR.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnFindCOR;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -315,6 +367,12 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
                 @DeleteNode.started += instance.OnDeleteNode;
                 @DeleteNode.performed += instance.OnDeleteNode;
                 @DeleteNode.canceled += instance.OnDeleteNode;
+                @Freeze.started += instance.OnFreeze;
+                @Freeze.performed += instance.OnFreeze;
+                @Freeze.canceled += instance.OnFreeze;
+                @FindCOR.started += instance.OnFindCOR;
+                @FindCOR.performed += instance.OnFindCOR;
+                @FindCOR.canceled += instance.OnFindCOR;
             }
         }
     }
@@ -328,5 +386,7 @@ public partial class @InputControl : IInputActionCollection2, IDisposable
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnRotateRight(InputAction.CallbackContext context);
         void OnDeleteNode(InputAction.CallbackContext context);
+        void OnFreeze(InputAction.CallbackContext context);
+        void OnFindCOR(InputAction.CallbackContext context);
     }
 }
