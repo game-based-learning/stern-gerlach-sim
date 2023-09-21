@@ -47,7 +47,10 @@ namespace SternGerlach
             }
             return new Vector3((xMaxima+xMinima)/2, (yMaxima+yMinima)/2, (zMaxima+zMinima)/2);
         }
-        private List<Vector3> GetChildrenLocations(Node node) { 
+        private List<Vector3> GetChildrenLocations(Node node) {
+            if (node.children == null || node.children.Count == 0) { 
+                return new List<Vector3>();
+            }
             List<Vector3> locations = new List<Vector3>();
             locations.Add(node.transform.position);
             for (int i = 0; i < node.children.Count; i++) {

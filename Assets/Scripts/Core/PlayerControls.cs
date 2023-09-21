@@ -42,9 +42,9 @@ public class PlayerControls : MonoBehaviour
         if (createParticle.IsPressed())
         {
             if (cooldown <= 0f) {
-                //if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
-                //    GameManager.Instance.ToggleFreeze();
-                //}
+                if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
+                    GameManager.Instance.ToggleFreeze();
+                }
                 factory.CreateParticle();
                 cooldown = Globals.PARTICLE_COOLDOWN;
             }
