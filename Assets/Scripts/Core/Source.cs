@@ -9,6 +9,7 @@ namespace SternGerlach
         [SerializeField] Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
+        [SerializeField] GameObject magnetSprite, questionSprite;
         [SerializeField] public SourceType type;
         public enum SourceType { MacroscopicMagnet, SilverAtom }
         private Dictionary<int,Node> nodes = new Dictionary<int, Node>();
@@ -29,6 +30,8 @@ namespace SternGerlach
             if(firstMagnet != null) {
                 nodes[0] = firstMagnet;
             }
+            magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
+            questionSprite.SetActive(type == SourceType.SilverAtom);
         }
     }
 }

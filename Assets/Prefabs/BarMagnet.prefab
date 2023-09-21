@@ -256,7 +256,11 @@ PrefabInstance:
     - target: {fileID: -4807031644167392406, guid: ef9ae8d9e7c57c644a938e9216f6cddf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 123dadd4de5da73428c5d773a4fdbea1, type: 2}
+      objectReference: {fileID: 2100000, guid: b83b400661a66444d92acb0f4d675811, type: 2}
+    - target: {fileID: 570308950741440857, guid: ef9ae8d9e7c57c644a938e9216f6cddf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ef9ae8d9e7c57c644a938e9216f6cddf, type: 3}
       propertyPath: m_Name
       value: tinker 2
