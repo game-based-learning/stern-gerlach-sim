@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -12,6 +13,7 @@ namespace SternGerlach
         [SerializeField] SceneChanger scenechanger;
 
         private bool isMain = false;
+        //private bool isMacro = false;
 
         private VisualElement root;
         private VisualElement bc;
@@ -31,8 +33,15 @@ namespace SternGerlach
         private Button freeplaybutton;
         private Button helpbutton;
 
+        //private VisualElement clickoffcontainer;
+        private Button clickoffbutton;
+        private bool sceneHasOneSGMagnet;
+
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
+
+        private InputAction ubutton;
+        private bool showUI = true;
 
         public enum States
         {
@@ -40,6 +49,11 @@ namespace SternGerlach
             UI_OPEN,
         }
         // Start is called before the first frame update
+        public void Initialize(InputAction u)
+        {
+            u.Enable();
+            ubutton = u;
+        }
         void Start()
         {
             Debug.Log(SceneManager.GetActiveScene().name);
@@ -56,10 +70,24 @@ namespace SternGerlach
                 rc = root.Q<VisualElement>("RotationContainer");
                 dc = root.Q<VisualElement>("DeleteContainer");
 
+                /*clickoffcontainer = root.Q<VisualElement>("ClickOff");
+
+                clickoffcontainer.AddManipulator(new Clickable(evt => {
+                    if(state == States.UI_OPEN)
+                    {
+                        CloseButtonPressed();
+                    }
+                }));*/
+
+
+                clickoffbutton = root.Q<Button>("ClickOff");
+                clickoffbutton.clicked += CloseButtonPressed;
+                clickoffbutton.visible = false;
+
                 closebutton = root.Q<Button>("close-button");
                 sgbutton = root.Q<Button>("sgmagnet-button");
                 ipbutton = root.Q<Button>("imageplate-button");
-
+                
                 deletebutton = root.Q<Button>("delete-button");
                 dclosebutton = root.Q<Button>("dclose-button");
 
@@ -69,7 +97,6 @@ namespace SternGerlach
                 closebutton.clicked += CloseButtonPressed;
                 sgbutton.clicked += SGMagnetButtonPressed;
                 ipbutton.clicked += ImagePlateButtonPressed;
-
 
                 rleftbutton = root.Q<Button>("rotate-left");
                 rrightbutton = root.Q<Button>("rotate-right");
@@ -88,15 +115,39 @@ namespace SternGerlach
             }
         }
 
+        void Update()
+        {
+            if (ubutton.WasPressedThisFrame())
+            {
+                if (showUI)
+                {
+                    root.visible = false;
+                    showUI = false;
+                } else
+                {
+                    root.visible = true;
+                    showUI = true;
+                }
+            }
+        }
         private void GuidedModeButtonPressed()
         {
             scenechanger.changeScene("MacroscopicNodeBuilder");
+            //isMacro = true;
         }
 
         private void DeleteButtonPressed()
         {
+            Debug.Log("use this: " + builder.selectedNode.name);
+            if (builder.selectedNode.name == "SGMag-One-Node(Clone)")
+            {
+                sceneHasOneSGMagnet = false;
+                sgbutton.visible = bc.visible;
+            }
+            Debug.Log(sceneHasOneSGMagnet);
             builder.DeleteNode();
             dc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
 
@@ -117,64 +168,143 @@ namespace SternGerlach
             bc.visible = false;
             rc.visible = false;
             dc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
         private void SGMagnetButtonPressed()
         {
             builder.PlaceSGMagnet();
             bc.visible = false;
-            RotationPopup();
-            //state = States.UI_CLOSED;
+            clickoffbutton.visible = false;
             Modify();
+            if (SceneManager.GetActiveScene().name == "MacroscopicNodeBuilder")
+            {
+                sceneHasOneSGMagnet = true;
+                state = States.UI_CLOSED;
+                return;
+            }
+            CloseButtonPressed();
+            RotationPopup();
+            
         }
 
         private void ImagePlateButtonPressed()
         {
             builder.PlaceImagePlate();
             bc.visible = false;
+            clickoffbutton.visible = false;
             state = States.UI_CLOSED;
         }
 
-        private void LargeImagePlateMod()
-        {
-            root.Q<Label>("1").text = "Total Particles Hit: \n";
-            root.Q<Label>("2").text = "Distribution of particles: \n";
-            root.Q<Label>("3").text = "Last Particle hit ";
-        }
 
         public void PopupDialog(Vector3 position)
         {
+            /*if (isMacro && )
+            {
+                root.Q<Button>("imageplate-button").visible = false;
+            }*/
+            Debug.Log("before popup check: " + sceneHasOneSGMagnet);
             bc.visible = true;
+            if (sceneHasOneSGMagnet)
+            {
+                sgbutton.visible = false;
+            }
+            else
+            {
+                sgbutton.style.visibility = StyleKeyword.Null;
+            }
+            clickoffbutton.visible = true;
             bc.style.left = position.x;
             bc.style.top = Screen.height - position.y;
             popupPosition = (position.x, Screen.height - position.y);
+            Debug.Log("at PopupDialog: " + popupPosition);
         }
 
         public void RotationPopup()
         {
             rc.visible = true;
+            clickoffbutton.visible = true;
             rc.style.left = popupPosition.x;
             rc.style.top = popupPosition.y;
+            Debug.Log("at RotationPopup: " + popupPosition);
         }
 
-        public void DeletePopup()
+        public void DeletePopup(Vector3 position)
         {
             dc.visible = true;
-            dc.style.left = popupPosition.x;
-            dc.style.top = popupPosition.y;
+            
+            dc.style.left = position.x;
+            dc.style.top = Screen.height - position.y;
+            clickoffbutton.visible = true;
         }
 
         public void Modify()
         {
-            root.Q<Label>("FocusName").text = builder.selectedNode.name;
-            /*switch (t.name)
+            var n = builder.selectedNode.name;
+            root.Q<Label>("FocusName").text = n;
+            root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+            root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
+
+            switch (n)
             {
+                case "ImagePlate":
+                    ImagePlateMod(builder.selectedNode);
+                    break;
+                case "SG-Magnet":
+                    SGMagnetMod(builder.selectedNode);
+                    break;
+                case "Silver Atom":
+                    SilverAtomMod(builder.selectedNode);
+                    break;
+                case "Classical Magnet":
+                    ClassicalMagnetMod(builder.selectedNode);
+                    break;
                 case "LargeImagePlate":
-                    LargeImagePlateMod();
+                    //LargeImagePlateMod(builder.selectedNode);
                     break;
                 default:
                     break;
-            }*/
+            }
         }
+
+        private void ImagePlateMod(Node sn)
+        {
+            var count = sn.GetComponent<ImagePlate>().textCount;
+            root.Q<Label>("1").text = "Total Particles Hit: " + count + "\n";
+        }
+
+        private void SGMagnetMod(Node sn)
+        {
+            /*var orientation = sn.GetComponent<SGMagnet>().orientation;
+            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";*/
+        }
+
+        private void SilverAtomMod(Node sn)
+        {
+            var spin = sn.GetComponent<Agent>().lastCollapse;
+            root.Q<Label>("1").text = "Spin: " + spin + "\n";
+        }
+
+        private void ClassicalMagnetMod(Node sn)
+        {
+            var orientation = sn.GetComponent<Agent>().angle;
+            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";
+        }
+
+        public float PredictionToggle(float pos)
+        {
+            var predictionbox = root.Q<VisualElement>("predictionpopup");
+            predictionbox.style.bottom = new StyleLength(new Length(pos, LengthUnit.Percent));
+            if (pos < 0) {
+                return 0;
+            } else
+            {
+                return -35;
+            }
+        }
+
+        /*private void LargeImagePlateMod(Node sn)
+        {
+        }*/
     }
 }

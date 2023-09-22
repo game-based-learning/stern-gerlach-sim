@@ -8,6 +8,7 @@ public class GameObjectFactory : MonoBehaviour
 {
     [SerializeField] GameObject particlePrefab;
     [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab, emptyNodePrefab;
+    [SerializeField] GameObject debugBoxPrefab;
     [SerializeField] Source source;
     public bool SilverAtomMode() {
         return source.type == SourceType.SilverAtom;
@@ -41,6 +42,9 @@ public class GameObjectFactory : MonoBehaviour
             Debug.Log("Invalid Source Type.");
         }
     }
+    public void CreateDebugBox(Vector3 position) {
+        GameObject.Instantiate(debugBoxPrefab, position, Quaternion.identity);
+    }
     private void CreateMacroscopicMagnet() {
         if(CanFireParticle()) {
             GameObject magnet = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
@@ -67,6 +71,7 @@ public class GameObjectFactory : MonoBehaviour
         return largeImagePlate.GetComponentsInChildren<ImagePlate>().ToList();
 
     }
+    internal Source GetSource() { return source;  }
     internal ImagePlate CreateImagePlate(Vector3 loc)
     {
         GameObject imagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);

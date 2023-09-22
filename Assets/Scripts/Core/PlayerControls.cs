@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     private InputAction createParticle;
     private InputAction rotateLeft, rotateRight;
     private InputAction deleteNode;
+    private InputAction freeze, cortest;
     private float cooldown = 0f;
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
@@ -28,6 +29,8 @@ public class PlayerControls : MonoBehaviour
         rotateLeft = controls.Control.RotateLeft;
         rotateRight = controls.Control.RotateRight;
         deleteNode = controls.Control.DeleteNode;
+        freeze = controls.Control.Freeze;
+        cortest = controls.Control.FindCOR;
     }
 
     // Update is called once per frame
@@ -39,6 +42,9 @@ public class PlayerControls : MonoBehaviour
         if (createParticle.IsPressed())
         {
             if (cooldown <= 0f) {
+                if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
+                    GameManager.Instance.ToggleFreeze();
+                }
                 factory.CreateParticle();
                 cooldown = Globals.PARTICLE_COOLDOWN;
             }
@@ -60,6 +66,13 @@ public class PlayerControls : MonoBehaviour
         }
         if (deleteNode.WasPressedThisFrame()) {
             builder.DeleteNode();
+        }
+        if (freeze.WasPressedThisFrame()) {
+            GameManager.Instance.ToggleFreeze();
+        }
+        // Remove for final ver
+        if (cortest.WasPressedThisFrame()) {
+            factory.CreateDebugBox(builder.FindCenterOfRotation());
         }
     }
 }

@@ -42,7 +42,7 @@ namespace SternGerlach
                         UIManager.state = UIUpdater.States.UI_OPEN;
                     } else if (ntag == "Object")
                     {
-                        UIManager.DeletePopup();
+                        UIManager.DeletePopup(position);
                         UIManager.state = UIUpdater.States.UI_OPEN;
                     }
                     if (hit.transform.TryGetComponent<Node>(out UIManager.builder.selectedNode))
@@ -68,7 +68,7 @@ namespace SternGerlach
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             Vector2 tmp = mPos.ReadValue<Vector2>();
             position.x = tmp.x;
@@ -81,7 +81,7 @@ namespace SternGerlach
             //Debug.Log("mouse pos: " + position);
             ray = Camera.main.ScreenPointToRay(position);
 
-            Debug.Log(UIManager.state);
+            //Debug.Log(UIManager.state);
             if(UIManager.state == UIUpdater.States.UI_CLOSED) {
                 FocusCollider(ray, lmb_val, ls_val);
             }

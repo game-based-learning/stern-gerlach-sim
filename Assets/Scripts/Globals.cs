@@ -14,9 +14,8 @@ namespace SternGerlach
         public static float ANGLE_BETWEEN_NODES = 22.5f;
         public static string[] SCENES = { "MacroscopicNodeBuilder", "SilverAtomNodeBuilder" };
         public static int CURRENT_SCENE_INDEX = 0;
-        //public static string TOP_EMPTY_NODE_NAME = "EmptyNodeTop";
-        //public static string BOTTOM_EMPTY_NODE_NAME = "EmptyNodeBottom";
-        //public static string EMPTY_NODE_NAME = "EmptyNode";
         internal static float PARTICLE_COOLDOWN = 0.15f;
+        internal static string UP_CARET_NAME = "UpCaret";
+        internal static string DOWN_CARET_NAME = "DownCaret";
     }
 }

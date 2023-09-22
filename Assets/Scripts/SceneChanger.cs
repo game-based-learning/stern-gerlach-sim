@@ -8,6 +8,7 @@ namespace SternGerlach
 {
     public class SceneChanger : MonoBehaviour
     {
+        
         private InputAction spacebutton;
         public void Initialize(InputAction space)
         {
