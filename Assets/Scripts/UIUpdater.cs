@@ -121,11 +121,11 @@ namespace SternGerlach
             {
                 if (showUI)
                 {
-                    root.visible = false;
+                    root.style.display = DisplayStyle.None;
                     showUI = false;
                 } else
                 {
-                    root.visible = true;
+                    root.style.display = DisplayStyle.Flex;
                     showUI = true;
                 }
             }
