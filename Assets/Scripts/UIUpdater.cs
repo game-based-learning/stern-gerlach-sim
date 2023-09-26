@@ -129,6 +129,7 @@ namespace SternGerlach
                     showUI = true;
                 }
             }
+            Modify();
         }
         private void GuidedModeButtonPressed()
         {
@@ -194,6 +195,7 @@ namespace SternGerlach
             bc.visible = false;
             clickoffbutton.visible = false;
             state = States.UI_CLOSED;
+            Modify();
         }
 
 
@@ -241,40 +243,62 @@ namespace SternGerlach
         public void Modify()
         {
             var n = builder.selectedNode.name;
-            root.Q<Label>("FocusName").text = n;
-            root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
-            root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
+            //Debug.Log("Modify called, selected Node: " + n);
 
             switch (n)
             {
-                case "ImagePlate":
+                case "Image Plate(Clone)":
+                    root.Q<Label>("FocusName").text = "Image Plate";
+                    Debug.Log("Modifying imgplate");
                     ImagePlateMod(builder.selectedNode);
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
                     break;
-                case "SG-Magnet":
+                case "S-G Magnet(Clone)":
+                    root.Q<Label>("FocusName").text = "S-G Magnet";
                     SGMagnetMod(builder.selectedNode);
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
+                    break;
+                case "SG Magnet(Clone)":
+                    root.Q<Label>("FocusName").text = "S-G Magnet";
+                    SGMagnetMod(builder.selectedNode);
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
                     break;
                 case "Silver Atom":
                     SilverAtomMod(builder.selectedNode);
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
                     break;
                 case "Classical Magnet":
                     ClassicalMagnetMod(builder.selectedNode);
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
                     break;
                 case "LargeImagePlate":
+                    root.Q<Label>("FocusName").text = "Large Image Plate";
+                    root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
+                    root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;
                     //LargeImagePlateMod(builder.selectedNode);
+                    break;
+                case "EmptyNode":
                     break;
                 default:
                     break;
             }
+            
         }
 
         private void ImagePlateMod(Node sn)
         {
-            var count = sn.GetComponent<ImagePlate>().textCount;
+            var count = sn.GetComponent<ImagePlate>().textCount.text;
             root.Q<Label>("1").text = "Total Particles Hit: " + count + "\n";
         }
 
         private void SGMagnetMod(Node sn)
         {
+            Debug.Log("modifying sgmagnet ui");
             /*var orientation = sn.GetComponent<SGMagnet>().orientation;
             root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";*/
         }

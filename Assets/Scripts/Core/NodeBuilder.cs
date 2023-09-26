@@ -10,6 +10,7 @@ namespace SternGerlach
     public class NodeBuilder : MonoBehaviour
     {
         public Node selectedNode;
+        public Node focusNode;
         [SerializeField] GameObjectFactory factory;
         [SerializeField] GameObject COR;
         internal void PlaceImagePlate()
@@ -28,7 +29,7 @@ namespace SternGerlach
                 List<ImagePlate> largePlate = factory.CreateLargeImagePlate(loc);
                 PlaceLargePlateNodes(largePlate);
             }
-
+            
             //selectedNode = null; //added code
         }
         internal Vector3 FindCenterOfRotation() {
@@ -101,6 +102,7 @@ namespace SternGerlach
             }
             Destroy(selectedNode.gameObject);
             selectedNode = newNode;
+            Debug.Log(selectedNode);
             this.COR.transform.position = FindCenterOfRotation();
         }
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
