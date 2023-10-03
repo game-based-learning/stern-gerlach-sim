@@ -140,7 +140,7 @@ namespace SternGerlach
         private void DeleteButtonPressed()
         {
             Debug.Log("use this: " + builder.selectedNode.name);
-            if (builder.selectedNode.name == "SGMag-One-Node(Clone)")
+            if (builder.selectedNode.name == "S-G Magnet(Clone)")
             {
                 sceneHasOneSGMagnet = false;
                 sgbutton.visible = bc.visible;
@@ -214,6 +214,7 @@ namespace SternGerlach
             else
             {
                 sgbutton.style.visibility = StyleKeyword.Null;
+                //Debug.Log("sgbutton visiblity: " + sgbutton.visible + ", parent visibility: " + sgbutton.parent.visible);
             }
             clickoffbutton.visible = true;
             bc.style.left = position.x;
