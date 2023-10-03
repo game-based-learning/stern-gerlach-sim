@@ -16,7 +16,7 @@ namespace SternGerlach
         internal void PlaceImagePlate()
         {
             if (!CanPlace()) { return; }
-            if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is Source) { return; }
+            //if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is Source) { return; }
 
             Debug.Log("Place Image Plate");
             Vector3 loc = selectedNode.transform.position;
@@ -108,13 +108,22 @@ namespace SternGerlach
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
         {
             Transform parent = selectedNode.transform.parent;
-            Node sgMagnet = parent.gameObject.GetComponent<SGMagnet>();
-            int count = 0;
-            foreach (Node node in nodes) {
-                sgMagnet.children[count++] = node;
-            }
+            //Node sgMagnet = parent.gameObject.GetComponent<SGMagnet>();
+            if (parent.gameObject.TryGetComponent<SGMagnet>(out var sgMagnet))
+            {
+                int count = 0;
+                foreach (Node node in nodes)
+                {
+                    sgMagnet.children[count++] = node;
+                }
 
-            nodes[0].transform.parent.transform.parent = sgMagnet.transform;
+                nodes[0].transform.parent.transform.parent = sgMagnet.transform;
+            }
+            // for case of first node
+            else if (parent.GetComponent<Node>() is Source)
+            {
+                factory.GetSource().children[0] = nodes[3];
+            }
             Destroy(selectedNode.gameObject);
             this.COR.transform.position = FindCenterOfRotation();
         }

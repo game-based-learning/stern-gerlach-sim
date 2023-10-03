@@ -243,6 +243,7 @@ namespace SternGerlach
 
         public void Modify()
         {
+            if(builder.selectedNode == null) { return; }
             var n = builder.selectedNode.name;
             //Debug.Log("Modify called, selected Node: " + n);
 
