@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- general format for each experiment:
+     form setup -> prediction -> execution -> mcq -> next experiment -->
+
+<experiment>
+	<!-- valid source names are "Silver_Atom" or "Macroscopic_Magnet" -->
+	<setup id="Preliminary Silver Atom Setup" source="Silver_Atom">
+		<node type="S-G_Magnet">
+			<!-- angle is local rotation -->
+			<angle>0</angle>
+			<!-- lower child node -->
+			<node type="Image_Plate">
+			</node>
+			<!-- upper child node -->
+			<node type="Image_Plate">
+			</node>
+		</node>
+	</setup>
+	
+	<!-- text for prediction prompt -->
+	<prediction>What do you think will happen?</prediction>
+	<!-- trigger can be Voluntary or Involuntary. Involuntary will move forward immediately -->
+	<execution type="Min_Particles" trigger="Voluntary">
+		<moveforwardprompt>Continue to MC Question</moveforwardprompt>
+		<minparticlecount>15</minparticlecount>
+	</execution>
+	<mcq prompt="What happened there?" answers="4" correctanswer="A">
+		<answer text="Correct answer text goes here">
+			<pickedmessage>
+			Very good, that is correct! You are correct because (explanation reinforcing the choice)
+			</pickedmessage>
+		</answer>
+		<answer text="Incorrect answer text goes here">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+		<answer text="More incorrect answer text goes here">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+		<answer text="And another incorrect answer text goes here">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+	</mcq>
+	<nextexperimentfile>experiment2.xml</nextexperimentfile>
+</experiment>
