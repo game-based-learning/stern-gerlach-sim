@@ -20,10 +20,10 @@ public class GameObjectFactory : MonoBehaviour
         return CanFireParticle(source.children[0]);
     }
     private bool CanFireParticle(Node node) {
-        if(node is ImagePlate) {
+        if (node is ImagePlate) {
             return true;
         }
-        if(node is SGMagnet) {
+        if (node is SGMagnet) {
             return CanFireParticle(node.children[0]) && CanFireParticle(node.children[1]);
         }
         else {
@@ -46,17 +46,17 @@ public class GameObjectFactory : MonoBehaviour
         GameObject.Instantiate(debugBoxPrefab, position, Quaternion.identity);
     }
     private void CreateMacroscopicMagnet() {
-        if(CanFireParticle()) {
+        if (CanFireParticle()) {
             GameObject magnet = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             Agent agent = magnet.AddComponent<Agent>();
-            agent.Initialize(source,Agent.AgentType.MacroscopicMagnet);
+            agent.Initialize(source, Agent.AgentType.MacroscopicMagnet);
         }
         else {
             Debug.Log("Incomplete setup.");
         }
     }
     private void CreateSilverAtom() {
-        if(CanFireParticle()) {
+        if (CanFireParticle()) {
             GameObject atom = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             atom.transform.parent = this.transform;
             Agent agent = atom.AddComponent<Agent>();
@@ -71,7 +71,7 @@ public class GameObjectFactory : MonoBehaviour
         return largeImagePlate.GetComponentsInChildren<ImagePlate>().ToList();
 
     }
-    internal Source GetSource() { return source;  }
+    internal Source GetSource() { return source; }
     internal ImagePlate CreateImagePlate(Vector3 loc)
     {
         GameObject imagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);

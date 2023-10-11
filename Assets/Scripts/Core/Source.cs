@@ -29,6 +29,12 @@ namespace SternGerlach
             magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
             questionSprite.SetActive(type == SourceType.SilverAtom);
         }
+        void SetSourceType(SourceType type)
+        {
+            this.type = type;
+            magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
+            questionSprite.SetActive(type == SourceType.SilverAtom);
+        }
         public override int GetRotation() { 
             return -1; 
         }

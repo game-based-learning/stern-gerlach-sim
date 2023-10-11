@@ -1,3 +1,4 @@
+using SternGerlach.Assets.Scripts.Core;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,12 +13,14 @@ namespace SternGerlach
     public class XMLDeserializer : MonoBehaviour
     {
         [SerializeField] TextAsset firstXmlFile;
+        private TextAsset currFile;
         // Start is called before the first frame update
         void Start()
         {
-            Parse(firstXmlFile);    
+            ParseExperiment(firstXmlFile);    
         }
-        void Parse(TextAsset xmlFile) { 
+        Experiment ParseExperiment(TextAsset xmlFile) {
+            this.currFile = xmlFile;
             string data = xmlFile.text;
             XmlDocument xmlDocument= new XmlDocument();
             xmlDocument.Load(new StringReader(data));
@@ -31,7 +34,7 @@ namespace SternGerlach
                 source = node;
             }
             if (source == null) {
-                DisplayBadlyFormattedMessage(xmlFile);
+                DisplayBadlyFormattedMessage();
             }
             experimentName = source.Attributes["id"]?.Value;
             if (experimentName == "" || experimentName == null) {
@@ -48,7 +51,7 @@ namespace SternGerlach
             Debug.Log("Source Type:" + sourceType.ToString());
 
             if (source.ChildNodes.Count == 0) {
-                DisplayBadlyFormattedMessage(xmlFile);
+                DisplayBadlyFormattedMessage();
             }
             ParseNBNode(source.ChildNodes[0]);
 /*            foreach (XmlNode attribute in node.Attributes)
@@ -60,13 +63,29 @@ namespace SternGerlach
                 Debug.Log(attribute.Value + attribute.Name);
             }*/
         }
-        void DisplayBadlyFormattedMessage(TextAsset file) {
-            Debug.Log("Badly formatted xml file named " + file.name);
+        void DisplayBadlyFormattedMessage() {
+            Debug.Log("Badly formatted xml file named " + currFile.name);
             return;
         }
         // Parse a nodebuilder node
         Node ParseNBNode(XmlNode node) {
             Debug.Log(node.Name);
+            string type = node.Attributes["type"]?.Value;
+            if (type == "" || type == null)
+            {
+                DisplayBadlyFormattedMessage();
+            }
+            if (type == "SG_Magnet")
+            {
+                // create sg magnet
+            }
+            else if (type == "Image_Plate")
+            {
+                // create image plate
+            }
+            else if (type == "Large_Image_Plate") { 
+                // create large image plate
+            }
             return null;
         }
 
