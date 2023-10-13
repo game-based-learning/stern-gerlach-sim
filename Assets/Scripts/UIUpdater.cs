@@ -251,7 +251,7 @@ namespace SternGerlach
             {
                 case "Image Plate(Clone)":
                     root.Q<Label>("FocusName").text = "Image Plate";
-                    Debug.Log("Modifying imgplate");
+                    //Debug.Log("Modifying imgplate");
                     ImagePlateMod(builder.selectedNode);
                     root.Q<VisualElement>("side").style.display = DisplayStyle.Flex;
                     root.Q<VisualElement>("side-2").style.display = DisplayStyle.None;

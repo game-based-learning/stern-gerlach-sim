@@ -39,6 +39,16 @@ public class Agent : MonoBehaviour
     }
     void Update()
     {
+        /*if (lastCollapse == CollapseType.UpState)
+        {
+            this.upCaret.transform.LookAt(Camera.main.transform);
+            this.upCaret.transform.Rotate(180f, 0f, 0f);
+        }
+        else
+        {
+            this.downCaret.transform.LookAt(Camera.main.transform);
+        }*/
+        //this.downCaret.transform.Rotate(0f, 180f, 0f);
         //Debug.Log(angle);
         if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
             // no updates if we are frozen
@@ -155,6 +165,7 @@ public class Agent : MonoBehaviour
     void ShowCaret() {
         if (lastCollapse == CollapseType.UpState)
         {
+            //Debug.Log("upstate");
             this.upCaret.SetActive(true);
         }
         else { 
