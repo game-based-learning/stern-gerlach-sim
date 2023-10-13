@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 6749368906265574592}
   - component: {fileID: 2841926683538062787}
   m_Layer: 0
-  m_Name: Source
+  m_Name: MacroSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

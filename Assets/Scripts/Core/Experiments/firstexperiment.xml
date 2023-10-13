@@ -6,15 +6,12 @@
 <experiment>
 	<!-- valid source names are "Silver_Atom" or "Macroscopic_Magnet" -->
 	<setup id="Preliminary Silver Atom Setup" source="Silver_Atom">
-		<node type="S-G_Magnet">
-			<!-- angle is local rotation -->
-			<angle>0</angle>
+		<!-- angle is local rotation -->
+		<node type="S-G_Magnet" angle ="0">
 			<!-- lower child node -->
-			<node type="Image_Plate">
-			</node>
+			<node type="Image_Plate" angle="0"></node>
 			<!-- upper child node -->
-			<node type="Image_Plate">
-			</node>
+			<node type="Image_Plate" angle="0"></node>
 		</node>
 	</setup>
 	

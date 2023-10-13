@@ -9,6 +9,7 @@ public class GameObjectFactory : MonoBehaviour
     [SerializeField] GameObject particlePrefab;
     [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab, emptyNodePrefab;
     [SerializeField] GameObject debugBoxPrefab;
+    [SerializeField] GameObject macroSourcePrefab, silverAtomSourcePrefab;
     [SerializeField] Source source;
     public bool SilverAtomMode() {
         return source.type == SourceType.SilverAtom;
@@ -29,6 +30,16 @@ public class GameObjectFactory : MonoBehaviour
         else {
             return false;
         }
+    }
+    public Source CreateSource(bool isMacro) {
+        if (isMacro) {
+            this.source = GameObject.Instantiate(macroSourcePrefab, Vector3.zero, Quaternion.identity).GetComponent<Source>();
+        }
+        else {
+            this.source = GameObject.Instantiate(silverAtomSourcePrefab, Vector3.zero, Quaternion.identity).GetComponent<Source>();
+        }
+        return this.source;
+
     }
     public void CreateParticle() {
         if (source.type == SourceType.MacroscopicMagnet) {

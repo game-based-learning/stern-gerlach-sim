@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static SternGerlach.Assets.Scripts.Core.Experiment;
+﻿using UnityEngine;
 
 namespace SternGerlach.Assets.Scripts.Core
 {
@@ -13,27 +8,46 @@ namespace SternGerlach.Assets.Scripts.Core
         private Source source = null;
         private string id = "DEFAULT_EXPERIMENT_NAME";
 
-        // MCQ
-        private Dictionary<char, (string,bool)> mcq = new Dictionary<char, (string, bool)>();
-        private char correctMCAnswer = '\0';
+        // MCQ (A: <Message>)
+        private string moveForwardToMCQMessage = "DEFAULT_GO_TO_MCQ_MESSAGE";
+        private MCQuestion mcq = new MCQuestion();
+        private string questionText = "DEFAULT_QUESTION_TEXT";
+        private bool voluntary = true;
 
         // PREDICTION
         private string predictionMessage = "DEFAULT_PREDICTION_MESSAGE";
 
         // EXECUTION
         public enum ExecutionType { MinParticles } // Add more types of execution types
-        private ExecutionType executionType = ExecutionType.MinParticles;
+        private Experiment.ExecutionType executionType = Experiment.ExecutionType.MinParticles;
         private int minParticles = 10;
-
-        public ExperimentBuilder() { 
-
+        public ExperimentBuilder() {  }
+        public Experiment Build() {
+            GameObject parent = new GameObject(id);
+            Experiment exp = parent.AddComponent<Experiment>();
+            mcq.question = questionText;
+            exp.id = id;
+            exp.source = source;
+            exp.mcq = mcq;
+            exp.predictionMessage = predictionMessage;
+            exp.executionType = executionType;
+            exp.minParticles = minParticles;
+            exp.voluntary = voluntary;
+            exp.moveForwardToMCQMessage = moveForwardToMCQMessage;
+            return exp;
         }
-        public Experiment GetExperiment() {
-            return new Experiment();
+        public void SetQuestionText(string question) {
+            this.questionText = question;
         }
-        public void AddMCAnswer(char label, string answer, bool correctAnswer)
+        public void AddMCAnswer(char label, string answer, string pickedMessage, bool correctAnswer)
         {
-            mcq.Add(label, (answer, correctAnswer));
+            mcq.AddAnswer(label, answer, pickedMessage, correctAnswer);
+        }
+        public void SetVoluntaryMCQ(bool voluntary) {
+            this.voluntary = voluntary;
+        }
+        public void SetMoveForwardToMCQMessage(string message) {
+            this.moveForwardToMCQMessage = message;
         }
         public void SetSource(Source source)
         {
@@ -47,7 +61,7 @@ namespace SternGerlach.Assets.Scripts.Core
         {
             this.predictionMessage = message;
         }
-        public void SetExecutionType(ExecutionType type)
+        public void SetExecution(Experiment.ExecutionType type)
         {
             this.executionType = type;
         }
