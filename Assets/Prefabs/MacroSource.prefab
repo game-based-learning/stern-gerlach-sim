@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34ee9e2d33a1cd479d565ddbbb84c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstMagnet: {fileID: 0}
+  rotation: 0
+  firstMagnet: {fileID: 7790819699400008098}
   entrance: {fileID: 4135730291338034473}
   exit: {fileID: 1478284151093241824}
   magnetSprite: {fileID: 3047950823035055642}
@@ -1254,3 +1255,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7188839466785370436, guid: fbc74a34106b89743bc2dbef3cb588b8, type: 3}
   m_PrefabInstance: {fileID: 6377112056388623535}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7790819699400008098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3791609350477184269, guid: fbc74a34106b89743bc2dbef3cb588b8, type: 3}
+  m_PrefabInstance: {fileID: 6377112056388623535}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2779bf887c2c30408eeaf4d6846cb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

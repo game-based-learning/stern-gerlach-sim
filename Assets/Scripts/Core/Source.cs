@@ -6,7 +6,7 @@ namespace SternGerlach
 {
     public class Source : Node
     {
-        [SerializeField] Node firstMagnet;
+        [SerializeField] public Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
         [SerializeField] GameObject magnetSprite, questionSprite;
