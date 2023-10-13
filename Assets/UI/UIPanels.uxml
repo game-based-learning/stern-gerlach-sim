@@ -42,10 +42,6 @@
             <ui:VisualElement name="PausePlay" style="width: 200px; height: 200px; background-image: url(&apos;project://database/Assets/UI/pause-button-png-24.png?fileID=2800000&amp;guid=8f16d3bdfe2491c48b2746f58bbe8ab8&amp;type=3#pause-button-png-24&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; justify-content: space-around; align-items: center; flex-direction: column; -unity-text-align: upper-center;">
                 <ui:VisualElement name="pauseplaybutton" />
             </ui:VisualElement>
-            <ui:VisualElement name="Notes" style="height: auto;">
-                <ui:Label text="NOTES" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; -unity-font-style: bold; font-size: 20px;" />
-                <ui:TextField picking-mode="Ignore" value="filler text" text="filler text" style="flex-direction: column; white-space: normal;" />
-            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="side-2" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
             <ui:Label text="Click something to bring to focus!" display-tooltip-when-elided="true" />

@@ -301,8 +301,9 @@ namespace SternGerlach
         private void SGMagnetMod(Node sn)
         {
             Debug.Log("modifying sgmagnet ui");
-            /*var orientation = sn.GetComponent<SGMagnet>().orientation;
-            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";*/
+
+            var orientation = sn.GetComponent<SGMagnet>().GetRotation();
+            root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";
         }
 
         private void SilverAtomMod(Node sn)
