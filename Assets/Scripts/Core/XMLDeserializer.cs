@@ -3,6 +3,7 @@ using System.IO;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace SternGerlach
 {
@@ -58,17 +59,9 @@ namespace SternGerlach
             Debug.Log("Children: " + source.HasChildNodes + "Amount: " + source.ChildNodes.Count);
             
             nodeBuilder.SelectNode(src.firstMagnet);
-            Debug.Log(2);
             ParseNBNode(source.ChildNodes[0]);
             Debug.Log(3);
-            /*            foreach (XmlNode attribute in node.Attributes)
-                        {
-                            switch (attribute.Name)
-                            {
-                                case:
-                            }
-                            Debug.Log(attribute.Value + attribute.Name);
-                        }*/
+
             Experiment experiment = experimentBuilder.Build();
             experiment.ToString();
             return experiment;
@@ -76,14 +69,13 @@ namespace SternGerlach
         // Parse a nodebuilder node
         void ParseNBNode(XmlNode node)
         {
-            Debug.Log("Node: " + node);
             string type = node.Attributes["type"]?.Value;
+
             if (type == "" || type == null)
             {
                 DisplayBadlyFormattedMessage();
             }
 
-            Debug.Log("A");
             switch (type) {
                 case "SG_Magnet":
                     nodeBuilder.PlaceSGMagnet();
@@ -93,25 +85,25 @@ namespace SternGerlach
                 case "Large_Image_Plate":
                     nodeBuilder.PlaceImagePlate();
                     break;
+                default:
+                    DisplayBadlyFormattedMessage();
+                    break;
             }
 
-            Debug.Log("B");
             nodeBuilder.Rotate(int.Parse(node.Attributes["angle"]?.Value));
-            if (node.ChildNodes.Count == 0) {
+            if (node.ChildNodes == null || node.ChildNodes.Count == 0 || nodeBuilder.selectedNode.children == null || nodeBuilder.selectedNode.children.Count == 0)
+            {
+                Debug.Log("Exit");
                 return;
             }
-
-            Debug.Log("C");
+            Node parentNode = nodeBuilder.selectedNode;
             for (int i = 0; i < node.ChildNodes.Count; i++) {
-
-                Debug.Log("The line below is where this blows up");
-                nodeBuilder.SelectNode(nodeBuilder.selectedNode.children[i]);
-
-                Debug.Log("E");
+                nodeBuilder.SelectNode(parentNode.children[i]);
+                Debug.Log("selectedNode " + nodeBuilder.selectedNode);
+                Debug.Log("selectedNode Children" + nodeBuilder.selectedNode.children.Count);
+                Debug.Log("Parsing next:" + node.ChildNodes[i].Attributes["type"]?.Value);
                 ParseNBNode(node.ChildNodes[i]);
             }
-
-            Debug.Log("D");
         }
         void DisplayBadlyFormattedMessage() {
             Debug.Log("Badly formatted xml file named " + currFile.name);

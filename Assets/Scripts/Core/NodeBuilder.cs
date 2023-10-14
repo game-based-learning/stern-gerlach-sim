@@ -102,6 +102,7 @@ namespace SternGerlach
             Destroy(selectedNode.gameObject);
             selectedNode = newNode;
             this.COR.transform.position = FindCenterOfRotation();
+            this.selectedNode = newNode;
         }
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
         {
