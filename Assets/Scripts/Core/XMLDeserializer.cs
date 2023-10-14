@@ -56,14 +56,12 @@ namespace SternGerlach
             if (source.ChildNodes.Count == 0) {
                 DisplayBadlyFormattedMessage();
             }
-            Debug.Log("Children: " + source.HasChildNodes + "Amount: " + source.ChildNodes.Count);
             
             nodeBuilder.SelectNode(src.firstMagnet);
             ParseNBNode(source.ChildNodes[0]);
-            Debug.Log(3);
 
             Experiment experiment = experimentBuilder.Build();
-            experiment.ToString();
+            Debug.Log(experiment.ToString());
             return experiment;
         }
         // Parse a nodebuilder node
@@ -93,15 +91,11 @@ namespace SternGerlach
             nodeBuilder.Rotate(int.Parse(node.Attributes["angle"]?.Value));
             if (node.ChildNodes == null || node.ChildNodes.Count == 0 || nodeBuilder.selectedNode.children == null || nodeBuilder.selectedNode.children.Count == 0)
             {
-                Debug.Log("Exit");
                 return;
             }
             Node parentNode = nodeBuilder.selectedNode;
             for (int i = 0; i < node.ChildNodes.Count; i++) {
                 nodeBuilder.SelectNode(parentNode.children[i]);
-                Debug.Log("selectedNode " + nodeBuilder.selectedNode);
-                Debug.Log("selectedNode Children" + nodeBuilder.selectedNode.children.Count);
-                Debug.Log("Parsing next:" + node.ChildNodes[i].Attributes["type"]?.Value);
                 ParseNBNode(node.ChildNodes[i]);
             }
         }

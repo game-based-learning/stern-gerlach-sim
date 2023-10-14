@@ -24,7 +24,7 @@ namespace SternGerlach.Assets.Scripts.Core
         public string ToString() {
             string debugString = "Nodes: \n";
             debugString += NodeToString(source);
-            debugString += "Experiment ID:" + id + "\n";
+            debugString += "\nExperiment ID:" + id + "\n";
             debugString += mcq.question + "\n";
             foreach ((char, string) answer in mcq.GetAnswerChoices()) {
                 debugString += answer.Item1 + ": " + answer.Item2 + "\n";

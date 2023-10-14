@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SilverAtomNodeBuilder.unity
     guid: c8d984c1d3c68634a869a7b866dcde01
+  - enabled: 1
+    path: Assets/Scenes/LegoInstructions.unity
+    guid: f9d58db2214b8154fa08b2152c1de758
   m_configObjects: {}
