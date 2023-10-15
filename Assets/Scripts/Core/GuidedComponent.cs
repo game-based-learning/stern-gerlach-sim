@@ -9,9 +9,9 @@ namespace SternGerlach
     {
         void Start()
         {
-            Scene s = SceneManager.GetActiveScene();
-            SceneManager.LoadScene("LegoInstructions", LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("LegoInstructions"));
+            //Scene s = SceneManager.GetActiveScene();
+            //SceneManager.LoadScene("LegoInstructions", LoadSceneMode.Additive);
+            //SceneManager.SetActiveScene(SceneManager.GetSceneByName("LegoInstructions"));
         }
     }
 }
