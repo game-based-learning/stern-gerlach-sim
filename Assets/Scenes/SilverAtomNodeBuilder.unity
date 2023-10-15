@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstXmlFile: {fileID: 4900000, guid: ad87a2eb13b22fb48b4604f02b8b6430, type: 3}
   factory: {fileID: 1799884474}
-  nodeBuilder: {fileID: 1936144057}
+  nodeBuilder: {fileID: 1799884475}
 --- !u!4 &1103304289
 Transform:
   m_ObjectHideFlags: 0
@@ -529,13 +529,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103304287}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0071394, y: -11.035023, z: 24.47579}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.9236095, y: 4.287283, z: -1.6116886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 1799884473}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1185700174
 GameObject:
@@ -943,6 +943,7 @@ GameObject:
   - component: {fileID: 1799884473}
   - component: {fileID: 1799884472}
   - component: {fileID: 1799884474}
+  - component: {fileID: 1799884475}
   m_Layer: 0
   m_Name: GuidedComponent
   m_TagString: Untagged
@@ -973,9 +974,10 @@ Transform:
   m_LocalPosition: {x: 2.08353, y: -15.322306, z: 26.087479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1103304289}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1799884474
 MonoBehaviour:
@@ -998,6 +1000,21 @@ MonoBehaviour:
   silverAtomSourcePrefab: {fileID: 1468160075247004027, guid: d8d842cba3fef584393497c57c41b9e4, type: 3}
   source: {fileID: 0}
   instructionFactory: 1
+--- !u!114 &1799884475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799884471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73404f90b0cad24baded90bced06b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedNode: {fileID: 0}
+  factory: {fileID: 1799884474}
+  COR: {fileID: 240012957}
 --- !u!1 &1930399473
 GameObject:
   m_ObjectHideFlags: 0
