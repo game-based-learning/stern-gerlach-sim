@@ -36,7 +36,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="Checklist" style="width: 100%; height: auto;">
                 <ui:Toggle label="Toggle" focusable="false" style="color: rgb(255, 255, 255); flex-direction: row-reverse;" />
-                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
+                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255); visibility: hidden; display: flex; opacity: 1;" />
                 <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
             </ui:VisualElement>
             <ui:VisualElement name="PausePlay" style="width: 200px; height: 200px; background-image: url(&apos;project://database/Assets/UI/pause-button-png-24.png?fileID=2800000&amp;guid=8f16d3bdfe2491c48b2746f58bbe8ab8&amp;type=3#pause-button-png-24&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; justify-content: space-around; align-items: center; flex-direction: column; -unity-text-align: upper-center;">
@@ -45,6 +45,11 @@
         </ui:VisualElement>
         <ui:VisualElement name="side-2" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
             <ui:Label text="Click something to bring to focus!" display-tooltip-when-elided="true" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Warning" style="position: absolute; left: 30%; top: 10%; width: 40%; height: 40%; align-items: center; justify-content: center; background-color: rgba(250, 8, 8, 0.41); opacity: 1; visibility: hidden;">
+            <ui:Label text="WARNING" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 40px;" />
+            <ui:Label text="Making a change to the simulation will reset all image plate hits" display-tooltip-when-elided="true" style="font-size: 20px; flex-wrap: wrap; width: 70%; white-space: normal;" />
+            <ui:Button text="Close" display-tooltip-when-elided="true" name="closewarning" style="height: 33px; width: 74px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

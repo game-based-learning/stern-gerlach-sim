@@ -33,9 +33,13 @@ namespace SternGerlach
         private Button freeplaybutton;
         private Button helpbutton;
 
+        private Button closewarning;
+        private bool thisIsFirstEdit = true;
+
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
         private bool sceneHasOneSGMagnet;
+
 
         public States state = States.UI_CLOSED;
         private (float x, float y) popupPosition;
@@ -91,6 +95,8 @@ namespace SternGerlach
                 deletebutton = root.Q<Button>("delete-button");
                 dclosebutton = root.Q<Button>("dclose-button");
 
+                closewarning = root.Q<Button>("closewarning");
+
                 deletebutton.clicked += DeleteButtonPressed;
                 dclosebutton.clicked += CloseButtonPressed;
 
@@ -105,6 +111,8 @@ namespace SternGerlach
                 rleftbutton.clicked += RotateLeftButtonPressed;
                 rrightbutton.clicked += RotateRightButtonPressed;
                 rclosebutton.clicked += CloseButtonPressed;
+
+                closewarning.clicked += WarningClosePressed;
             } else
             {
                 guidedbutton = root.Q<Button>("guided-mode");
@@ -130,6 +138,10 @@ namespace SternGerlach
                 }
             }
             Modify();
+        }
+        private void WarningClosePressed()
+        {
+            root.Q<VisualElement>("Warning").visible = false;
         }
         private void GuidedModeButtonPressed()
         {
@@ -234,6 +246,11 @@ namespace SternGerlach
 
         public void DeletePopup(Vector3 position)
         {
+            if (thisIsFirstEdit)
+            {
+                root.Q<VisualElement>("Warning").visible = true;
+                thisIsFirstEdit = false;
+            }
             dc.visible = true;
             
             dc.style.left = position.x;
