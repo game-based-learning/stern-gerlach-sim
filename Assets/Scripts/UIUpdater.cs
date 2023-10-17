@@ -33,6 +33,9 @@ namespace SternGerlach
         private Button freeplaybutton;
         private Button helpbutton;
 
+        private Button pauseplay;
+        private bool stateIsPaused = false;
+
         private Button closewarning;
         public bool thisIsFirstEdit = true;
 
@@ -88,6 +91,10 @@ namespace SternGerlach
                 clickoffbutton.clicked += CloseButtonPressed;
                 clickoffbutton.visible = false;
 
+                pauseplay = root.Q<Button>("pause-play");
+                pauseplay.clicked += PausePlayButtonPressed;
+                pauseplay.style.backgroundImage = Resources.Load<Texture2D>("pausebutton");
+
                 closebutton = root.Q<Button>("close-button");
                 sgbutton = root.Q<Button>("sgmagnet-button");
                 ipbutton = root.Q<Button>("imageplate-button");
@@ -138,6 +145,18 @@ namespace SternGerlach
                 }
             }
             Modify();
+        }
+        private void PausePlayButtonPressed()
+        {
+            GameManager.Instance.ToggleFreeze();
+            stateIsPaused = !stateIsPaused;
+            if (stateIsPaused)
+            {
+                pauseplay.style.backgroundImage = Resources.Load<Texture2D>("playbutton");
+            } else
+            {
+                pauseplay.style.backgroundImage = Resources.Load<Texture2D>("pausebutton");
+            }
         }
         private void WarningClosePressed()
         {
