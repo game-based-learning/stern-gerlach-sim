@@ -19,27 +19,23 @@
                 <ui:Button text="Rotate Right" display-tooltip-when-elided="true" name="rotate-right" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="rclose-button" style="height: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: absolute;">
+            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: absolute; display: none;">
                 <ui:Button text="Delete" display-tooltip-when-elided="true" name="delete-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none;">
+        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none; align-items: center; justify-content: flex-start;">
             <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">
                 <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Stats" style="width: 100%; height: auto;">
+            <ui:VisualElement name="Stats" style="width: 100%; height: auto; margin-top: 20px; margin-bottom: 20px;">
                 <ui:Label text="STATS" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="1" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; align-items: center; justify-content: space-between; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="2" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="3" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Checklist" style="width: 100%; height: auto;">
-                <ui:Toggle label="Toggle" focusable="false" style="color: rgb(255, 255, 255); flex-direction: row-reverse;" />
-                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255); visibility: hidden; display: flex; opacity: 1;" />
-                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
-            </ui:VisualElement>
-            <ui:VisualElement name="PausePlay" style="width: 200px; height: 200px; background-image: url(&apos;project://database/Assets/UI/pause-button-png-24.png?fileID=2800000&amp;guid=8f16d3bdfe2491c48b2746f58bbe8ab8&amp;type=3#pause-button-png-24&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; justify-content: space-around; align-items: center; flex-direction: column; -unity-text-align: upper-center;">
+            <ui:Button text="DELETE" display-tooltip-when-elided="true" name="delete-button-new" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; background-color: rgb(224, 0, 0); color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 27px;" />
+            <ui:VisualElement name="PausePlay" style="width: 60%; height: 22.5%; background-image: url(&apos;project://database/Assets/UI/pause-button-png-24.png?fileID=2800000&amp;guid=8f16d3bdfe2491c48b2746f58bbe8ab8&amp;type=3#pause-button-png-24&apos;); margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; justify-content: space-around; align-items: center; flex-direction: column; -unity-text-align: upper-center;">
                 <ui:VisualElement name="pauseplaybutton" />
             </ui:VisualElement>
         </ui:VisualElement>

@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace SternGerlach
 {
@@ -16,6 +17,7 @@ namespace SternGerlach
         private Vector3 position = new Vector3();
         [SerializeField] private PointManager pm;
         [SerializeField] private UIUpdater UIManager;
+
 
         public void Initialize(InputAction c, InputAction p, InputAction ls)
         {
@@ -42,8 +44,13 @@ namespace SternGerlach
                         UIManager.state = UIUpdater.States.UI_OPEN;
                     } else if (ntag == "Object")
                     {
-                        UIManager.DeletePopup(position);
-                        UIManager.state = UIUpdater.States.UI_OPEN;
+                        if (UIManager.thisIsFirstEdit)
+                        {
+                            UIManager.root.Q<VisualElement>("Warning").visible = true;
+                            UIManager.thisIsFirstEdit = false;
+                        }
+                        //UIManager.DeletePopup(position);
+                        //UIManager.state = UIUpdater.States.UI_OPEN;
                     }
                     if (hit.transform.TryGetComponent<Node>(out UIManager.builder.selectedNode))
                     {

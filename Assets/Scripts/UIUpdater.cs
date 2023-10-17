@@ -15,7 +15,7 @@ namespace SternGerlach
         private bool isMain = false;
         //private bool isMacro = false;
 
-        private VisualElement root;
+        public VisualElement root;
         private VisualElement bc;
         private VisualElement rc;
         private VisualElement dc;
@@ -34,7 +34,7 @@ namespace SternGerlach
         private Button helpbutton;
 
         private Button closewarning;
-        private bool thisIsFirstEdit = true;
+        public bool thisIsFirstEdit = true;
 
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
@@ -92,7 +92,7 @@ namespace SternGerlach
                 sgbutton = root.Q<Button>("sgmagnet-button");
                 ipbutton = root.Q<Button>("imageplate-button");
                 
-                deletebutton = root.Q<Button>("delete-button");
+                deletebutton = root.Q<Button>("delete-button-new");
                 dclosebutton = root.Q<Button>("dclose-button");
 
                 closewarning = root.Q<Button>("closewarning");
@@ -162,6 +162,9 @@ namespace SternGerlach
             dc.visible = false;
             clickoffbutton.visible = false;
             state = States.UI_CLOSED;
+            CloseButtonPressed();
+            root.Q<VisualElement>("side-2").style.display = DisplayStyle.Flex;
+            root.Q<VisualElement>("side").style.display = DisplayStyle.None;
         }
 
         private void RotateLeftButtonPressed()
@@ -244,19 +247,15 @@ namespace SternGerlach
             Debug.Log("at RotationPopup: " + popupPosition);
         }
 
-        public void DeletePopup(Vector3 position)
+        /*public void DeletePopup(Vector3 position)
         {
-            if (thisIsFirstEdit)
-            {
-                root.Q<VisualElement>("Warning").visible = true;
-                thisIsFirstEdit = false;
-            }
+            
             dc.visible = true;
             
             dc.style.left = position.x;
             dc.style.top = Screen.height - position.y;
             clickoffbutton.visible = true;
-        }
+        }*/
 
         public void Modify()
         {
