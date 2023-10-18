@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3867188, g: 0.4238264, b: 0.46289152, a: 1}
+  m_IndirectSpecularColor: {r: 0.39160052, g: 0.42309564, b: 0.46167073, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &207591278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207591280}
+  - component: {fileID: 207591279}
+  m_Layer: 0
+  m_Name: QuestionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &207591279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207591278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54c29fa6c08fb4fb0c6724be83d517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updater: {fileID: 1725618769}
+--- !u!4 &207591280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207591278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.954778, y: -1.451759, z: 7.8036547}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213028231
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &213028232
 Transform:
   m_ObjectHideFlags: 0
@@ -216,7 +261,6 @@ GameObject:
   - component: {fileID: 339597189}
   - component: {fileID: 339597188}
   - component: {fileID: 339597187}
-  - component: {fileID: 339597193}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -329,6 +373,8 @@ MonoBehaviour:
   panController: {fileID: 339597189}
   clickController: {fileID: 339597191}
   sceneManager: {fileID: 1253715751}
+  updater: {fileID: 1725618769}
+  predictionHandler: {fileID: 207591279}
 --- !u!1 &345286466
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,13 +510,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345286466}
   m_CullTransparentMesh: 1
-  m_GameObject: {fileID: 339597185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e54c29fa6c08fb4fb0c6724be83d517, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updater: {fileID: 1725618769}
 --- !u!114 &396536982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2841926683538062787, guid: d9d6148caeb07df44a746007c7aa373b, type: 3}
@@ -1085,6 +1124,7 @@ MonoBehaviour:
   ui: {fileID: 1725618768}
   builder: {fileID: 1936144057}
   scenechanger: {fileID: 0}
+  thisIsFirstEdit: 1
   state: 0
 --- !u!4 &1725618770
 Transform:
@@ -1258,6 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
+  focusNode: {fileID: 0}
   factory: {fileID: 1799884474}
   COR: {fileID: 240012957}
 --- !u!1 &1930399473
@@ -1380,6 +1421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
+  focusNode: {fileID: 0}
   factory: {fileID: 890276988}
   COR: {fileID: 240012957}
 --- !u!1 &1948414426
