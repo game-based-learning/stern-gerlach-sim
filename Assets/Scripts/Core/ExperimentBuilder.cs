@@ -8,6 +8,9 @@ namespace SternGerlach.Assets.Scripts.Core
         private Source source = null;
         private string id = "DEFAULT_EXPERIMENT_NAME";
 
+        // INSTRUCTION SETTINGS
+        private float sizemodifier = 0f, xposmodifier = 0f, yposmodifier = 0f;
+
         // MCQ (A: <Message>)
         private MCQuestion mcq = new MCQuestion();
         private string questionText = "DEFAULT_QUESTION_TEXT";
@@ -29,6 +32,9 @@ namespace SternGerlach.Assets.Scripts.Core
             exp.predictionMessage = predictionMessage;
             exp.minParticles = minParticles;
             exp.moveForwardToMCQMessage = moveForwardToMCQMessage;
+            exp.sizeModifier = sizemodifier;
+            exp.xPosModifier = xposmodifier;
+            exp.yPosModifier= yposmodifier;
             return exp;
         }
         public void SetQuestionText(string question) {
@@ -56,6 +62,21 @@ namespace SternGerlach.Assets.Scripts.Core
         public void SetMinParticles(int minParticles)
         {
             this.minParticles = minParticles;
+        }
+        //  sizemodifier="0" xposmodifier ="0" yposmodifier="0"
+        public void SetInstructionModifier(string type, float modification) { 
+            switch (type)
+            {
+                case "sizemodifier":
+                    this.sizemodifier = modification;
+                    break;
+                case "xposmodifier":
+                    this.xposmodifier = modification;
+                    break;
+                case "yposmodifier":
+                    this.yposmodifier = modification;
+                    break;
+            }
         }
     }
 }

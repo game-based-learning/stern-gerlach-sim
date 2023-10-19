@@ -36,6 +36,7 @@ namespace SternGerlach
             ParsePrediction(xmlDocument);
             ParseExecution(xmlDocument);
             ParseMCQ(xmlDocument);
+            ParseInstructionSettings(xmlDocument);
             //Parse settings for ortho camera instructions
             //Parse next experiment file name
 
@@ -120,6 +121,20 @@ namespace SternGerlach
                 string pickedMessage = mcAnswer.FirstChild.InnerText;
                 experimentBuilder.AddMCAnswer(label, mcAnswerText, pickedMessage, mcAnswerCorrect);
             }
+        }
+        void ParseInstructionSettings(XmlDocument xmlDocument) {
+            XmlNodeList nodeList = xmlDocument.SelectNodes("//experiment/instructioncamerasettings");
+
+            XmlNode execution = nodeList[0];
+
+            if (execution == null)
+            {
+                DisplayBadlyFormattedMessage();
+            }
+
+            this.experimentBuilder.SetInstructionModifier("sizemodifier", float.Parse(execution.Attributes["sizemodifier"]?.Value));
+            this.experimentBuilder.SetInstructionModifier("xposmodifier", float.Parse(execution.Attributes["xposmodifier"]?.Value));
+            this.experimentBuilder.SetInstructionModifier("yposmodifier", float.Parse(execution.Attributes["yposmodifier"]?.Value));
         }
         // Parse a nodebuilder node
         void ParseNBNode(XmlNode node)

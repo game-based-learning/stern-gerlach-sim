@@ -15,6 +15,8 @@ namespace SternGerlach.Assets.Scripts.Core
         // EXECUTION
         public int minParticles = 10;
         public string moveForwardToMCQMessage;
+        // CAMERA SETTINGS
+        public float sizeModifier = 0f, yPosModifier = 0f, xPosModifier = 0f;
         void Awake() {
             DontDestroyOnLoad(this);
         }
@@ -29,6 +31,7 @@ namespace SternGerlach.Assets.Scripts.Core
             debugString += "PredictionMessage: " + predictionMessage;
             debugString += "\nMin Particles: " + minParticles;
             debugString += "\nMove Forward Message: " + moveForwardToMCQMessage;
+            debugString += "\nInstruction settings:";
             return debugString;
         }
         private string NodeToString(Node node) { 
