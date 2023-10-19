@@ -1,3 +1,4 @@
+using SternGerlach.Assets.Scripts.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,16 @@ namespace SternGerlach
 {
     public class GuidedComponent : MonoBehaviour
     {
-        void Start()
+        private Experiment exp;
+        [SerializeField] XMLDeserializer xml;
+        [SerializeField] Source nbSource;
+        private Source instSource;
+        private void Update()
         {
-            //Scene s = SceneManager.GetActiveScene();
-            //SceneManager.LoadScene("LegoInstructions", LoadSceneMode.Additive);
-            //SceneManager.SetActiveScene(SceneManager.GetSceneByName("LegoInstructions"));
+            //exp = xml.currExp;
+            //instSource = exp.source;
+            //Debug.Log(instSource.Equals(nbSource));
+            
         }
     }
 }

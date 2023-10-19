@@ -17,28 +17,26 @@
 	
 	<!-- text for prediction prompt -->
 	<prediction>What do you think will happen?</prediction>
-	<!-- trigger can be Voluntary or Involuntary. Involuntary will move forward immediately -->
-	<execution type="Min_Particles" trigger="Voluntary">
-		<moveforwardprompt>Continue to MC Question</moveforwardprompt>
-		<minparticlecount>15</minparticlecount>
-	</execution>
-	<mcq prompt="What happened there?" answers="4" correctanswer="A">
-		<answer text="Correct answer text goes here">
+	
+	<execution moveforwardprompt="Continue to MC Question" minparticlecount="15"></execution>
+	
+	<mcq prompt="What happened there?" answers="4">
+		<answer label="A" text="Correct answer text goes here" correct="true">
 			<pickedmessage>
 			Very good, that is correct! You are correct because (explanation reinforcing the choice)
 			</pickedmessage>
 		</answer>
-		<answer text="Incorrect answer text goes here">
+		<answer label="B" text="Incorrect answer text goes here" correct="false">
 			<pickedmessage>
 			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
 			</pickedmessage>
 		</answer>
-		<answer text="More incorrect answer text goes here">
+		<answer label="C" text="More incorrect answer text goes here" correct="false">
 			<pickedmessage>
 			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
 			</pickedmessage>
 		</answer>
-		<answer text="And another incorrect answer text goes here">
+		<answer label="D" text="And another incorrect answer text goes here" correct="false">
 			<pickedmessage>
 			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
 			</pickedmessage>

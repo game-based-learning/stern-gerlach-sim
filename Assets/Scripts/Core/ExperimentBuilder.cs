@@ -9,18 +9,15 @@ namespace SternGerlach.Assets.Scripts.Core
         private string id = "DEFAULT_EXPERIMENT_NAME";
 
         // MCQ (A: <Message>)
-        private string moveForwardToMCQMessage = "DEFAULT_GO_TO_MCQ_MESSAGE";
         private MCQuestion mcq = new MCQuestion();
         private string questionText = "DEFAULT_QUESTION_TEXT";
-        private bool voluntary = true;
 
         // PREDICTION
         private string predictionMessage = "DEFAULT_PREDICTION_MESSAGE";
 
         // EXECUTION
-        public enum ExecutionType { MinParticles } // Add more types of execution types
-        private Experiment.ExecutionType executionType = Experiment.ExecutionType.MinParticles;
         private int minParticles = 10;
+        private string moveForwardToMCQMessage = "DEFAULT_GO_TO_MCQ_MESSAGE";
         public ExperimentBuilder() {  }
         public Experiment Build() {
             GameObject parent = new GameObject(id);
@@ -30,9 +27,7 @@ namespace SternGerlach.Assets.Scripts.Core
             exp.source = source;
             exp.mcq = mcq;
             exp.predictionMessage = predictionMessage;
-            exp.executionType = executionType;
             exp.minParticles = minParticles;
-            exp.voluntary = voluntary;
             exp.moveForwardToMCQMessage = moveForwardToMCQMessage;
             return exp;
         }
@@ -42,9 +37,6 @@ namespace SternGerlach.Assets.Scripts.Core
         public void AddMCAnswer(char label, string answer, string pickedMessage, bool correctAnswer)
         {
             mcq.AddAnswer(label, answer, pickedMessage, correctAnswer);
-        }
-        public void SetVoluntaryMCQ(bool voluntary) {
-            this.voluntary = voluntary;
         }
         public void SetMoveForwardToMCQMessage(string message) {
             this.moveForwardToMCQMessage = message;
@@ -57,13 +49,9 @@ namespace SternGerlach.Assets.Scripts.Core
         {
             this.id = id;
         }
-        public void AddPredictionMessage(string message)
+        public void SetPredictionMessage(string message)
         {
             this.predictionMessage = message;
-        }
-        public void SetExecution(Experiment.ExecutionType type)
-        {
-            this.executionType = type;
         }
         public void SetMinParticles(int minParticles)
         {

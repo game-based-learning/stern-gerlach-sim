@@ -26,6 +26,9 @@ namespace SternGerlach
             if(firstMagnet != null) {
                 nodes[0] = firstMagnet;
             }
+            if (magnetSprite == null && questionSprite == null) {
+                return;
+            }
             magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
             questionSprite.SetActive(type == SourceType.SilverAtom);
         }

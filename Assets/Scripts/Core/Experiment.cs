@@ -9,15 +9,12 @@ namespace SternGerlach.Assets.Scripts.Core
         public string id;
         // MCQ
         public MCQuestion mcq;
-        public string moveForwardToMCQMessage;
         public char correctMCAnswer;
         // PREDICTION
         public string predictionMessage;
         // EXECUTION
-        public enum ExecutionType { MinParticles } // Add more types of execution types
-        public ExecutionType executionType = ExecutionType.MinParticles;
         public int minParticles = 10;
-        public bool voluntary;
+        public string moveForwardToMCQMessage;
         void Awake() {
             DontDestroyOnLoad(this);
         }
@@ -27,8 +24,9 @@ namespace SternGerlach.Assets.Scripts.Core
             debugString += "\nExperiment ID:" + id + "\n";
             debugString += mcq.question + "\n";
             foreach ((char, string) answer in mcq.GetAnswerChoices()) {
-                debugString += answer.Item1 + ": " + answer.Item2 + "\n";
+                debugString += answer.Item1 + ": " + answer.Item2 + " " + mcq.IsCorrect(answer.Item1) + "\n";
             }
+            debugString += "PredictionMessage: " + predictionMessage;
             return debugString;
         }
         private string NodeToString(Node node) { 
