@@ -90,7 +90,17 @@ namespace SternGerlach
             this.experimentBuilder.SetPredictionMessage(predictionMessage);
         }
         void ParseExecution(XmlDocument xmlDocument) {
+            XmlNodeList nodeList = xmlDocument.SelectNodes("//experiment/execution");
 
+            XmlNode execution = nodeList[0];
+
+            if (execution == null)
+            {
+                DisplayBadlyFormattedMessage();
+            }
+
+            this.experimentBuilder.SetMinParticles(Int32.Parse(execution.Attributes["minparticlecount"]?.Value));
+            this.experimentBuilder.SetMoveForwardToMCQMessage(execution.Attributes["moveforwardprompt"]?.Value);
         }
         void ParseMCQ(XmlDocument xmlDocument)
         {

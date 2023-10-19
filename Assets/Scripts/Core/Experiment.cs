@@ -27,6 +27,8 @@ namespace SternGerlach.Assets.Scripts.Core
                 debugString += answer.Item1 + ": " + answer.Item2 + " " + mcq.IsCorrect(answer.Item1) + "\n";
             }
             debugString += "PredictionMessage: " + predictionMessage;
+            debugString += "\nMin Particles: " + minParticles;
+            debugString += "\nMove Forward Message: " + moveForwardToMCQMessage;
             return debugString;
         }
         private string NodeToString(Node node) { 
