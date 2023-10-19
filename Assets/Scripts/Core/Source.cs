@@ -6,7 +6,7 @@ namespace SternGerlach
 {
     public class Source : Node
     {
-        [SerializeField] Node firstMagnet;
+        [SerializeField] public Node firstMagnet;
         [SerializeField] GameObject entrance;
         [SerializeField] GameObject exit;
         [SerializeField] GameObject magnetSprite, questionSprite;
@@ -26,6 +26,15 @@ namespace SternGerlach
             if(firstMagnet != null) {
                 nodes[0] = firstMagnet;
             }
+            if (magnetSprite == null && questionSprite == null) {
+                return;
+            }
+            magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
+            questionSprite.SetActive(type == SourceType.SilverAtom);
+        }
+        void SetSourceType(SourceType type)
+        {
+            this.type = type;
             magnetSprite.SetActive(type == SourceType.MacroscopicMagnet);
             questionSprite.SetActive(type == SourceType.SilverAtom);
         }

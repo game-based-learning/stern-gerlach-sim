@@ -15,7 +15,7 @@ public class SGMagnet : Node
     public override Vector3 GetStartLocation { get => entrance.transform.position; set => entranceLoc = value; }
     public override Vector3 GetEndLocation { get => exit.transform.position; set => exitLoc = value; }
     public SGMagnet() { }
-    void Start() {
+    void Awake() {
         if (childs == null)
         {
             childs = new Dictionary<int,Node>();

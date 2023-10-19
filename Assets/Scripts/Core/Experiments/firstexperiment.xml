@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- general format for each experiment:
+     form setup -> prediction -> execution -> mcq -> next experiment -->
+
+<experiment>
+	<!-- valid source names are "Silver_Atom" or "Macroscopic_Magnet" -->
+	<setup id="Preliminary Silver Atom Setup" source="Silver_Atom">
+		<!-- angle is local rotation -->
+		<node type="SG_Magnet" angle ="0">
+			<!-- lower child node -->
+			<node type="Image_Plate" angle="0"></node>
+			<!-- upper child node -->
+			<node type="Image_Plate" angle="0"></node>
+		</node>
+	</setup>
+
+	<!-- optional settings for dialing in the instruction orthographic camera -->
+	<!-- NOTE: the modifiers are added to the fields in the camera (not multiplied) -->
+	<!-- so if you set the size modifier of the camera to 5, the size of the camera will expand from 6 to 11 -->
+	<instructioncamerasettings sizemodifier="0" xposmodifier ="0" yposmodifier="0"></instructioncamerasettings>
+	
+	<!-- text for prediction prompt -->
+	<prediction>What do you think will happen?</prediction>
+	
+	<execution moveforwardprompt="Continue to MC Question" minparticlecount="15"></execution>
+	
+	<mcq prompt="What happened there?" answers="4">
+		<answer label="A" text="Correct answer text goes here" correct="true">
+			<pickedmessage>
+			Very good, that is correct! You are correct because (explanation reinforcing the choice)
+			</pickedmessage>
+		</answer>
+		<answer label="B" text="Incorrect answer text goes here" correct="false">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+		<answer label="C" text="More incorrect answer text goes here" correct="false">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+		<answer label="D" text="And another incorrect answer text goes here" correct="false">
+			<pickedmessage>
+			(Insert a hint for why this answer choice is incorrect and guide them to the right answer).
+			</pickedmessage>
+		</answer>
+	</mcq>
+	<nextexperimentfile>experiment2.xml</nextexperimentfile>
+</experiment>

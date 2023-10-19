@@ -9,7 +9,9 @@ public class GameObjectFactory : MonoBehaviour
     [SerializeField] GameObject particlePrefab;
     [SerializeField] GameObject sgMagnetPrefab, imagePlatePrefab, emptyNodePrefab;
     [SerializeField] GameObject debugBoxPrefab;
+    [SerializeField] GameObject macroSourcePrefab, silverAtomSourcePrefab;
     [SerializeField] Source source;
+    [SerializeField] bool instructionFactory;
     public bool SilverAtomMode() {
         return source.type == SourceType.SilverAtom;
     }
@@ -20,15 +22,45 @@ public class GameObjectFactory : MonoBehaviour
         return CanFireParticle(source.children[0]);
     }
     private bool CanFireParticle(Node node) {
-        if(node is ImagePlate) {
+        if (node is ImagePlate) {
             return true;
         }
-        if(node is SGMagnet) {
+        if (node is SGMagnet) {
             return CanFireParticle(node.children[0]) && CanFireParticle(node.children[1]);
         }
         else {
             return false;
         }
+    }
+    private void AddInstructionTagIfNecessary(GameObject gameObj) {
+        Debug.Log("Called1");
+        if (!instructionFactory) {
+            return;
+        }
+        Debug.Log("Called");
+        SetGameLayerRecursive(gameObj, LayerMask.NameToLayer("TopLayer"));
+    }
+    // from unity forums "ignacio-casal"
+    private void SetGameLayerRecursive(GameObject gameObject, int layer)
+    {
+        gameObject.layer = layer;
+        foreach (Transform child in gameObject.transform)
+        {
+            SetGameLayerRecursive(child.gameObject, layer);
+        }
+    }
+
+    public Source CreateSource(bool isMacro) {
+        GameObject source;
+        if (isMacro) {
+            source = GameObject.Instantiate(macroSourcePrefab, Vector3.zero + new Vector3(0, 5, 0), Quaternion.identity);
+        }
+        else {
+            source = GameObject.Instantiate(silverAtomSourcePrefab, Vector3.zero + new Vector3(0, 5, 0), Quaternion.identity);
+        }
+        this.source = source.GetComponent<Source>();
+        AddInstructionTagIfNecessary(source);
+        return this.source;
     }
     public void CreateParticle() {
         if (source.type == SourceType.MacroscopicMagnet) {
@@ -42,21 +74,18 @@ public class GameObjectFactory : MonoBehaviour
             Debug.Log("Invalid Source Type.");
         }
     }
-    public void CreateDebugBox(Vector3 position) {
-        GameObject.Instantiate(debugBoxPrefab, position, Quaternion.identity);
-    }
     private void CreateMacroscopicMagnet() {
-        if(CanFireParticle()) {
+        if (CanFireParticle()) {
             GameObject magnet = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             Agent agent = magnet.AddComponent<Agent>();
-            agent.Initialize(source,Agent.AgentType.MacroscopicMagnet);
+            agent.Initialize(source, Agent.AgentType.MacroscopicMagnet);
         }
         else {
             Debug.Log("Incomplete setup.");
         }
     }
     private void CreateSilverAtom() {
-        if(CanFireParticle()) {
+        if (CanFireParticle()) {
             GameObject atom = GameObject.Instantiate(particlePrefab, source.GetStartLocation, Quaternion.identity);
             atom.transform.parent = this.transform;
             Agent agent = atom.AddComponent<Agent>();
@@ -68,23 +97,28 @@ public class GameObjectFactory : MonoBehaviour
     }
     internal List<ImagePlate> CreateLargeImagePlate(Vector3 loc) {
         GameObject largeImagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);
+        AddInstructionTagIfNecessary(largeImagePlate);
         return largeImagePlate.GetComponentsInChildren<ImagePlate>().ToList();
 
     }
-    internal Source GetSource() { return source;  }
+    internal Source GetSource() { return source; }
     internal ImagePlate CreateImagePlate(Vector3 loc)
     {
         GameObject imagePlate = GameObject.Instantiate(imagePlatePrefab, loc, Quaternion.identity);
+        AddInstructionTagIfNecessary(imagePlate);
         return imagePlate.GetComponent<ImagePlate>();
     }
     internal SGMagnet CreateSGMagnet(Vector3 loc)
     {
-        GameObject imagePlate = GameObject.Instantiate(sgMagnetPrefab, loc, Quaternion.identity);
-        return imagePlate.GetComponent<SGMagnet>();
+        GameObject sgMagnet = GameObject.Instantiate(sgMagnetPrefab, loc, Quaternion.identity);
+        SGMagnet sg = sgMagnet.GetComponent<SGMagnet>();
+        AddInstructionTagIfNecessary(sgMagnet);
+        return sg;
     }
     internal EmptyNode CreateEmptyNode(Vector3 loc)
     {
         GameObject emptyNode = GameObject.Instantiate(emptyNodePrefab, loc, Quaternion.identity);
+        AddInstructionTagIfNecessary(emptyNode);
         return emptyNode.GetComponent<EmptyNode>();
     }
 }
