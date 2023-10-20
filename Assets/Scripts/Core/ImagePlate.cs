@@ -14,4 +14,9 @@ public class ImagePlate : Node
     public void ShowIndicator() {
         this.indicator.SetActive(true);
     }
+    void FixedUpdate()
+    {
+        textCount.transform.LookAt(Camera.main.transform);
+        textCount.transform.Rotate(0f, 180f, 0f);
+    }
 }

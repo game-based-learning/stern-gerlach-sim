@@ -13,6 +13,8 @@ namespace SternGerlach
         [SerializeField] private Pan panController;
         [SerializeField] private ObjectClicker clickController;
         [SerializeField] private SceneChanger sceneManager;
+        [SerializeField] private UIUpdater updater;
+        [SerializeField] private PredictionHandler predictionHandler;
         // Start is called before the first frame update
 
         private void Awake()
@@ -35,6 +37,10 @@ namespace SternGerlach
                 controlScheme.Game.LShift);
             sceneManager.Initialize(
                 controlScheme.UI.Space);
+            updater.Initialize(
+                controlScheme.UI.UIToggle);
+            predictionHandler.Initialize(
+                controlScheme.UI.MCQPrediction);
         }
     }
 }

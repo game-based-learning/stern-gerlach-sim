@@ -8,14 +8,15 @@ public class Agent : MonoBehaviour
     private Node currentNode, nextNode;
     private System.Random random;
     enum AgentState { WithinNode, BetweenNodes }
-    enum CollapseType { UpState, DownState }
+    public enum CollapseType { UpState, DownState }
     public enum AgentType { MacroscopicMagnet, SilverAtom }
     private bool enteredFirstMagnet = false;
     private AgentState agentState;
     private AgentType agentType;
-    private CollapseType lastCollapse;
-    private int angle;
+    public CollapseType lastCollapse { get; set; }
+    public int angle;
     private GameObject arrow, questionMark, upCaret, downCaret;
+
     public void Initialize(Node firstNode, AgentType type)  {
         this.agentState = AgentState.WithinNode;
         this.agentType = type;
@@ -38,6 +39,16 @@ public class Agent : MonoBehaviour
     }
     void Update()
     {
+        /*if (lastCollapse == CollapseType.UpState)
+        {
+            this.upCaret.transform.LookAt(Camera.main.transform);
+            this.upCaret.transform.Rotate(180f, 0f, 0f);
+        }
+        else
+        {
+            this.downCaret.transform.LookAt(Camera.main.transform);
+        }*/
+        //this.downCaret.transform.Rotate(0f, 180f, 0f);
         //Debug.Log(angle);
         if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
             // no updates if we are frozen
@@ -154,6 +165,7 @@ public class Agent : MonoBehaviour
     void ShowCaret() {
         if (lastCollapse == CollapseType.UpState)
         {
+            //Debug.Log("upstate");
             this.upCaret.SetActive(true);
         }
         else { 

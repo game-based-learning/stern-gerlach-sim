@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 884178034}
   - component: {fileID: 884178033}
   - component: {fileID: 884178032}
+  - component: {fileID: 884178035}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -333,6 +334,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &884178035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884178031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54c29fa6c08fb4fb0c6724be83d517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updater: {fileID: 884178033}
 --- !u!1 &892412071
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +589,8 @@ MonoBehaviour:
   panController: {fileID: 1385608425}
   clickController: {fileID: 1385608427}
   sceneManager: {fileID: 1248983888}
+  updater: {fileID: 884178033}
+  predictionHandler: {fileID: 884178035}
 --- !u!4 &1385608429
 Transform:
   m_ObjectHideFlags: 0

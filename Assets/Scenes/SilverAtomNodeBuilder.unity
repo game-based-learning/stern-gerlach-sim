@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 339597189}
   - component: {fileID: 339597188}
   - component: {fileID: 339597187}
+  - component: {fileID: 339597193}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -463,6 +464,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345286466}
   m_CullTransparentMesh: 1
+  m_GameObject: {fileID: 339597185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e54c29fa6c08fb4fb0c6724be83d517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updater: {fileID: 1725618769}
 --- !u!114 &396536982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2841926683538062787, guid: d9d6148caeb07df44a746007c7aa373b, type: 3}

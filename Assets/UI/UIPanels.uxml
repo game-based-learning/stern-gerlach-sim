@@ -1,40 +1,49 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" style="width: 100%; height: 100%; flex-direction: row;">
-        <ui:VisualElement style="width: 80%; height: 100%;">
-            <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: -35%; background-color: rgba(0, 0, 0, 0.51);">
+            <ui:VisualElement style="width: 20%;" />
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 20px; align-items: stretch; justify-content: space-around; flex-direction: column;" />
+                <ui:TextField picking-mode="Ignore" label="What do you think will happen next?" value="I think that..." text="I think that..." max-length="-1" tabindex="0" style="font-size: 20px; color: rgb(255, 255, 255); -unity-text-align: upper-left; -unity-font-style: bold; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; flex-direction: column;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Button text="Button" display-tooltip-when-elided="true" name="ClickOff" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; right: 0; bottom: 0; align-items: flex-start; flex-basis: auto; opacity: 0.19; visibility: hidden;" />
+        <ui:VisualElement name="popups" picking-mode="Ignore" style="width: 80%; height: 100%; visibility: visible; display: flex;">
+            <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: absolute;">
                 <ui:Button text="SG Magnet" display-tooltip-when-elided="true" name="sgmagnet-button" style="height: 50%;" />
                 <ui:Button text="Image Plate" display-tooltip-when-elided="true" name="imageplate-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="close-button" style="height: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="RotationContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+            <ui:VisualElement name="RotationContainer" style="width: 105px; height: 74px; visibility: hidden; position: absolute;">
                 <ui:Button text="Rotate Left" display-tooltip-when-elided="true" name="rotate-left" style="height: 50%;" />
                 <ui:Button text="Rotate Right" display-tooltip-when-elided="true" name="rotate-right" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="rclose-button" style="height: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: relative;">
+            <ui:VisualElement name="DeleteContainer" style="width: 105px; height: 74px; visibility: hidden; position: absolute; display: none;">
                 <ui:Button text="Delete" display-tooltip-when-elided="true" name="delete-button" style="height: 50%;" />
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
+        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none; align-items: center; justify-content: flex-start;">
             <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">
                 <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Stats" style="width: 100%; height: 33%;">
+            <ui:VisualElement name="Stats" style="width: 100%; height: auto; margin-top: 20px; margin-bottom: 20px;">
                 <ui:Label text="STATS" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="1" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; align-items: center; justify-content: space-between; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="2" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="3" style="color: rgb(255, 255, 255); -unity-text-align: upper-left; justify-content: space-between; align-items: center; font-size: 15px;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Checklist" style="width: 100%; height: 33%;">
-                <ui:Toggle label="Toggle" focusable="false" style="color: rgb(255, 255, 255); flex-direction: row-reverse;" />
-                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
-                <ui:Toggle label="Toggle" focusable="false" style="flex-direction: row-reverse; color: rgb(255, 255, 255);" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Notes" style="height: 33%;">
-                <ui:Label text="NOTES" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; -unity-font-style: bold; font-size: 20px;" />
-                <ui:TextField picking-mode="Ignore" value="filler text" text="filler text" style="flex-direction: column; white-space: normal;" />
-            </ui:VisualElement>
+            <ui:Button text="DELETE" display-tooltip-when-elided="true" name="delete-button-new" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; background-color: rgb(224, 0, 0); color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 27px;" />
+            <ui:Button display-tooltip-when-elided="true" name="pause-play" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 150px; height: 150px; background-color: rgba(207, 207, 207, 0); background-image: resource(&apos;pausebutton&apos;);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="side-2" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
+            <ui:Label text="Click something to bring to focus!" display-tooltip-when-elided="true" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Warning" style="position: absolute; left: 30%; top: 10%; width: 40%; height: 40%; align-items: center; justify-content: center; background-color: rgba(250, 8, 8, 0.41); opacity: 1; visibility: hidden;">
+            <ui:Label text="WARNING" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 40px;" />
+            <ui:Label text="Making a change to the simulation will reset all image plate hits" display-tooltip-when-elided="true" style="font-size: 20px; flex-wrap: wrap; width: 70%; white-space: normal;" />
+            <ui:Button text="Close" display-tooltip-when-elided="true" name="closewarning" style="height: 33px; width: 74px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
