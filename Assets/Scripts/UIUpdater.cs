@@ -132,6 +132,7 @@ namespace SternGerlach
 
         void Update()
         {
+            Modify();
             if (ubutton.WasPressedThisFrame())
             {
                 if (showUI)
@@ -144,7 +145,7 @@ namespace SternGerlach
                     showUI = true;
                 }
             }
-            Modify();
+            
         }
         private void PausePlayButtonPressed()
         {
@@ -355,6 +356,7 @@ namespace SternGerlach
 
         public float PredictionToggle(float pos)
         {
+            Debug.Log("prediction toggling");
             var predictionbox = root.Q<VisualElement>("predictionpopup");
             predictionbox.style.bottom = new StyleLength(new Length(pos, LengthUnit.Percent));
             if (pos < 0) {
