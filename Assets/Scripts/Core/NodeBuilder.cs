@@ -104,6 +104,7 @@ namespace SternGerlach
             selectedNode = newNode;
             Debug.Log(selectedNode);
             this.COR.transform.position = FindCenterOfRotation();
+            this.selectedNode = newNode;
         }
         void PlaceLargePlateNodes(List<ImagePlate> nodes)
         {
@@ -136,6 +137,9 @@ namespace SternGerlach
                 return false; 
             }
             return NodeSelected() && selectedNode.gameObject.name != "FirstMagnet";
+        }
+        public void SelectNode(Node node) {
+            this.selectedNode = node;
         }
         internal void SelectNode(Ray ray)
         {
@@ -177,6 +181,16 @@ namespace SternGerlach
                 Destroy(selectedNode.gameObject);
             }
             this.COR.transform.position = FindCenterOfRotation();
+        }
+        // Only used for loading from file. Use RotateLeft and RotateRight for normal rotation!
+        internal void Rotate(int rot) {
+            if (!ShouldRotate()) { return; }
+            if (rot % 15 != 0) {
+                Debug.Log("Error: You cannot use angles that are not divisible by 15 in your XML file.");
+                return;
+            }
+            selectedNode.transform.Rotate(new Vector3(rot, 0, 0), Space.Self);
+            selectedNode.AdjustRotation(rot);
         }
         internal void RotateLeft()
         {
