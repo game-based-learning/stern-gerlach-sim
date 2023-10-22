@@ -170,6 +170,7 @@ MonoBehaviour:
   factory: {fileID: 890276988}
   builder: {fileID: 1936144057}
   mainCamera: {fileID: 1948414428}
+  guidedComponent: {fileID: 0}
 --- !u!1 &240012957
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   macroSourcePrefab: {fileID: 1468160075247004027, guid: d9d6148caeb07df44a746007c7aa373b, type: 3}
   silverAtomSourcePrefab: {fileID: 1468160075247004027, guid: d8d842cba3fef584393497c57c41b9e4, type: 3}
   source: {fileID: 396536982}
+  instructionFactory: 0
 --- !u!4 &890276989
 Transform:
   m_ObjectHideFlags: 0
@@ -293,9 +295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6f72e32c1f384488ed2dd6fe715b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstXmlFile: {fileID: 4900000, guid: ad87a2eb13b22fb48b4604f02b8b6430, type: 3}
+  xmlFiles: []
   factory: {fileID: 890276988}
   nodeBuilder: {fileID: 1936144057}
+  guidedComponent: {fileID: 0}
+  currExp: {fileID: 0}
 --- !u!4 &1103304289
 Transform:
   m_ObjectHideFlags: 0
@@ -652,6 +656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
+  focusNode: {fileID: 0}
   factory: {fileID: 890276988}
   COR: {fileID: 240012957}
 --- !u!1 &1948414426

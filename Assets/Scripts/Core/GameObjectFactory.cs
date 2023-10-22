@@ -19,7 +19,9 @@ public class GameObjectFactory : MonoBehaviour
         return this.transform.childCount == 0;
     }
     private bool CanFireParticle() {
-        return CanFireParticle(source.children[0]);
+        bool b = CanFireParticle(source.children[0]);
+        Debug.Log(b);
+        return b;
     }
     private bool CanFireParticle(Node node) {
         if (node is ImagePlate) {

@@ -185,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &213028232
 Transform:
   m_ObjectHideFlags: 0
@@ -809,6 +809,7 @@ MonoBehaviour:
   factory: {fileID: 1799884474}
   nodeBuilder: {fileID: 1799884475}
   guidedComponent: {fileID: 1799884472}
+  currExp: {fileID: 0}
 --- !u!4 &1103304289
 Transform:
   m_ObjectHideFlags: 0
@@ -1357,8 +1358,8 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -0.25
-    y: 0.6
+    x: 0
+    y: 0.5
     width: 0.5
     height: 0.5
   near clip plane: 0.3

@@ -8,7 +8,7 @@ using UnityEngine.Windows;
 
 namespace SternGerlach
 {
-    internal class GuidedComponent : MonoBehaviour
+    public class GuidedComponent : MonoBehaviour
     {
         private Experiment exp;
         [SerializeField] public XMLDeserializer xml;
@@ -16,19 +16,13 @@ namespace SternGerlach
         [SerializeField] Camera instructionCamera;
         private Source instSource;
         // initial camera settings
-        private float initX, initY, initSize, width, height;
-        public void Start()
-        {
-            this.initSize = instructionCamera.orthographicSize;
-            this.initX = instructionCamera.rect.x;
-            this.initY = instructionCamera.rect.y;
-            this.width = instructionCamera.rect.width;
-            this.height = instructionCamera.rect.height;
-        }
+        //private float initX = instructionCamera.rect.x, initY = instructionCamera.rect.y, initSize = instructionCamera.orthographicSize;
+        //private float width = instructionCamera.rect.width, height = instructionCamera.rect.height;
+
         public void SetCameraSettings(float sizeModifier, float xModifier, float yModifier)
         {
-            instructionCamera.orthographicSize = sizeModifier + initSize;
-            instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
+            //instructionCamera.orthographicSize = sizeModifier + initSize;
+            //instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
         }
         public void TryEqual()
         {
@@ -47,7 +41,7 @@ namespace SternGerlach
             instSource = exp.source;
             //Debug.Log(instSource);
             //Debug.Log(nbSource);
-            Debug.Log("complete?: "+ instSource.Equals(nbSource));
+            //Debug.Log("complete?: "+ instSource.Equals(nbSource));
         }
     }
 }

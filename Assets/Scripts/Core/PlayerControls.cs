@@ -42,6 +42,7 @@ public class PlayerControls : MonoBehaviour
         }
         if (createParticle.IsPressed())
         {
+            Debug.Log("Try fire");
             if (cooldown <= 0f) {
                 if (GameManager.Instance.GetGameState() == GameManager.GameState.FROZEN) {
                     GameManager.Instance.ToggleFreeze();
