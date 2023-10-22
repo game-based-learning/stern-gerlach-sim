@@ -68,7 +68,10 @@ namespace SternGerlach
             string type = source.Attributes["source"]?.Value;
 
             Source src = factory.CreateSource(type == "Macroscopic_Magnet");
-            this.experimentBuilder.SetSource(src);
+            if (src == null) {
+                Debug.Log("blow up");
+            }
+            experimentBuilder.SetSource(src);
 
             if (source.ChildNodes.Count == 0)
             {

@@ -5,7 +5,7 @@ namespace SternGerlach.Assets.Scripts.Core
     internal class ExperimentBuilder
     {
         // SETUP INFO
-        private Source source = null;
+        private Source source;
         private string id = "DEFAULT_EXPERIMENT_NAME";
 
         // INSTRUCTION SETTINGS
