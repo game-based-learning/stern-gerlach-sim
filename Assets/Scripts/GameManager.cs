@@ -7,7 +7,7 @@ namespace SternGerlach
 {
     public class GameManager : MonoBehaviour
     {
-
+        [SerializeField] public Material correct, wrongAngle, wrongNode;
         // add more states
         public enum GameState { DEFAULT, FROZEN }
         private GameState state = GameState.DEFAULT;

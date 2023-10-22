@@ -1,3 +1,4 @@
+using SternGerlach;
 using System.Collections.Generic;
 using UnityEngine;
 using static Unity.VisualScripting.Metadata;
@@ -5,7 +6,7 @@ using static Unity.VisualScripting.Metadata;
 public abstract class Node : MonoBehaviour
 {
     // objects where we change the material (only for instructions)
-    [SerializeField] List<GameObject> instructionObjects;
+    [SerializeField] public List<GameObject> instructionObjects;
     public int rotation = 0;
     public abstract Dictionary<int, Node> children { get; set; }
     public abstract Vector3 GetStartLocation { get; set; }
@@ -34,17 +35,31 @@ public abstract class Node : MonoBehaviour
             child.Value.AdjustRotation(degrees);
         }
     }
+    public void UpdateInstructionColoring(Node instructionSource)
+    {
+        if (this.Equals(instructionSource)) {
+            ApplyMaterialToTree(instructionSource, GameManager.Instance.correct);
+        }
+    }
+    void ApplyMaterialToTree(Node node, Material mat) {
+        // apply material to node
+        foreach(GameObject gameObj in node.instructionObjects) {
+            gameObj.GetComponent<Renderer>().material = mat;
+        }
+        if (node.children == null || node.children.Count == 0) {
+            return;
+        }
+        for (int i = 0; i < node.children.Count; i++) {
+            node.ApplyMaterialToTree(node.children[i], mat);
+        }
+    }
     public override bool Equals(object other)
     {
-        Debug.Log(this);
-        Debug.Log(other);
         if (other == null || GetType() != other.GetType()) { 
-            Debug.Log("i:" + GetType() + " nb:" + other.GetType());
             return false; 
         }
         Node otherNode = (Node) other;
         if (GetRotation() != otherNode.GetRotation()) {
-            Debug.Log("i:" + GetRotation() + " nb:" + otherNode.GetRotation());
             return false;
         }
         if (!ChildrenEqual(otherNode)) {

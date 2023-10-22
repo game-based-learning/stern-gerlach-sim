@@ -12,10 +12,16 @@ public class ImagePlate : Node
     public int collapseCount = 0; //added code
     [SerializeField] public TextMeshPro textCount; //added code
     public void ShowIndicator() {
+        if (this.indicator == null) {
+            return;
+        }
         this.indicator.SetActive(true);
     }
     void FixedUpdate()
     {
+        if (textCount == null) {
+            return;
+        }
         textCount.transform.LookAt(Camera.main.transform);
         textCount.transform.Rotate(0f, 180f, 0f);
     }

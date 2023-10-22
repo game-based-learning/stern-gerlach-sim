@@ -331,6 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dc2c3d51e2c8543974dcba7a81ff37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  correct: {fileID: 2100000, guid: 9d97c4c78219cbf4f8317e09017342ef, type: 2}
+  wrongAngle: {fileID: 2100000, guid: a32fab377201bba44beed0d96f633d59, type: 2}
+  wrongNode: {fileID: 2100000, guid: fe83ae9c04dffed418327135748dca9c, type: 2}
 --- !u!4 &428138421
 Transform:
   m_ObjectHideFlags: 0
@@ -472,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedNode: {fileID: 0}
+  focusNode: {fileID: 0}
   factory: {fileID: 0}
   COR: {fileID: 0}
 --- !u!4 &959783451
@@ -539,6 +543,7 @@ MonoBehaviour:
   ui: {fileID: 1937926624}
   builder: {fileID: 959783450}
   scenechanger: {fileID: 2103851968}
+  thisIsFirstEdit: 1
   state: 0
 --- !u!4 &1937926626
 Transform:
