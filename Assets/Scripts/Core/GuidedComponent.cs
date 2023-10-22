@@ -13,7 +13,23 @@ namespace SternGerlach
         private Experiment exp;
         [SerializeField] XMLDeserializer xml;
         [SerializeField] Source nbSource;
+        [SerializeField] Camera instructionCamera;
         private Source instSource;
+        // initial camera settings
+        private float initX, initY, initSize, width, height;
+        public void Start()
+        {
+            this.initSize = instructionCamera.orthographicSize;
+            this.initX = instructionCamera.rect.x;
+            this.initY = instructionCamera.rect.y;
+            this.width = instructionCamera.rect.width;
+            this.height = instructionCamera.rect.height;
+        }
+        public void SetCameraSettings(float sizeModifier, float xModifier, float yModifier)
+        {
+            instructionCamera.orthographicSize = sizeModifier + initSize;
+            instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
+        }
         public void TryEqual()
         {
             this.exp = xml.currExp;

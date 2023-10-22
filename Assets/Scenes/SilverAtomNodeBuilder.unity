@@ -756,9 +756,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc6f72e32c1f384488ed2dd6fe715b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstXmlFile: {fileID: 4900000, guid: ad87a2eb13b22fb48b4604f02b8b6430, type: 3}
+  xmlFiles:
+  - {fileID: 4900000, guid: ad87a2eb13b22fb48b4604f02b8b6430, type: 3}
   factory: {fileID: 1799884474}
   nodeBuilder: {fileID: 1799884475}
+  guidedComponent: {fileID: 1799884472}
 --- !u!4 &1103304289
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xml: {fileID: 1103304288}
   nbSource: {fileID: 396536982}
+  instructionCamera: {fileID: 1930399475}
 --- !u!4 &1799884473
 Transform:
   m_ObjectHideFlags: 0
@@ -1264,7 +1267,7 @@ GameObject:
   - component: {fileID: 1930399474}
   - component: {fileID: 1930399475}
   m_Layer: 0
-  m_Name: Camera (1)
+  m_Name: Orthographic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

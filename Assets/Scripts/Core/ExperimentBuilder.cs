@@ -4,6 +4,7 @@ namespace SternGerlach.Assets.Scripts.Core
 {
     internal class ExperimentBuilder
     {
+        private GuidedComponent guidedComponent;
         // SETUP INFO
         private Source source;
         private string id = "DEFAULT_EXPERIMENT_NAME";
@@ -32,10 +33,14 @@ namespace SternGerlach.Assets.Scripts.Core
             exp.predictionMessage = predictionMessage;
             exp.minParticles = minParticles;
             exp.moveForwardToMCQMessage = moveForwardToMCQMessage;
+            exp.guidedComponent = guidedComponent;
             exp.sizeModifier = sizemodifier;
             exp.xPosModifier = xposmodifier;
             exp.yPosModifier= yposmodifier;
             return exp;
+        }
+        public void SetGuidedComponent(GuidedComponent guidedComponent) {
+            this.guidedComponent = guidedComponent;
         }
         public void SetQuestionText(string question) {
             this.questionText = question;
