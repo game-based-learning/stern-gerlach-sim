@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1801739067224802127}
   - component: {fileID: 7013304412931110521}
   - component: {fileID: 820118119894410637}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5749256785609623162}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Caret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 255074853457416875}
   - component: {fileID: 1170065571823984342}
   - component: {fileID: 7352793273923025766}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
