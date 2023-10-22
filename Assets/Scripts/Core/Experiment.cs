@@ -2,7 +2,7 @@
 
 namespace SternGerlach.Assets.Scripts.Core
 {
-    internal class Experiment : MonoBehaviour
+    public class Experiment : MonoBehaviour
     {
         public GuidedComponent guidedComponent;
         // SETUP INFO

@@ -18,8 +18,8 @@ namespace SternGerlach
         string sourceFilePath = "/Scripts/Core/Experiments/";
         private ExperimentBuilder experimentBuilder;
         private TextAsset currFile;
-        internal Experiment currExp;
-        void Start()
+        public Experiment currExp;
+        void Awake()
         {
             currExp = ParseExperiment(xmlFiles[0]);
         }
@@ -44,7 +44,7 @@ namespace SternGerlach
             //Parse next experiment file name
 
             Experiment experiment = this.experimentBuilder.Build();
-            Debug.Log(experiment.ToString());
+            //Debug.Log(experiment.ToString());
             return experiment;
         }
         void ParseSetup(XmlDocument xmlDocument) {

@@ -11,7 +11,7 @@ namespace SternGerlach
     internal class GuidedComponent : MonoBehaviour
     {
         private Experiment exp;
-        [SerializeField] XMLDeserializer xml;
+        [SerializeField] public XMLDeserializer xml;
         [SerializeField] Source nbSource;
         [SerializeField] Camera instructionCamera;
         private Source instSource;
@@ -42,6 +42,12 @@ namespace SternGerlach
             instSource = exp.source;
             Debug.Log("Node builder tree:\n" + nbSource.ToString());
             Debug.Log("Instruction tree:\n" + instSource.ToString());
+            //Debug.Log("gc update");
+            exp = xml.currExp;
+            instSource = exp.source;
+            //Debug.Log(instSource);
+            //Debug.Log(nbSource);
+            Debug.Log("complete?: "+ instSource.Equals(nbSource));
         }
     }
 }

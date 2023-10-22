@@ -51,10 +51,10 @@ public class GameObjectFactory : MonoBehaviour
     public Source CreateSource(bool isMacro) {
         GameObject source;
         if (isMacro) {
-            source = GameObject.Instantiate(macroSourcePrefab, Vector3.zero + new Vector3(0, 5, 0), Quaternion.identity);
+            source = GameObject.Instantiate(macroSourcePrefab, Vector3.zero + new Vector3(0, 25, 0), Quaternion.identity);
         }
         else {
-            source = GameObject.Instantiate(silverAtomSourcePrefab, Vector3.zero + new Vector3(0, 5, 0), Quaternion.identity);
+            source = GameObject.Instantiate(silverAtomSourcePrefab, Vector3.zero + new Vector3(0, 25, 0), Quaternion.identity);
         }
         this.source = source.GetComponent<Source>();
         AddInstructionTagIfNecessary(source);
