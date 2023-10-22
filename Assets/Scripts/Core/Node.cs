@@ -36,11 +36,15 @@ public abstract class Node : MonoBehaviour
     }
     public override bool Equals(object other)
     {
+        Debug.Log(this);
+        Debug.Log(other);
         if (other == null || GetType() != other.GetType()) { 
+            Debug.Log("i:" + GetType() + " nb:" + other.GetType());
             return false; 
         }
         Node otherNode = (Node) other;
         if (GetRotation() != otherNode.GetRotation()) {
+            Debug.Log("i:" + GetRotation() + " nb:" + otherNode.GetRotation());
             return false;
         }
         if (!ChildrenEqual(otherNode)) {
@@ -73,6 +77,8 @@ public abstract class Node : MonoBehaviour
 
             if (!kvp.Value.Equals(otherChild))
             {
+                Debug.Log("i:" + kvp.Value);
+                Debug.Log("nb:" + otherChild);
                 return false; // Child nodes are not equal, not equal.
             }
         }

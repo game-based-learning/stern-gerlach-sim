@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SternGerlach.Assets.Scripts.Core
 {
-    internal class MCQuestion
+    public class MCQuestion
     {
         // Kind of messy to have a nested tuple but this could be refactored
         private Dictionary<char, ((string, bool), string)> mcq = new Dictionary<char, ((string, bool),string)>();

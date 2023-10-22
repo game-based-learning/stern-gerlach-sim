@@ -54,7 +54,7 @@ namespace SternGerlach
                     }
                     if (hit.transform.TryGetComponent<Node>(out UIManager.builder.selectedNode))
                     {
-                        Debug.Log("Selected: " + hit.transform.gameObject.name);
+                        //Debug.Log("Selected: " + hit.transform.gameObject.name);
                     } else
                     {
                         UIManager.builder.selectedNode = null;

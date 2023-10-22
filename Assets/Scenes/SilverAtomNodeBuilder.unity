@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updater: {fileID: 1725618769}
+  gc: {fileID: 1799884472}
 --- !u!4 &207591280
 Transform:
   m_ObjectHideFlags: 0

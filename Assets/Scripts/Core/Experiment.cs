@@ -2,7 +2,7 @@
 
 namespace SternGerlach.Assets.Scripts.Core
 {
-    internal class Experiment : MonoBehaviour
+    public class Experiment : MonoBehaviour
     {
         // SETUP INFO
         public Source source;

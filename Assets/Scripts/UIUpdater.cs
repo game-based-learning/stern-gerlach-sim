@@ -1,3 +1,5 @@
+using SternGerlach.Assets.Scripts.Core;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,6 +41,8 @@ namespace SternGerlach
         private Button closewarning;
         public bool thisIsFirstEdit = true;
 
+        public RadioButtonGroup mcq;
+
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
         private bool sceneHasOneSGMagnet;
@@ -61,16 +65,16 @@ namespace SternGerlach
             u.Enable();
             ubutton = u;
         }
-        void Start()
+        void Awake()
         {
-            Debug.Log(SceneManager.GetActiveScene().name);
+            //Debug.Log(SceneManager.GetActiveScene().name);
             if(SceneManager.GetActiveScene().name == "AlphaBuild")
             {
                 isMain = true;
             }
             root = ui.rootVisualElement;
 
-            Debug.Log(isMain);
+            //Debug.Log(isMain);
             if (!isMain)
             {
                 bc = root.Q<VisualElement>("DialogPopup");
@@ -103,6 +107,10 @@ namespace SternGerlach
                 dclosebutton = root.Q<Button>("dclose-button");
 
                 closewarning = root.Q<Button>("closewarning");
+
+                var x = root.Q("questioncontainer");
+                mcq = x.Q<RadioButtonGroup>("mcq");
+                //Debug.Log(mcq);
 
                 deletebutton.clicked += DeleteButtonPressed;
                 dclosebutton.clicked += CloseButtonPressed;
@@ -240,7 +248,7 @@ namespace SternGerlach
             {
                 root.Q<Button>("imageplate-button").visible = false;
             }*/
-            Debug.Log("before popup check: " + sceneHasOneSGMagnet);
+            //Debug.Log("before popup check: " + sceneHasOneSGMagnet);
             bc.visible = true;
             if (sceneHasOneSGMagnet)
             {
@@ -255,7 +263,7 @@ namespace SternGerlach
             bc.style.left = position.x;
             bc.style.top = Screen.height - position.y;
             popupPosition = (position.x, Screen.height - position.y);
-            Debug.Log("at PopupDialog: " + popupPosition);
+            //Debug.Log("at PopupDialog: " + popupPosition);
         }
 
         public void RotationPopup()
@@ -264,7 +272,7 @@ namespace SternGerlach
             clickoffbutton.visible = true;
             rc.style.left = popupPosition.x;
             rc.style.top = popupPosition.y;
-            Debug.Log("at RotationPopup: " + popupPosition);
+            //Debug.Log("at RotationPopup: " + popupPosition);
         }
 
         /*public void DeletePopup(Vector3 position)
@@ -276,7 +284,18 @@ namespace SternGerlach
             dc.style.top = Screen.height - position.y;
             clickoffbutton.visible = true;
         }*/
-
+        public void MCQInit(MCQuestion m)
+        {
+            //Debug.Log(mcq);
+            mcq.label = m.question;
+            var answers = m.GetAnswerChoices();
+            List<string> choices = new List<string>();
+            foreach(var answer in answers)
+            {
+                choices.Add(answer.Item2);
+            }
+            mcq.choices = choices;
+        }
         public void Modify()
         {
             if(builder.selectedNode == null) { return; }
@@ -336,7 +355,7 @@ namespace SternGerlach
 
         private void SGMagnetMod(Node sn)
         {
-            Debug.Log("modifying sgmagnet ui");
+            //Debug.Log("modifying sgmagnet ui");
 
             var orientation = sn.GetComponent<SGMagnet>().GetRotation();
             root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";

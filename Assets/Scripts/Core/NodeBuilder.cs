@@ -18,7 +18,7 @@ namespace SternGerlach
             if (!CanPlace()) { return; }
             //if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is Source) { return; }
 
-            Debug.Log("Place Image Plate");
+            //Debug.Log("Place Image Plate");
             Vector3 loc = selectedNode.transform.position;
             if (factory.SilverAtomMode())
             {
@@ -68,7 +68,7 @@ namespace SternGerlach
             if (!CanPlace()) { return; }
             // only allow one sg magnet for macroscopic mode
             if (!factory.SilverAtomMode() && selectedNode.transform.parent.GetComponent<Node>() is SGMagnet) { return; }
-            Debug.Log("Place SG Magnet");
+            //Debug.Log("Place SG Magnet");
             Vector3 loc = selectedNode.transform.position;
             SGMagnet plate = factory.CreateSGMagnet(loc);
             PlaceNode(plate);
@@ -102,7 +102,7 @@ namespace SternGerlach
             }
             Destroy(selectedNode.gameObject);
             selectedNode = newNode;
-            Debug.Log(selectedNode);
+            //Debug.Log(selectedNode);
             this.COR.transform.position = FindCenterOfRotation();
             this.selectedNode = newNode;
         }
