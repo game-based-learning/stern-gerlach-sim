@@ -17,6 +17,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
     [SerializeField] Camera mainCamera;
+    [SerializeField] GuidedComponent guidedComponent;
     // Start is called before the first frame update
     void Start()
     {

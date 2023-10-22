@@ -86,11 +86,15 @@ namespace SternGerlach
 
             // Accounts for special case (first node not placed yet)
             bool firstnode = false;
-            if(node == null) {
+            if (node == null)
+            {
                 node = parent.gameObject.GetComponent<Source>();
                 firstnode = true;
+                ((Source)node).SetFirstNode(newNode);
             }
-            node.children[index] = newNode;
+            else {
+                node.children[index] = newNode;
+            }
             if(!firstnode) {
                 newNode.transform.rotation = parent.rotation;
                 // perform appropriate rotation

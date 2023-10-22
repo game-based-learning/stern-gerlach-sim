@@ -1,5 +1,6 @@
 using SternGerlach.Assets.Scripts.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using UnityEditor;
@@ -10,17 +11,17 @@ namespace SternGerlach
 {
     public class XMLDeserializer : MonoBehaviour
     {
-        [SerializeField] TextAsset firstXmlFile;
+        [SerializeField] List<TextAsset> xmlFiles;
         [SerializeField] GameObjectFactory factory;
         [SerializeField] NodeBuilder nodeBuilder;
+        [SerializeField] GuidedComponent guidedComponent;
         string sourceFilePath = "/Scripts/Core/Experiments/";
         private ExperimentBuilder experimentBuilder;
         private TextAsset currFile;
         public Experiment currExp;
         void Awake()
         {
-            //Debug.Log("xmldeserializer being run");
-            currExp = ParseExperiment(firstXmlFile);
+            currExp = ParseExperiment(xmlFiles[0]);
         }
         Experiment ParseExperiment(TextAsset xmlFile) {
             // Create XML reader settings
@@ -32,6 +33,7 @@ namespace SternGerlach
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(XmlReader.Create(AssetDatabase.GetAssetPath(xmlFile), settings));
             this.experimentBuilder = new ExperimentBuilder();
+            this.experimentBuilder.SetGuidedComponent(this.guidedComponent);
 
             ParseSetup(xmlDocument);
             ParsePrediction(xmlDocument);
@@ -69,7 +71,10 @@ namespace SternGerlach
             string type = source.Attributes["source"]?.Value;
 
             Source src = factory.CreateSource(type == "Macroscopic_Magnet");
-            this.experimentBuilder.SetSource(src);
+            if (src == null) {
+                Debug.Log("blow up");
+            }
+            experimentBuilder.SetSource(src);
 
             if (source.ChildNodes.Count == 0)
             {

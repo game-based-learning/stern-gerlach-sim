@@ -4,6 +4,7 @@ namespace SternGerlach.Assets.Scripts.Core
 {
     public class Experiment : MonoBehaviour
     {
+        public GuidedComponent guidedComponent;
         // SETUP INFO
         public Source source;
         public string id;
@@ -17,8 +18,8 @@ namespace SternGerlach.Assets.Scripts.Core
         public string moveForwardToMCQMessage;
         // CAMERA SETTINGS
         public float sizeModifier = 0f, yPosModifier = 0f, xPosModifier = 0f;
-        void Awake() {
-            DontDestroyOnLoad(this);
+        void Start() {
+            guidedComponent.SetCameraSettings(sizeModifier,xPosModifier,yPosModifier);
         }
         public string ToString() {
             string debugString = "Nodes: \n";
