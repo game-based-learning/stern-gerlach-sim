@@ -33,11 +33,9 @@ public class GameObjectFactory : MonoBehaviour
         }
     }
     private void AddInstructionTagIfNecessary(GameObject gameObj) {
-        Debug.Log("Called1");
         if (!instructionFactory) {
             return;
         }
-        Debug.Log("Called");
         SetGameLayerRecursive(gameObj, LayerMask.NameToLayer("TopLayer"));
     }
     // from unity forums "ignacio-casal"

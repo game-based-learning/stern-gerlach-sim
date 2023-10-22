@@ -17,6 +17,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] GameObjectFactory factory;
     [SerializeField] NodeBuilder builder;
     [SerializeField] Camera mainCamera;
+    [SerializeField] GuidedComponent guidedComponent;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +69,10 @@ public class PlayerControls : MonoBehaviour
             builder.DeleteNode();
         }
         if (freeze.WasPressedThisFrame()) {
-            GameManager.Instance.ToggleFreeze();
+            // debug for equal check
+            //guidedComponent.TryEqual();
+            guidedComponent.DebugTrees();
+            //GameManager.Instance.ToggleFreeze();
         }
     }
 }

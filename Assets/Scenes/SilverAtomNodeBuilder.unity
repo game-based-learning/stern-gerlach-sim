@@ -170,6 +170,7 @@ MonoBehaviour:
   factory: {fileID: 890276988}
   builder: {fileID: 1936144057}
   mainCamera: {fileID: 1948414428}
+  guidedComponent: {fileID: 1799884472}
 --- !u!1 &240012957
 GameObject:
   m_ObjectHideFlags: 0

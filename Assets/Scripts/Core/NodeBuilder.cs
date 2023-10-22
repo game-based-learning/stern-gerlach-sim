@@ -89,7 +89,9 @@ namespace SternGerlach
                 node = parent.gameObject.GetComponent<Source>();
                 firstnode = true;
             }
+            Debug.Log("Node type placed" + newNode.GetType() + "type of parent" + node.GetType() + "index of child of parent" + index);
             node.children[index] = newNode;
+            Debug.Log("Parent node children" + node.ToString());
             if(!firstnode) {
                 newNode.transform.rotation = parent.rotation;
                 // perform appropriate rotation
