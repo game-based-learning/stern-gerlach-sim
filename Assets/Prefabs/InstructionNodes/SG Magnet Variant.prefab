@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 5936418468118002692}
   entrance: {fileID: 5249809886211378133}
   exit: {fileID: 39606118172040458}
+  textCount: {fileID: 0}
 --- !u!65 &6957268133485793448
 BoxCollider:
   m_ObjectHideFlags: 0
