@@ -100,4 +100,20 @@ public abstract class Node : MonoBehaviour
 
         return true; // All child nodes are equal.
     }
+    public override string ToString()
+    {
+        string str ="I am a " + this.GetType() + "with rotation" + this.GetRotation();
+        if (children != null && children.Count != 0)
+        {
+            str += "And my children are: ";
+            for (int i = 0; i < children.Count; i++)
+            {
+                str += children[i].ToString();
+            }
+        }
+        else {
+            str += "And I have no children.";
+        }
+        return str;
+    }
 }

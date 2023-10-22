@@ -1,6 +1,7 @@
 using SternGerlach;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,7 @@ public class SGMagnet : Node
 {
     [SerializeField] List<Node> nodes;
     [SerializeField] GameObject entrance,exit;
+    [SerializeField] TextMeshPro textCount = null;
     private Vector3 entranceLoc, exitLoc;
     private Dictionary<int,Node> childs = new Dictionary<int,Node>();
     public override Dictionary<int,Node> children { get => childs; set => childs = value; }
