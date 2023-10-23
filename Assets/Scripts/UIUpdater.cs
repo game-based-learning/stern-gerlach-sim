@@ -12,7 +12,7 @@ namespace SternGerlach
         [SerializeField] public Transform[] focusables;
         [SerializeField] UIDocument ui;
         [SerializeField] public NodeBuilder builder;
-        [SerializeField] SceneChanger scenechanger;
+        [SerializeField] public SceneChanger scenechanger;
 
         private bool isMain = false;
         //private bool isMacro = false;
@@ -66,10 +66,11 @@ namespace SternGerlach
             u.Enable();
             ubutton = u;
         }
+        
         void Awake()
         {
             //Debug.Log(SceneManager.GetActiveScene().name);
-            if(SceneManager.GetActiveScene().name == "AlphaBuild")
+            if(SceneManager.GetActiveScene().name.Contains("AlphaBuild"))
             {
                 isMain = true;
             }
@@ -135,7 +136,7 @@ namespace SternGerlach
             } else
             {
                 guidedbutton = root.Q<Button>("guided-mode");
-                freeplaybutton = root.Q<Button>("freeplay-mode");
+                //freeplaybutton = root.Q<Button>("freeplay-mode");
                 helpbutton = root.Q<Button>("help");
 
                 guidedbutton.clicked += GuidedModeButtonPressed;
@@ -175,7 +176,7 @@ namespace SternGerlach
         {
             root.Q<VisualElement>("Warning").visible = false;
         }
-        private void GuidedModeButtonPressed()
+        public virtual void GuidedModeButtonPressed()
         {
             scenechanger.changeScene("MacroscopicNodeBuilder");
             //isMacro = true;
