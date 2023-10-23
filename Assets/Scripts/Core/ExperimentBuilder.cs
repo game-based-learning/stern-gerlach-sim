@@ -10,7 +10,7 @@ namespace SternGerlach.Assets.Scripts.Core
         private string id = "DEFAULT_EXPERIMENT_NAME";
 
         // INSTRUCTION SETTINGS
-        private float sizemodifier = 0f, xposmodifier = 0f, yposmodifier = 0f;
+        private float sizeModifier = 0f, xPosModifier = 0f, yPosModifier = 0f;
 
         // MCQ (A: <Message>)
         private MCQuestion mcq = new MCQuestion();
@@ -34,9 +34,10 @@ namespace SternGerlach.Assets.Scripts.Core
             exp.minParticles = minParticles;
             exp.moveForwardToMCQMessage = moveForwardToMCQMessage;
             exp.guidedComponent = guidedComponent;
-            exp.sizeModifier = sizemodifier;
-            exp.xPosModifier = xposmodifier;
-            exp.yPosModifier= yposmodifier;
+            exp.sizeModifier = sizeModifier;
+            exp.xPosModifier = xPosModifier;
+            exp.yPosModifier = yPosModifier;
+            guidedComponent.SetCameraSettings(sizeModifier, xPosModifier, yPosModifier);
             return exp;
         }
         public void SetGuidedComponent(GuidedComponent guidedComponent) {
@@ -73,13 +74,13 @@ namespace SternGerlach.Assets.Scripts.Core
             switch (type)
             {
                 case "sizemodifier":
-                    this.sizemodifier = modification;
+                    this.sizeModifier = modification;
                     break;
                 case "xposmodifier":
-                    this.xposmodifier = modification;
+                    this.xPosModifier = modification;
                     break;
                 case "yposmodifier":
-                    this.yposmodifier = modification;
+                    this.yPosModifier = modification;
                     break;
             }
         }

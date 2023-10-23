@@ -18,9 +18,6 @@ namespace SternGerlach.Assets.Scripts.Core
         public string moveForwardToMCQMessage;
         // CAMERA SETTINGS
         public float sizeModifier = 0f, yPosModifier = 0f, xPosModifier = 0f;
-        void Start() {
-            guidedComponent.SetCameraSettings(sizeModifier,xPosModifier,yPosModifier);
-        }
         public string ToString() {
             string debugString = "Nodes: \n";
             debugString += NodeToString(source);

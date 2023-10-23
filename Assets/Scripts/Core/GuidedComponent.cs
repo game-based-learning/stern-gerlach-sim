@@ -16,13 +16,13 @@ namespace SternGerlach
         [SerializeField] Camera instructionCamera;
         private Source instSource;
         // initial camera settings
-        //private float initX = instructionCamera.rect.x, initY = instructionCamera.rect.y, initSize = instructionCamera.orthographicSize;
-        //private float width = instructionCamera.rect.width, height = instructionCamera.rect.height;
+        private float initX = Globals.INST_CAM_INIT_X, initY = Globals.INST_CAM_INIT_Y, initSize = Globals.INST_CAM_INIT_SIZE;
+        private float width = Globals.INST_CAM_INIT_WIDTH, height = Globals.INST_CAM_INIT_HEIGHT;
 
         public void SetCameraSettings(float sizeModifier, float xModifier, float yModifier)
         {
-            //instructionCamera.orthographicSize = sizeModifier + initSize;
-            //instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
+            instructionCamera.orthographicSize = sizeModifier + initSize;
+            instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
         }
         void Update()
         {
@@ -30,12 +30,12 @@ namespace SternGerlach
             instSource = exp.source;
             nbSource.UpdateInstructionColoring(instSource);
         }
-        public void TryEqual()
+        public bool TryEqual()
         {
             this.exp = xml.currExp;
             instSource = exp.source;
-            Debug.Log(nbSource.Equals(instSource));
             nbSource.UpdateInstructionColoring(instSource);
+            return nbSource.Equals(instSource);
         }
         public void DebugTrees() 
         {
@@ -43,12 +43,8 @@ namespace SternGerlach
             instSource = exp.source;
             Debug.Log("Node builder tree:\n" + nbSource.ToString());
             Debug.Log("Instruction tree:\n" + instSource.ToString());
-            //Debug.Log("gc update");
             exp = xml.currExp;
             instSource = exp.source;
-            //Debug.Log(instSource);
-            //Debug.Log(nbSource);
-            //Debug.Log("complete?: "+ instSource.Equals(nbSource));
         }
     }
 }

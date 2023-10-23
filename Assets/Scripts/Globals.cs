@@ -17,5 +17,8 @@ namespace SternGerlach
         internal static float PARTICLE_COOLDOWN = 0.15f;
         internal static string UP_CARET_NAME = "UpCaret";
         internal static string DOWN_CARET_NAME = "DownCaret";
+        // Instruction camera defaults
+        internal static float INST_CAM_INIT_X = 0f, INST_CAM_INIT_Y = 0.5f, INST_CAM_INIT_SIZE = 6.79f;
+        internal static float INST_CAM_INIT_WIDTH = 0.5f, INST_CAM_INIT_HEIGHT = 0.5f;
     }
 }
