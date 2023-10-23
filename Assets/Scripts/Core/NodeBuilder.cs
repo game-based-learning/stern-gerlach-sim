@@ -11,6 +11,7 @@ namespace SternGerlach
     {
         public Node selectedNode;
         public Node focusNode;
+        private List<ImagePlate> current_plates = new List<ImagePlate>(); //new
         [SerializeField] GameObjectFactory factory;
         [SerializeField] GameObject COR;
         internal void PlaceImagePlate()
@@ -24,6 +25,7 @@ namespace SternGerlach
             {
                 ImagePlate plate = factory.CreateImagePlate(loc);
                 PlaceNode(plate);
+                current_plates.Add(plate);
             }
             else {
                 List<ImagePlate> largePlate = factory.CreateLargeImagePlate(loc);
@@ -164,13 +166,21 @@ namespace SternGerlach
             Node parent = selectedNode.transform.parent.GetComponent<Node>();
             // Special case for large image plate
             int index = 0;
+            Debug.Log("currplates: "+current_plates.Count);
+            foreach (var plate in current_plates) //new
+            {
+                plate.collapseCount = 0;
+                plate.textCount.text = "0";
+            }
             if (!factory.SilverAtomMode() && selectedNode is ImagePlate) {
                 parent = selectedNode.transform.parent.transform.parent.GetComponent<SGMagnet>();
                 parent.children = new Dictionary<int, Node>();
                 EmptyNode node = factory.CreateEmptyNode(selectedNode.transform.parent.transform.position);
                 node.transform.parent = parent.transform;
                 parent.children[index] = node;
+                current_plates.Remove(selectedNode.GetComponent<ImagePlate>()); //new
                 Destroy(selectedNode.transform.parent.gameObject);
+                
             }
             else {
                 for (int i = 0; i < parent.children.Count; i++) {

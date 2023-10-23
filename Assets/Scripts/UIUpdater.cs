@@ -357,7 +357,8 @@ namespace SternGerlach
 
         private void ImagePlateMod(Node sn)
         {
-            var count = sn.GetComponent<ImagePlate>().textCount.text;
+            //var count = sn.GetComponent<ImagePlate>().textCount.text;
+            var count = sn.GetComponent<ImagePlate>().collapseCount;
             root.Q<Label>("1").text = "Total Particles Hit: " + count + "\n";
         }
 
