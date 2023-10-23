@@ -24,11 +24,18 @@ namespace SternGerlach
             //instructionCamera.orthographicSize = sizeModifier + initSize;
             //instructionCamera.rect = new Rect(xModifier + this.initX, yModifier + this.initY, this.width, this.height);
         }
+        void Update()
+        {
+            this.exp = xml.currExp;
+            instSource = exp.source;
+            nbSource.UpdateInstructionColoring(instSource);
+        }
         public void TryEqual()
         {
             this.exp = xml.currExp;
             instSource = exp.source;
             Debug.Log(nbSource.Equals(instSource));
+            nbSource.UpdateInstructionColoring(instSource);
         }
         public void DebugTrees() 
         {
