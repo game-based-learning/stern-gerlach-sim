@@ -1,6 +1,7 @@
 using SternGerlach.Assets.Scripts.Core;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ namespace SternGerlach
         [SerializeField] public XMLDeserializer xml;
         [SerializeField] Source nbSource;
         [SerializeField] Camera instructionCamera;
+        [SerializeField] TextMeshProUGUI completeText;
         private Source instSource;
         // initial camera settings
         private float initX = Globals.INST_CAM_INIT_X, initY = Globals.INST_CAM_INIT_Y, initSize = Globals.INST_CAM_INIT_SIZE;
@@ -26,16 +28,23 @@ namespace SternGerlach
         }
         void Update()
         {
-            this.exp = xml.currExp;
-            instSource = exp.source;
-            nbSource.UpdateInstructionColoring(instSource);
+            TryEqual();
         }
         public bool TryEqual()
         {
             this.exp = xml.currExp;
             instSource = exp.source;
+            bool eq = nbSource.Equals(instSource);
             nbSource.UpdateInstructionColoring(instSource);
-            return nbSource.Equals(instSource);
+            if (eq)
+            {
+                completeText.text = "Complete setup!";
+            }
+            else
+            {
+                completeText.text = "Incomplete setup.";
+            }
+            return eq;
         }
         public void DebugTrees() 
         {
