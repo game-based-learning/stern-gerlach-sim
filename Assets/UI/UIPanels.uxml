@@ -1,11 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" style="width: 100%; height: 100%; flex-direction: row;">
-        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: -35%; background-color: rgba(0, 0, 0, 0.51);">
-            <ui:VisualElement style="width: 20%;" />
-            <ui:VisualElement name="questioncontainer" style="flex-direction: row;">
-                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" name="mcq" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 20px; align-items: stretch; justify-content: space-around; flex-direction: column;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
         <ui:Button text="Button" display-tooltip-when-elided="true" name="ClickOff" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; right: 0; bottom: 0; align-items: flex-start; flex-basis: auto; opacity: 0.19; visibility: hidden;" />
         <ui:VisualElement name="popups" picking-mode="Ignore" style="width: 80%; height: 100%; visibility: visible; display: flex;">
             <ui:VisualElement name="DialogPopup" style="width: 105px; height: 74px; visibility: hidden; position: absolute;">
@@ -43,6 +37,18 @@
             <ui:Label text="WARNING" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 40px;" />
             <ui:Label text="Making a change to the simulation will reset all image plate hits" display-tooltip-when-elided="true" style="font-size: 20px; flex-wrap: wrap; width: 70%; white-space: normal;" />
             <ui:Button text="Close" display-tooltip-when-elided="true" name="closewarning" style="height: 33px; width: 74px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="mcqpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: none;">
+            <ui:VisualElement style="width: 20%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
+            <ui:VisualElement name="questioncontainer" style="flex-direction: row;">
+                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" name="mcq" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 20px; align-items: stretch; justify-content: space-around; flex-direction: column;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: flex;">
+            <ui:VisualElement style="width: 25%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
+            <ui:VisualElement name="predcontainer" style="flex-direction: row; width: 100%;">
+                <ui:TextField picking-mode="Ignore" label="Text Field" text="type here..." name="prediction" style="flex-direction: column; font-size: 25px; width: 80%; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(0, 0, 0); -unity-font-style: normal; white-space: nowrap; -unity-text-outline-color: rgb(255, 255, 255); background-color: rgb(200, 200, 200); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

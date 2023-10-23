@@ -16,6 +16,7 @@ namespace SternGerlach
         [SerializeField] Source nbSource;
         [SerializeField] Camera instructionCamera;
         [SerializeField] TextMeshProUGUI completeText;
+        [SerializeField] UIUpdater updater;
         private Source instSource;
         // initial camera settings
         private float initX = Globals.INST_CAM_INIT_X, initY = Globals.INST_CAM_INIT_Y, initSize = Globals.INST_CAM_INIT_SIZE;
@@ -28,7 +29,8 @@ namespace SternGerlach
         }
         void Update()
         {
-            TryEqual();
+            if (TryEqual()) { updater.ShowMCQ(); }
+            
         }
         public bool TryEqual()
         {

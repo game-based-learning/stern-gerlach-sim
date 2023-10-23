@@ -42,6 +42,7 @@ namespace SternGerlach
         public bool thisIsFirstEdit = true;
 
         public RadioButtonGroup mcq;
+        public TextField predq;
 
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
@@ -110,6 +111,9 @@ namespace SternGerlach
 
                 var x = root.Q("questioncontainer");
                 mcq = x.Q<RadioButtonGroup>("mcq");
+
+                var y = root.Q("predcontainer");
+                predq = y.Q<TextField>("prediction");
                 //Debug.Log(mcq);
 
                 deletebutton.clicked += DeleteButtonPressed;
@@ -296,6 +300,10 @@ namespace SternGerlach
             }
             mcq.choices = choices;
         }
+        public void PredQInit(string p)
+        {
+            predq.label = p;
+        }
         public void Modify()
         {
             if(builder.selectedNode == null) { return; }
@@ -373,17 +381,32 @@ namespace SternGerlach
             root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";
         }
 
-        public float PredictionToggle(float pos)
+        public bool PredictionToggle(bool shown)
         {
             Debug.Log("prediction toggling");
             var predictionbox = root.Q<VisualElement>("predictionpopup");
-            predictionbox.style.bottom = new StyleLength(new Length(pos, LengthUnit.Percent));
+            if(shown) { 
+                predictionbox.style.display = DisplayStyle.None; 
+            } else { 
+                predictionbox.style.display = DisplayStyle.Flex; 
+            }
+            return !shown;
+
+            //predictionbox.style.display = DisplayStyle.Flex;
+            /*predictionbox.style.bottom = new StyleLength(new Length(pos, LengthUnit.Percent));
             if (pos < 0) {
                 return 0;
             } else
             {
                 return -35;
-            }
+            }*/
+        }
+
+        public void ShowMCQ()
+        {
+            Debug.Log("showing mcq");
+            var mcqbox = root.Q<VisualElement>("mcqpopup");
+            mcqbox.style.display = DisplayStyle.Flex;
         }
 
         /*private void LargeImagePlateMod(Node sn)

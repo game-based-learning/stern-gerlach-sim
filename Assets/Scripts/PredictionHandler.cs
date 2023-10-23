@@ -11,8 +11,9 @@ namespace SternGerlach
         [SerializeField] UIUpdater updater;
         [SerializeField] GuidedComponent gc;
         private MCQuestion multiplechoice;
+        private string prediction;
         private InputAction mbutton;
-        private float pos = 0;
+        private bool shown = true;
         public void Initialize(InputAction m)
         {
             m.Enable();
@@ -25,8 +26,11 @@ namespace SternGerlach
             Debug.Log(gc.xml.currExp);
             Debug.Log(gc.xml.currExp.mcq);*/
             multiplechoice = gc.xml.currExp.mcq;
+            prediction = gc.xml.currExp.predictionMessage;
+
             //Debug.Log(gc.xml.currExp.ToString());
             updater.MCQInit(multiplechoice);
+            updater.PredQInit(prediction);
         }
 
         // Update is called once per frame
@@ -34,7 +38,8 @@ namespace SternGerlach
         {
             if (mbutton.WasPressedThisFrame())
             {
-                pos = updater.PredictionToggle(pos); 
+                //pos = updater.PredictionToggle(pos); 
+                shown = updater.PredictionToggle(shown);
             }
         }
     }
