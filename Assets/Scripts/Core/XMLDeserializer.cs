@@ -19,9 +19,14 @@ namespace SternGerlach
         private ExperimentBuilder experimentBuilder;
         private TextAsset currFile;
         public Experiment currExp;
+        private int runningIndex;
         void Awake()
         {
             currExp = ParseExperiment(xmlFiles[0]);
+            runningIndex = 0;
+        }
+        public void ParseNextExperiment() {
+            ParseExperiment(xmlFiles[++runningIndex]);
         }
         Experiment ParseExperiment(TextAsset xmlFile) {
             // Create XML reader settings
