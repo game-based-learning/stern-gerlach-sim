@@ -37,9 +37,60 @@ public abstract class Node : MonoBehaviour
     }
     public void UpdateInstructionColoring(Node instructionSource)
     {
-        if (this.Equals(instructionSource)) {
+        if (Equals(instructionSource))
+        {
+            Debug.Log("Trees are equal.");
             ApplyMaterialToTree(instructionSource, GameManager.Instance.correct);
+            return;
         }
+        Debug.Log("Trees are not equal.");
+        ColorMismatchedNodes(instructionSource, this);
+    }
+
+    void ColorMismatchedNodes(Node node1, Node node2)
+    {
+        if (!node1.EqualsNodeOnly(node2))
+        {
+            if (!NodesHaveCorrectRotation(node1, node2))
+            {
+                // Nodes match, but rotation is wrong, so color them yellow.
+                ApplyMaterialToTree(node1, GameManager.Instance.wrongAngle);
+            }
+            else
+            {
+                // Nodes don't match, so color them and their descendants red.
+                ApplyMaterialToTree(node1, GameManager.Instance.wrongNode);
+            }
+        }
+        else
+        {
+            // Nodes match, so color them green.
+            ApplyMaterialToTree(node1, GameManager.Instance.correct);
+        }
+
+        if (node1.children == null || node2.children == null)
+        {
+            return;
+        }
+
+        // Traverse the children and recursively check for mismatches.
+        foreach (var kvp in node1.children)
+        {
+            if (node2.children.TryGetValue(kvp.Key, out Node otherChild))
+            {
+                ColorMismatchedNodes(kvp.Value, otherChild);
+            }
+            else
+            {
+                // Child is missing in the second tree, color it red.
+                ApplyMaterialToTree(kvp.Value, GameManager.Instance.wrongNode);
+            }
+        }
+    }
+
+    bool NodesHaveCorrectRotation(Node node1, Node node2)
+    {
+        return node1.GetRotation() == node2.GetRotation();
     }
     void ApplyMaterialToTree(Node node, Material mat) {
         // apply material to node
@@ -63,6 +114,18 @@ public abstract class Node : MonoBehaviour
             return false;
         }
         if (!ChildrenEqual(otherNode)) {
+            return false;
+        }
+        return true;
+    }
+    private bool EqualsNodeOnly(Node other) {
+        if (other == null || GetType() != other.GetType())
+        {
+            return false;
+        }
+        Node otherNode = (Node)other;
+        if (GetRotation() != otherNode.GetRotation())
+        {
             return false;
         }
         return true;

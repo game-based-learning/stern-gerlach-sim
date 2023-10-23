@@ -70,7 +70,9 @@ public class PlayerControls : MonoBehaviour
             builder.DeleteNode();
         }
         if (freeze.WasPressedThisFrame()) {
-            GameManager.Instance.ToggleFreeze();
+            //GameManager.Instance.ToggleFreeze();
+            //guidedComponent.DebugTrees();
+            guidedComponent.TryEqual();
         }
     }
 }
