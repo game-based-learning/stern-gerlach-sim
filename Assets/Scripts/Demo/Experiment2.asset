@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6347cb22de6fc478193fae1d3e4543, type: 3}
-  m_Name: InputData
+  m_Name: Experiment2
   m_EditorClassIdentifier: 
   input_data: 

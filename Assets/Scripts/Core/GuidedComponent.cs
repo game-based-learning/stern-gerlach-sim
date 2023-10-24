@@ -19,6 +19,12 @@ namespace SternGerlach
         [SerializeField] TextMeshProUGUI completeText;
         [SerializeField] UIUpdater updater;
         private Source instSource;
+
+        public UserInputData uid;
+
+        private bool hasPredictionBeenShown = false;
+        private bool hasMCQBeenShown = false;
+        private bool startSwitch = true;
         // initial camera settings
         private float initX = Globals.INST_CAM_INIT_X, initY = Globals.INST_CAM_INIT_Y, initSize = Globals.INST_CAM_INIT_SIZE;
         private float width = Globals.INST_CAM_INIT_WIDTH, height = Globals.INST_CAM_INIT_HEIGHT;
@@ -31,12 +37,27 @@ namespace SternGerlach
         void Update()
         {
             Debug.Log("atomcount: " + CollapsedAtomCount());
-            if (TryEqual() && CollapsedAtomCount() == xml.currExp.minParticles) 
+            if(TryEqual() && !hasPredictionBeenShown)
+            {
+                updater.ShowPrediction();
+                hasPredictionBeenShown = true;
+            }
+            if (TryEqual() && CollapsedAtomCount() == xml.currExp.minParticles && !hasMCQBeenShown) 
             { 
                 updater.ShowMCQ(); 
+                hasMCQBeenShown = true;
+            }
+            if (hasMCQBeenShown && uid.correct && startSwitch)
+            {
+                startSwitch = false;
+                StartCoroutine(moveon());
             }
         }
-
+        IEnumerator moveon()
+        {
+            yield return new WaitForSeconds(3);
+            Debug.Log("resetting scene");
+        }
         private int CollapsedAtomCount()
         {
             int atoms = 0;
