@@ -12,6 +12,7 @@ namespace SternGerlach
     public class GuidedComponent : MonoBehaviour
     {
         private Experiment exp;
+        [SerializeField] NodeBuilder nb;
         [SerializeField] public XMLDeserializer xml;
         [SerializeField] Source nbSource;
         [SerializeField] Camera instructionCamera;
@@ -29,8 +30,21 @@ namespace SternGerlach
         }
         void Update()
         {
-            if (TryEqual()) { updater.ShowMCQ(); }
-            
+            Debug.Log("atomcount: " + CollapsedAtomCount());
+            if (TryEqual() && CollapsedAtomCount() == xml.currExp.minParticles) 
+            { 
+                updater.ShowMCQ(); 
+            }
+        }
+
+        private int CollapsedAtomCount()
+        {
+            int atoms = 0;
+            foreach (var plate in nb.current_plates)
+            {
+                atoms += plate.collapseCount;
+            }
+            return atoms;
         }
         public bool TryEqual()
         {

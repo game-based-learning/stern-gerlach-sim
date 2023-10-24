@@ -11,7 +11,7 @@ namespace SternGerlach
     {
         public Node selectedNode;
         public Node focusNode;
-        private List<ImagePlate> current_plates = new List<ImagePlate>(); //new
+        public List<ImagePlate> current_plates = new List<ImagePlate>(); //new
         [SerializeField] GameObjectFactory factory;
         [SerializeField] GameObject COR;
         internal void PlaceImagePlate()
