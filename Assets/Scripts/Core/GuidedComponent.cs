@@ -47,8 +47,10 @@ namespace SternGerlach
                 updater.ShowMCQ(); 
                 hasMCQBeenShown = true;
             }
+            Debug.Log("uid"+uid.correct);
             if (hasMCQBeenShown && uid.correct && startSwitch)
             {
+                Debug.Log("entering here");
                 startSwitch = false;
                 StartCoroutine(moveon());
             }
