@@ -8,15 +8,5 @@ namespace SternGerlach
     public class UserInputData : ScriptableObject
     {
         public string input_data;
-
-        public enum choices
-        {
-            A,
-            B,
-            C,
-            D
-        }
-        public choices mcq_choice;
-        public bool correct = false;
     }
 }

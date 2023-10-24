@@ -13,7 +13,6 @@ namespace SternGerlach
         [SerializeField] UIDocument ui;
         [SerializeField] public NodeBuilder builder;
         [SerializeField] public SceneChanger scenechanger;
-        [SerializeField] public PredictionHandler predictionHandler;
 
         private bool isMain = false;
         //private bool isMacro = false;
@@ -44,11 +43,7 @@ namespace SternGerlach
 
         public RadioButtonGroup mcq;
         public TextField predq;
-        public Button psubmit;
-        public Button msubmit;
-        public Label pickedmsg;
-
-        private Button closedialoguebutton;
+        public Button submit;
 
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
@@ -118,18 +113,12 @@ namespace SternGerlach
 
                 var x = root.Q("questioncontainer");
                 mcq = x.Q<RadioButtonGroup>("mcq");
-                msubmit = root.Q<Button>("submitmcq");
-                msubmit.clicked += MCQCheck;
 
                 var y = root.Q("predcontainer");
                 predq = y.Q<TextField>("prediction");
                 //Debug.Log(mcq);
-                psubmit = root.Q<Button>("submitprediction");
-                psubmit.clicked += PredictionHide;
-                pickedmsg = root.Q<Label>("pickedmsg");
-
-                closedialoguebutton = root.Q<Button>("closedialogue");
-                closedialoguebutton.clicked += CloseDialogue;
+                submit = root.Q<Button>("submitprediction");
+                submit.clicked += PredictionHide;
 
                 deletebutton.clicked += DeleteButtonPressed;
                 dclosebutton.clicked += CloseButtonPressed;
@@ -422,29 +411,16 @@ namespace SternGerlach
                 return -35;
             }*/
         }
-        public void MCQCheck()
-        {
-            var msg = predictionHandler.Check();
-            pickedmsg.text = msg;
-        }
+
         public void ShowMCQ()
         {
             Debug.Log("showing mcq");
             var mcqbox = root.Q<VisualElement>("mcqpopup");
             mcqbox.style.display = DisplayStyle.Flex;
         }
-        public void ShowPrediction()
-        {
-            var predbox = root.Q<VisualElement>("predictionpopup");
-            predbox.style.display = DisplayStyle.Flex;
-        }
 
         /*private void LargeImagePlateMod(Node sn)
         {
         }*/
-        private void CloseDialogue()
-        {
-            root.Q<VisualElement>("startingdialogue").style.display = DisplayStyle.None;
-        }
     }
 }

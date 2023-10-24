@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xmlFiles:
-  - {fileID: 4900000, guid: 3b4bac13ee624264e9b8b22cbb24e414, type: 3}
+  - {fileID: 4900000, guid: ad87a2eb13b22fb48b4604f02b8b6430, type: 3}
   factory: {fileID: 1799884474}
   nodeBuilder: {fileID: 1799884475}
   guidedComponent: {fileID: 1799884472}
@@ -1132,7 +1132,6 @@ MonoBehaviour:
   ui: {fileID: 1725618768}
   builder: {fileID: 1936144057}
   scenechanger: {fileID: 0}
-  predictionHandler: {fileID: 207591279}
   thisIsFirstEdit: 1
   state: 0
 --- !u!4 &1725618770
@@ -1262,7 +1261,6 @@ MonoBehaviour:
   instructionCamera: {fileID: 1930399475}
   completeText: {fileID: 345286468}
   updater: {fileID: 1725618769}
-  uid: {fileID: 11400000, guid: 78cf60e87d4ad9a4e9ac250717a2668c, type: 2}
 --- !u!4 &1799884473
 Transform:
   m_ObjectHideFlags: 0

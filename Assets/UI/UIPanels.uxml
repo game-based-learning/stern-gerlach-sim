@@ -17,7 +17,7 @@
                 <ui:Button text="Close" display-tooltip-when-elided="true" name="dclose-button" style="height: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="side" style="width: 20%; height: 50%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none; align-items: center; justify-content: flex-start; padding-left: 1%; padding-top: 2%; margin-left: 2%; margin-right: 2%; margin-top: 2%; margin-bottom: 2%;">
+        <ui:VisualElement name="side" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); visibility: visible; display: none; align-items: center; justify-content: flex-start;">
             <ui:VisualElement name="FocusTop" style="justify-content: center; align-items: center; width: 100%; height: 15%;">
                 <ui:Label text="Name" display-tooltip-when-elided="true" name="FocusName" style="color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center;" />
             </ui:VisualElement>
@@ -30,7 +30,7 @@
             <ui:Button text="DELETE" display-tooltip-when-elided="true" name="delete-button-new" style="margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; background-color: rgb(224, 0, 0); color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 27px;" />
             <ui:Button display-tooltip-when-elided="true" name="pause-play" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: 150px; height: 150px; background-color: rgba(207, 207, 207, 0); background-image: resource(&apos;pausebutton&apos;);" />
         </ui:VisualElement>
-        <ui:VisualElement name="side-2" style="width: 20%; height: 50%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38); padding-left: 1%; padding-right: 0; padding-top: 2%; padding-bottom: 0; margin-left: 2%; margin-right: 2%; margin-top: 2%; margin-bottom: 2%;">
+        <ui:VisualElement name="side-2" style="width: 20%; height: 100%; left: 0; right: auto; background-color: rgba(0, 0, 0, 0.38);">
             <ui:Label text="Click something to bring to focus!" display-tooltip-when-elided="true" />
         </ui:VisualElement>
         <ui:VisualElement name="Warning" style="position: absolute; left: 30%; top: 10%; width: 40%; height: 40%; align-items: center; justify-content: center; background-color: rgba(250, 8, 8, 0.41); opacity: 1; visibility: hidden;">
@@ -39,29 +39,16 @@
             <ui:Button text="Close" display-tooltip-when-elided="true" name="closewarning" style="height: 33px; width: 74px;" />
         </ui:VisualElement>
         <ui:VisualElement name="mcqpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: none;">
-            <ui:VisualElement style="width: 35%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%; min-width: auto;" />
-            <ui:VisualElement name="questioncontainer" style="flex-direction: row; width: 100%; align-items: center; margin-right: 20px; display: flex;">
-                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" name="mcq" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 37%; align-items: stretch; justify-content: space-around; flex-direction: column; flex-wrap: wrap; max-width: 35%;" />
-                <ui:VisualElement style="max-width: 100%; max-height: 100%; min-width: 50%; height: 80%; width: auto;">
-                    <ui:Button text="Submit" display-tooltip-when-elided="true" name="submitmcq" style="width: 30%; height: 25%; -unity-text-align: middle-center; align-items: center; justify-content: center; font-size: 24px; -unity-font-style: bold; margin-left: 40px;" />
-                    <ui:Label display-tooltip-when-elided="true" name="pickedmsg" enable-rich-text="false" style="align-items: auto; padding-left: 2%; font-size: 20px; width: 100%; flex-wrap: wrap; flex-direction: column; white-space: normal; color: rgb(255, 255, 255); -unity-font-style: italic; padding-right: 1%; padding-top: 2%; padding-bottom: 2%; height: 75%;" />
-                </ui:VisualElement>
+            <ui:VisualElement style="width: 20%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
+            <ui:VisualElement name="questioncontainer" style="flex-direction: row;">
+                <ui:RadioButtonGroup label="What&apos;s the Correct Answer?" value="-1" choices="C,A,D,B" focusable="true" name="mcq" style="color: rgb(255, 255, 255); -unity-text-outline-color: rgb(255, 255, 255); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(0, 0, 0, 0); -unity-font-style: bold; display: flex; visibility: visible; overflow: hidden; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); -unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#Arial&apos;); -unity-text-align: upper-left; font-size: 20px; align-items: stretch; justify-content: space-around; flex-direction: column;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: none;">
-            <ui:VisualElement style="width: 35%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
+        <ui:VisualElement name="predictionpopup" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: flex;">
+            <ui:VisualElement style="width: 25%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
             <ui:VisualElement name="predcontainer" style="flex-direction: row; width: 100%; align-items: center;">
-                <ui:TextField picking-mode="Ignore" label="Text Field" text="type here..." name="prediction" style="flex-direction: column; font-size: 42%; width: 65%; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(0, 0, 0); -unity-font-style: normal; white-space: nowrap; -unity-text-outline-color: rgb(255, 255, 255); background-color: rgb(200, 200, 200); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); height: 70%; flex-wrap: wrap;" />
+                <ui:TextField picking-mode="Ignore" label="Text Field" text="type here..." name="prediction" style="flex-direction: column; font-size: 25px; width: 65%; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; color: rgb(0, 0, 0); -unity-font-style: normal; white-space: nowrap; -unity-text-outline-color: rgb(255, 255, 255); background-color: rgb(200, 200, 200); -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); height: 70%;" />
                 <ui:Button text="Submit" display-tooltip-when-elided="true" name="submitprediction" style="width: 15%; height: 25%; -unity-text-align: middle-center; align-items: center; justify-content: center; font-size: 24px; -unity-font-style: bold; margin-left: 40px;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="startingdialogue" style="position: absolute; width: 100%; height: 35%; flex-direction: row; bottom: 0; background-color: rgba(0, 0, 0, 0.51); visibility: visible; display: flex;">
-            <ui:VisualElement style="width: 35%; background-image: resource(&apos;79214681_l_bgr&apos;); height: 200%; bottom: auto; top: -100%;" />
-            <ui:VisualElement name="dialoguecontainer" style="flex-direction: column; width: 100%; align-items: center;">
-                <ui:VisualElement style="height: 100%; justify-content: center; align-items: center;">
-                    <ui:Label text="&quot;Here&apos;s a new setup! Let&apos;s see if we can build it.&quot;" display-tooltip-when-elided="true" name="dialogue" style="font-size: 33%; color: rgb(255, 255, 255);" />
-                    <ui:Button text="Let&apos;s go!" display-tooltip-when-elided="true" name="closedialogue" style="width: 15%; align-items: center; height: 20%; margin-top: 4%; margin-bottom: -2%; font-size: 22%; -unity-font-style: bold;" />
-                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
