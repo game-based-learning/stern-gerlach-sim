@@ -43,6 +43,7 @@ namespace SternGerlach
 
         public RadioButtonGroup mcq;
         public TextField predq;
+        public Button submit;
 
         //private VisualElement clickoffcontainer;
         private Button clickoffbutton;
@@ -116,6 +117,8 @@ namespace SternGerlach
                 var y = root.Q("predcontainer");
                 predq = y.Q<TextField>("prediction");
                 //Debug.Log(mcq);
+                submit = root.Q<Button>("submitprediction");
+                submit.clicked += PredictionHide;
 
                 deletebutton.clicked += DeleteButtonPressed;
                 dclosebutton.clicked += CloseButtonPressed;
@@ -383,6 +386,11 @@ namespace SternGerlach
             root.Q<Label>("1").text = "Orientation: " + orientation + " clockwise\n";
         }
 
+        private void PredictionHide()
+        {
+            var predictionbox = root.Q<VisualElement>("predictionpopup");
+            predictionbox.style.display = DisplayStyle.None;
+        }
         public bool PredictionToggle(bool shown)
         {
             Debug.Log("prediction toggling");

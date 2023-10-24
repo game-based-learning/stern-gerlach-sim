@@ -2,6 +2,7 @@ using SternGerlach.Assets.Scripts.Core;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace SternGerlach
 {
@@ -10,10 +11,13 @@ namespace SternGerlach
         // Start is called before the first frame update
         [SerializeField] UIUpdater updater;
         [SerializeField] GuidedComponent gc;
+        private VisualElement root;
         private MCQuestion multiplechoice;
         private string prediction;
         private InputAction mbutton;
         private bool shown = true;
+
+        public UserInputData uid;
         public void Initialize(InputAction m)
         {
             m.Enable();
@@ -21,6 +25,9 @@ namespace SternGerlach
         }
         void Start()
         {
+            root = updater.root;
+            var p = root.Q<TextField>("prediction");
+            p.RegisterCallback<ChangeEvent<string>>(OnTextFieldValueChanged);
             /*Debug.Log(gc);
             Debug.Log(gc.xml);
             Debug.Log(gc.xml.currExp);
@@ -36,11 +43,16 @@ namespace SternGerlach
         // Update is called once per frame
         void Update()
         {
-            if (mbutton.WasPressedThisFrame())
+            /*if (mbutton.WasPressedThisFrame())
             {
                 //pos = updater.PredictionToggle(pos); 
                 shown = updater.PredictionToggle(shown);
-            }
+            }*/
+        }
+
+        private void OnTextFieldValueChanged(ChangeEvent<string> e)
+        {
+            uid.input_data = e.newValue;
         }
     }
 }

@@ -37,10 +37,10 @@ namespace SternGerlach
                 controlScheme.Game.LShift);
             sceneManager.Initialize(
                 controlScheme.UI.Space);
-            updater.Initialize(
+            /*updater.Initialize(
                 controlScheme.UI.UIToggle);
             predictionHandler.Initialize(
-                controlScheme.UI.MCQPrediction);
+                controlScheme.UI.MCQPrediction);*/
         }
     }
 }

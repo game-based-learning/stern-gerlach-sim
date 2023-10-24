@@ -20,13 +20,18 @@ namespace SternGerlach
         {
             if (SceneManager.GetActiveScene().name != "AlphaBuild")
             {
-                if (spacebutton.WasPressedThisFrame())
-                {
-                    Debug.Log("pressed!");
-                    changeScene(Globals.SCENES[++Globals.CURRENT_SCENE_INDEX % 2]);
-                }
+                SpaceHandler();
             }
             
+        }
+
+        public virtual void SpaceHandler()
+        {
+            if (spacebutton.WasPressedThisFrame())
+            {
+                Debug.Log("pressed!");
+                changeScene(Globals.SCENES[++Globals.CURRENT_SCENE_INDEX % 2]);
+            }
         }
         public void changeScene(string sceneName)
         {

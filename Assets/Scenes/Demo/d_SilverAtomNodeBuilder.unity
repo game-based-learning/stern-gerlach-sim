@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updater: {fileID: 1725618769}
   gc: {fileID: 1799884472}
+  uid: {fileID: 11400000, guid: a41a2487031a8a74f81f2e841faf395b, type: 2}
 --- !u!4 &207591280
 Transform:
   m_ObjectHideFlags: 0
@@ -970,7 +971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1253715751
 MonoBehaviour:
   m_ObjectHideFlags: 0
